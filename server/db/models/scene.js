@@ -3,10 +3,7 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 
 var schema = new mongoose.Schema({
-    heading: {
-        type: String,
-        required: true
-    },
+    header: {type: mongoose.Schema.Types.ObjectId, ref: 'Component'},
     components: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Component', index: true}
     ],
@@ -19,13 +16,12 @@ var schema = new mongoose.Schema({
     }
 });
 
-schema.virtual('IntExt').get(() => {
-    return this.heading.find(/[Ii]nt[.]?|[Ee]xt[.]?/)[0];
+schema.pre('save', function(next) {
+    this.populate('components')
+        .then(populatedComps => this.header = populatedComps.find(comp => comp.type === 'location'));
+    next();
 });
 
-schema.virtual('location').get(() => {
-    return this.heading.replace(/[Ii]nt[.]?\s|[Ee]xt[.]?\s/, '');
-});
 
 
 mongoose.model('Scene', schema);
