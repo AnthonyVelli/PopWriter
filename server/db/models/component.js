@@ -8,13 +8,25 @@ var schema = new mongoose.Schema({
         required: true
     },
     character: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Character'
     },
     text: {
         type: String,
         required: true
     }
+});
+
+schema.virtual('intExt').get(function () {
+  if(this.type === 'location'){
+    return this.text.slice(0, this.text.indexOf(' '));
+  }
+});
+
+schema.virtual('location').get(function () {
+  if(this.type === 'location'){
+    return this.text.slice(this.text.indexOf(' ') + 1);
+  }
 });
 
 module.exports = mongoose.model('Component', schema);
