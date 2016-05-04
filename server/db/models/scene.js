@@ -13,9 +13,7 @@ var schema = new mongoose.Schema({
     synposis: {
         type: String
     },
-    custom: {
-        type: Object
-    },
+    custom: [{type: Object}],
     date: {
         type: Date
     }
