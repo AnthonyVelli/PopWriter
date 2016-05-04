@@ -22,6 +22,7 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
+var Screenplay = mongoose.model('Screenplay');
 
 var wipeCollections = function () {
     var removeUsers = User.remove({});
@@ -46,6 +47,28 @@ var seedUsers = function () {
     return User.create(users);
 
 };
+
+var seedScreenplays = function(){
+
+    var screenplay = [
+        {
+            title: 'The Wizard of Oz'
+
+        },
+        {
+            title: 'The Godfather'
+        },
+        {
+            title: 'Star Wars IX'
+        }
+    ];
+
+    return Screenplay.create(screenplay);
+};
+
+
+
+
 
 connectToDb
     .then(function () {
