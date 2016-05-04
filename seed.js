@@ -54,19 +54,22 @@ var seedScreenplays = function(){
         {
             title: 'The Wizard of Oz'
 
-        },
-        {
-            title: 'The Godfather'
-        },
-        {
-            title: 'Star Wars IX'
         }
     ];
 
     return Screenplay.create(screenplay);
 };
 
+var seedCharacters = function(){
+    var characters = [
+        {
+            name: 'Dorothy',
+            sex: 'female',
+        }
+    ];
+};
 
+var
 
 
 
