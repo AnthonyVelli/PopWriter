@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const User = mongoose.model('User');
+const User = require("mongoose").model('User');
 
 module.exports = router;
 
@@ -43,4 +43,4 @@ router.delete('/:id', (req, res, next) => {
 	.catch(next);
 });
 
-router.use('/:id/screenplays', require('./screenplays'))
+router.use('/:id/screenplays', require('../screenplays'))

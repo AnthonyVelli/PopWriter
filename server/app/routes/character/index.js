@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const Character = mongoose.model('Character');
+const Character = require('mongoose').model('Character');
 
 module.exports = router;
 

@@ -20,9 +20,9 @@ var schema = new mongoose.Schema({
 
 schema.pre('update', function() {
   this.update({ lastUpdate : new Date() } );
-  next();
+  next()
 });
 
 
 
-module.exports = mongoose.model('Script', schema);
+module.exports = mongoose.model('Screenplay', schema);

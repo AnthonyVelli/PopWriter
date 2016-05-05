@@ -3,8 +3,8 @@
 const router = require('express').Router();
 const Screenplay = require('mongoose').model('Screenplay');
 
-router.get("/", (req, res, next) => {
-	Screenplay.find({_id: req.requestUser.screenplay})
+router.get('/', (req, res, next) => {
+	Screenplay.find({_id: {$in: req.requestUser.screenplay}})
 	.then(screenplays => res.json(screenplays))
 	.catch(next);
 });

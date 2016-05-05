@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
-var Component = require('././../db/models/component');
+//var Component = require('../db/models/component');
+const Component = require('mongoose').model('Component');
 module.exports = router;
 
 router.param('componentId', function(req, res, next, componentId){
