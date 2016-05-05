@@ -1,14 +1,12 @@
 var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
-
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
+var models = require('./create-dummy-entries');
+ 
 
-// Require in all models.
-require('../../../server/db/models');
-
-var Component = mongoose.model('Component');
+const Component = models.Component;
 
 describe('Component model', function () {
 
@@ -16,14 +14,8 @@ describe('Component model', function () {
         if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);        
     });
-
-    beforeEach('Create dummy objects', function(done){
-        Component.create({type: 'location', text: 'in the heart of the city'})
-    .then(function(createdUser){
-        return Component.create({type: 'dialogue', text: 'i coulda been somebahdy'}); })
-    .then(function(ele){
-        done(); })
-    .catch(done);
+    beforeEach('Establish DB connection', function () {
+        return models.createComponents();
     });
 
     afterEach('Clear test database', function (done) {
@@ -36,42 +28,32 @@ describe('Component model', function () {
             expect(Component).to.be.a('function');
         });
 
-        it('should save a Component', function (done) {
-            Component.find()
+        it('should save a Component', function () {
+            return Component.find()
             .then(function(ele) {
-                expect(ele).to.have.length(2);
-                done();
-            })
-            .catch(done);
+                expect(ele).to.have.length(2); });
         });
 
-        it('should delete a Component', function (done) {
-            // Component.find().then(function(ele){console.log(ele);});
-            Component.find({type: 'location'}).remove()
+        it('should delete a Component', function () {
+            return Component.find({type: 'location'}).remove()
             .then(function(ele){
                 return Component.find(); })
             .then(function(ele) {
-                expect(ele).to.have.length(1); 
-                done(); })
-            .catch(done);
+                expect(ele).to.have.length(1); });
         });
     });
 
     describe('Virtuals', function () {
-        it('interiour/exteriour virtual', function (done) {
-            Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
+        it('interiour/exteriour virtual', function () {
+            return Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
             .then(function(created){
                 expect(created.intExt).to.equal('INT.'); 
-                expect(created.location).to.equal('The Coconut Grove Nightclub - night'); 
-                done(); })
-            .catch(done);
+                expect(created.location).to.equal('The Coconut Grove Nightclub - night'); });
         });
-        it('location virtual', function (done) {
-            Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
+        it('location virtual', function () {
+            return Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
             .then(function(created){
-                expect(created.location).to.equal('The Coconut Grove Nightclub - night'); 
-                done(); })
-            .catch(done);
+                expect(created.location).to.equal('The Coconut Grove Nightclub - night'); });
         });
     });
 

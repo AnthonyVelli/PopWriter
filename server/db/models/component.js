@@ -29,4 +29,4 @@ schema.virtual('location').get(function () {
   }
 });
 
-module.exports = mongoose.model('Component', schema);
+mongoose.model('Component', schema);
