@@ -5,3 +5,4 @@ require('./user');
 require('./character');
 require('./component');
 require('./screenplay');
+require('./scene')
