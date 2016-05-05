@@ -11,10 +11,10 @@ var schema = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    scenes: [{
-        type: mongoose.Schema.Types.ObjectId,
+    scenes: {
+        type: [mongoose.Schema.Types.ObjectId],
         ref: "Scene"
-    }],
+    },
     lastUpdate: Date
 });
 
