@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 
 var schema = new mongoose.Schema({
-    header: {type: String, required: true}
+    header: {type: String, required: true},
     components: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Component', index: true}
     ],
