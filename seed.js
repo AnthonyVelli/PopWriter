@@ -34,8 +34,17 @@ var scenes = require('./seed/scenes')
 
 var wipeCollections = function () {
     var removeUsers = User.remove({});
+    var removeScreenplays = Screenplay.remove({});
+    var removeCharacters = Character.remove({});
+    var removeComponents = Component.remove({});
+    var removeScenes = Scene.remove({});
+
     return Promise.all([
-        removeUsers
+        removeUsers,
+        removeScreenplays,
+        removeCharacters,
+        removeComponents,
+        removeScenes
     ]);
 };
 
@@ -49,6 +58,11 @@ var seedUsers = function () {
         {
             email: 'obama@gmail.com',
             password: 'potus'
+        },
+        {
+            email: 'zeke@zeke.zeke',
+            password: 'zeke',
+            isAdmin: true
         }
     ];
 
@@ -58,7 +72,7 @@ var seedUsers = function () {
 
 var seedScreenplays = function(){
 
-    var user, scene, currentChar, screenP, header;
+    var user, scene, currentChar, screenP, header, dialogue;
     var compArr =[];
 
     return User.findOne({email: 'obama@gmail.com'})
@@ -83,7 +97,6 @@ var seedScreenplays = function(){
     // consider changing the name here
     .then((newlyCreatedComponent) => {
         // why is there a header here
-        var dialogue;
         newlyCreatedComponent.forEach(comp => {
             if(comp.type === 'dialogue') dialogue = comp;
             if(comp.type === 'location') header = comp;
@@ -92,6 +105,10 @@ var seedScreenplays = function(){
         dialogue.character = currentChar._id
         return dialogue.save();
         // return
+    })
+    .then(() => {
+        currentChar.dialogue = [dialogue._id];
+        return currentChar.save();
     })
     .then( () => {
         return Scene.create({header: header, components: compArr});

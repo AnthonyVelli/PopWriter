@@ -28,6 +28,10 @@ var schema = new mongoose.Schema({
     screenplay: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Screenplay'
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 
