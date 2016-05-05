@@ -23,6 +23,8 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Screenplay = mongoose.model('Screenplay');
+var Character = mongoose.model('Character');
+var Scene = mongoose.model('Scene');
 
 var wipeCollections = function () {
     var removeUsers = User.remove({});
@@ -61,15 +63,58 @@ var seedScreenplays = function(){
 };
 
 var seedCharacters = function(){
+    var charsId = [];
     var characters = [
         {
             name: 'Dorothy',
-            sex: 'female',
+            sex: 'female'
+        },
+        {
+            name: 'Toto',
+            sex: 'other'
         }
     ];
+
+    return Character.create(characters)
+    .then(characters => {
+        charsId = characters.map(function(char){
+            return char._id;
+        })
+    })
+    .then(()=> {
+        return Screenplay.findOne({title: 'The Wizard of Oz' })
+    })
+    .then(script => {
+        script.update({ characters: charsId});
+    });
 };
 
-var
+var seedScenes = function(){
+    var scenesId;
+    var scenes = [
+        {
+            synopsis: 'The story about a girl...'
+        }
+    ];
+
+    return Scene.create(scenes)
+    .then(scene => {
+        sceneId = characters.map(function(scene){
+            return char._id;
+        })
+    })
+    .then(()=> {
+        return Screenplay.findOne({title: 'The Wizard of Oz' })
+    })
+    .then(script => {
+        script.update({ scenes: scenesId});
+    });
+};
+
+
+
+
+
 
 
 
@@ -79,6 +124,9 @@ connectToDb
     })
     .then(function () {
         return seedUsers();
+    })
+    .then(function(){
+        return seedScreenplays();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
