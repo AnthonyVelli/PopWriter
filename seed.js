@@ -113,11 +113,6 @@ var seedScenes = function(){
 
 
 
-
-
-
-
-
 connectToDb
     .then(function () {
         return wipeCollections();
@@ -127,6 +122,12 @@ connectToDb
     })
     .then(function(){
         return seedScreenplays();
+    })
+    .then(function(){
+        return seedCharacters();
+    })
+     .then(function(){
+        return seedScenes();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
