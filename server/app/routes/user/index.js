@@ -27,8 +27,12 @@ router.param('id', (req, res, next, id) => {
 	.catch(next);
 });
 
-router.put('/:id', (req, res, next) => {
-	req.requestUser.update(req.body)
+router.put(":/id", (req, res, next) => {
+	User.findById(req.requestUser._id)
+	.then(user => {
+		user.set(req.body);
+		return user.save();
+	})
 	.then(updatedUser => res.json(updatedUser))
 	.catch(next);
 });

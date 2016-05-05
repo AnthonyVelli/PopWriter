@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 // create to a user
 router.post('/', (req, res, next) => {
 	Character.create(req.body)
-	.then(character => res.sendStatus(201).json(character))
+	.then(character => res.status(201).json(character))
 	.catch(next);
 });
 

@@ -31,7 +31,7 @@ router.put('/:screenplayId', (req, res, next) => {
 })
 router.delete('/:screenplayId', (req, res, next) => {
 	req.wantedScreenplay.remove()
-	.then(() => res.status(204))
+	.then(() => res.sendStatus(204))
 	.catch(next);
 });
 
