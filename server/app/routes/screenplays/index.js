@@ -10,12 +10,5 @@ router.get('/', function(req, res, next){
     .catch(next);
 });
 
-router.get('/:userId', function(req, res, next){
-    Screenplay.findById(req.params.userId)
-    .then(screenplays => {
-        res.json(screenplays);
-    })
-    .catch(next);
-});
 
 module.exports = router;
