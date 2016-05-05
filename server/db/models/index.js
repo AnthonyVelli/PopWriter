@@ -3,6 +3,6 @@
 // anywhere the User model needs to be used.
 require('./user');
 require('./character');
+require('./scene');
 require('./component');
 require('./screenplay');
-require('./scene')
