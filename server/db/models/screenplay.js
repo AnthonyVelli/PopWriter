@@ -11,18 +11,18 @@ var schema = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    scenes: [{
-        type: mongoose.Schema.Types.ObjectId,
+    scenes: {
+        type: [mongoose.Schema.Types.ObjectId],
         ref: "Scene"
-    }],
+    },
     lastUpdate: Date
 });
 
 schema.pre('update', function() {
   this.update({ lastUpdate : new Date() } );
-  next();
+  next()
 });
 
 
 
-module.exports = mongoose.model('Script', schema);
+module.exports = mongoose.model('Screenplay', schema);
