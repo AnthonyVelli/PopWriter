@@ -58,7 +58,7 @@ var seedUsers = function () {
 
 var seedScreenplays = function(){
 
-    var user, scene, currentChar, screenP;
+    var user, scene, currentChar, screenP, header;
     var compArr =[];
 
     return User.findOne({email: 'obama@gmail.com'})
@@ -80,20 +80,21 @@ var seedScreenplays = function(){
         currentChar = charsArr[0];
         return Component.create(components);
     })
-    .then((components) => {
-        var header;
+    // consider changing the name here
+    .then((newlyCreatedComponent) => {
+        // why is there a header here
         var dialogue;
-        components.forEach(comp => {
-            if(comp.type === 'location') scenes.header = comp._id;
-            else compArr.push(comp._id);
+        newlyCreatedComponent.forEach(comp => {
             if(comp.type === 'dialogue') dialogue = comp;
+            if(comp.type === 'location') header = comp;
+            else compArr.push(comp._id);
         });
         dialogue.character = currentChar._id
         return dialogue.save();
         // return
     })
     .then( () => {
-        return Scene.create({components: compArr});
+        return Scene.create({header: header, components: compArr});
     })
     .then((scene) => {
         screenP.scenes = [scene._id];

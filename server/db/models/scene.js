@@ -18,6 +18,7 @@ var schema = new mongoose.Schema({
 
 schema.pre('save', function(next) {
     this.populate('components')
+    //can populate only of a query
         .then(populatedComps => this.header = populatedComps.find(comp => comp.type === 'location'));
     next();
 });
