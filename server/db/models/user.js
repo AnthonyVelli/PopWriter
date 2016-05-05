@@ -25,10 +25,10 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    screenplay: [{
-        type: mongoose.Schema.Types.ObjectId,
+    screenplay: {
+        type: [mongoose.Schema.Types.ObjectId],
         ref: 'Screenplay'
-    }]
+    }
 });
 
 // method to remove sensitive information from user objects before sending them out
