@@ -1,20 +1,20 @@
 'use strict';
 
 const router = require('express').Router();
-var User = mongoose.model('User');
+const User = mongoose.model('User');
 
 module.exports = router;
 
 // get all users
 router.get('/', (req, res, next) => {
 	User.find({})
-	.then(user => res.json(user))
+	.then(users => res.json(users))
 	.catch(next);
 });
 
 router.post('/', (req, res, next) => {
 	User.create(req.body)
-	.then(user => res.send(201).json(user))
+	.then(user => res.status(201).json(user))
 	.catch(next);
 });
 
@@ -29,14 +29,14 @@ router.param('id', (req, res, next, id) => {
 
 router.put('/:id', (req, res, next) => {
 	req.requestUser.set(req.body)
-	req.requestUser.save()
+	return req.requestUser.save()
 	.then(updatedUser => res.json(updatedUser))
 	.catch(next);
 });
 
 router.delete('/:id', (req, res, next) => {
 	req.requestUser.remove()
-	.then(() => res.send(204))
+	.then(() => res.sendStatus(204))
 	.catch(next);
 });
 

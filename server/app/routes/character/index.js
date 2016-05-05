@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-var Character = mongoose.model('Character');
+const Character = mongoose.model('Character');
 
 module.exports = router;
 
@@ -15,14 +15,14 @@ router.get('/', (req, res, next) => {
 // create to a user
 router.post('/', (req, res, next) => {
 	Character.create(req.body)
-	.then(character => res.send(201).json(character))
+	.then(character => res.sendStatus(201).json(character))
 	.catch(next);
 });
 
 router.param('id', (req, res, next, id) => {
 	Character.findbyId(id)
 	.then(character => {
-		req.wantedCharacter = character;
+		req.requestedCharacter = character;
 		next();
 	})
 	.catch(next)
@@ -30,15 +30,15 @@ router.param('id', (req, res, next, id) => {
 
 // update a character
 router.put('/:id', (req, res, next) => {
-	req.wantedCharacter.set(req.body)
-	req.wantedCharacter.save()
+	req.requestedCharacter.set(req.body)
+	return req.requestedCharacter.save()
 	.then(updatedCharacter => res.json(updatedCharacter))
 	.catch(next);
 });
 
 // delete a character
 router.delete("/:id", (req, res, next) => {
-	req.wantedCharacter.remove()
-	.then(() => res.send(204))
+	req.requestedCharacter.remove()
+	.then(() => res.sendStatus(204))
 	.catch(next);
 });

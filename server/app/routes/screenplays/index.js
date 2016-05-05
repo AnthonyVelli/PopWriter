@@ -1,7 +1,7 @@
 'use strict';
 
-var router = require('express').Router();
-var Screenplay = require('mongoose').model('Screenplay');
+const router = require('express').Router();
+const Screenplay = require('mongoose').model('Screenplay');
 
 router.get("/", (req, res, next) => {
 	Screenplay.find({_id: req.requestUser.screenplay})
@@ -26,13 +26,13 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 
 router.put('/:screenplayId', (req, res, next) => {
 	req.wantedScreenplay.set(req.body)
-	req.wantedScreenplay.save()
+	return req.wantedScreenplay.save()
 	.then(updatedScreenplay => res.json(updatedScreenplay))
 	.catch(next);
 })
 router.delete('/:screenplayId', (req, res, next) => {
 	req.wantedScreenplay.remove()
-	.then(() => res.send(204))
+	.then(() => res.status(204))
 	.catch(next);
 });
 
