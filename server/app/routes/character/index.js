@@ -30,8 +30,7 @@ router.param('id', (req, res, next, id) => {
 
 // update a character
 router.put('/:id', (req, res, next) => {
-	req.requestedCharacter.set(req.body)
-	return req.requestedCharacter.save()
+	req.requestedCharacter.update(req.body)
 	.then(updatedCharacter => res.json(updatedCharacter))
 	.catch(next);
 });

@@ -28,8 +28,7 @@ router.param('id', (req, res, next, id) => {
 });
 
 router.put('/:id', (req, res, next) => {
-	req.requestUser.set(req.body)
-	return req.requestUser.save()
+	req.requestUser.update(req.body)
 	.then(updatedUser => res.json(updatedUser))
 	.catch(next);
 });

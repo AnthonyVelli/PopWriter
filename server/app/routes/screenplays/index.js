@@ -25,8 +25,7 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 })
 
 router.put('/:screenplayId', (req, res, next) => {
-	req.wantedScreenplay.set(req.body)
-	return req.wantedScreenplay.save()
+	req.wantedScreenplay.update(req.body)
 	.then(updatedScreenplay => res.json(updatedScreenplay))
 	.catch(next);
 })
