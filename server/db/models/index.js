@@ -4,5 +4,6 @@
 require('./user');
 require('./character');
 require('./scene');
-require('./screenplay');
 require('./component');
+require('./screenplay');
+
