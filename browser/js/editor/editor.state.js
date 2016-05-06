@@ -6,8 +6,10 @@ app.config($stateProvider => {
     });
 })
 .controller('EditorController', ($scope, ScreenplaysFactory, $stateParams) => {
+
     ScreenplaysFactory.getOne($stateParams.id)
     .then(screenplay => {
         $scope.screenplay = screenplay;
     })
+
 })
