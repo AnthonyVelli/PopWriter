@@ -6,4 +6,3 @@ require('./character');
 require('./scene');
 require('./component');
 require('./screenplay');
-
