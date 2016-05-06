@@ -6,7 +6,8 @@ router.use('/members', require('./members'));
 router.use('/components', require('./components'));
 router.use('/screenplays', require('./screenplays'));
 router.use('/users', require('./user'));
-router.use('/characters', require('./character'));
+router.use('/character', require('./character'));
+
 
 // Make sure this is after all of
 // the registered routes!
