@@ -18,7 +18,7 @@ var schema = new mongoose.Schema({
 
 schema.pre('validate', function(next) {
     var Component = mongoose.model('Component');
-    
+
     if (this.components.length === 0) {next(); }
     var compstoPop = this.components.filter((ele) => !ele.type);
     var comps = this.components.filter((ele) => ele.type);
@@ -33,6 +33,7 @@ schema.pre('validate', function(next) {
         this.header = foundComps.find(ele => ele.type === 'location').text;
         next();
     });
+
 });
 
 
