@@ -8,19 +8,6 @@ app.config($stateProvider => {
 	});
 })
 
-app.factory('UserFactory', ($http) => {
-	var UserFactory = {};
-	var parseData = res => res.data;
-
-	UserFactory.createUser = (body) => {
-		console.log(body)
-		return $http.post('/api/users/', body)
-		.then(parseData);
-	}
-
-	return UserFactory;
-})
-
 app.controller('SignupCtrl', ($scope, AuthService, $state, UserFactory) => {
 
 	$scope.signup = {};

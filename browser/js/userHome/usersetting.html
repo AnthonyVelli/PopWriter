@@ -1,3 +1,17 @@
 <div>
-	<h1>Blocker1</h1>
+<h1>Blocker1</h1>
+<h3>{{user.email}}</h3>
 </div>
+
+
+<form name="userInfo">
+    <div class="form-group">
+        <label for="Name">Email</label>
+        <input type="text" class="form-control" placeholder="Name" ng-model="user.email">
+    </div>
+    <div class="form-group">
+        <label for="E-Mail Address">Password</label>
+        <input type="email" class="form-control" placeholder="password" ng-model="user.password">
+    </div>
+    <button ng-click="save()" class="btn btn-primary">Save</button>
+</form>
