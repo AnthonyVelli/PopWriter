@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.param('id', (req, res, next, id) => {
-	User.findbyId(id)
+	User.findById(id)
 	.then(user => {
 		req.requestUser = user;
 		next();
@@ -28,7 +28,7 @@ router.param('id', (req, res, next, id) => {
 	.catch(next);
 });
 
-router.put(":/id", (req, res, next) => {
+router.put("/:id", (req, res, next) => {
 	User.findById(req.requestUser._id)
 	.then(user => {
 		user.set(req.body);
