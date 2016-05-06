@@ -44,12 +44,13 @@ describe('Component model', function () {
     });
 
     describe('Virtuals', function () {
+
         it('interiour/exteriour virtual', function () {
             return Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
             .then(function(created){
-                expect(created.intExt).to.equal('INT.'); 
-                expect(created.location).to.equal('The Coconut Grove Nightclub - night'); });
+                expect(created.intExt).to.equal('INT.'); });
         });
+
         it('location virtual', function () {
             return Component.create({type: 'location', text: 'INT. The Coconut Grove Nightclub - night'})
             .then(function(created){

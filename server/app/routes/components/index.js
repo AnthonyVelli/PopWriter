@@ -1,6 +1,5 @@
 'use strict';
 var router = require('express').Router();
-//var Component = require('../db/models/component');
 const Component = require('mongoose').model('Component');
 module.exports = router;
 
@@ -13,13 +12,16 @@ router.param('componentId', function(req, res, next, componentId){
   .catch(next);
 });
 
-router.get('/', function (req, res, next) {
-	Component.find()
-	.then(function(components){
-		res.json(components);
-	})
-	.catch(next);
-    
+router.get('/:componentId?', function (req, res, next) {
+	if (req.params.componentId) {
+		res.json(req.component);
+	} else {
+		Component.find()
+			.then(function(foundComponents){
+				res.json(foundComponents);
+			})
+			.catch(next);
+	}
 });
 
 router.put('/:componentId', function (req, res, next) {
@@ -35,7 +37,7 @@ router.put('/:componentId', function (req, res, next) {
 router.post('/', function (req, res, next) {
 	Component.create(req.body)
 	.then(function(createdComponent){
-		res.json(createdComponent);
+		res.status(201).json(createdComponent);
 	})
 	.catch(next);
     
@@ -44,7 +46,7 @@ router.post('/', function (req, res, next) {
 router.delete('/:componentId', function (req, res, next) {
   req.component.remove()
   .then(function(){
-      res.status(204).end();
+      res.sendStatus(204);
   })
   .catch(next);
     

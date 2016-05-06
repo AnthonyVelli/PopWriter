@@ -68,9 +68,8 @@ describe('Scene model', function () {
 
         it('Pre-Save Hook to Populate Heading', function () {
             return Scene.findOne()
-            .populate('header')
             .then(function(foundScene){
-                expect(foundScene.header.type).to.equal('location') ;
+                expect(foundScene.header).to.be.a('string') ;
             });
         });
     });
