@@ -15,7 +15,7 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     }
-});
+}, {toObject: {virtuals: true}, toJSON: {virtuals: true}});
 
 schema.virtual('intExt').get(function () {
   if(this.type === 'location'){
