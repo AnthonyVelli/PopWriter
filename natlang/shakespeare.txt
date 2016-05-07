@@ -1,12 +1,4 @@
 
-
-hello world the
-quick brown fox
-jummped over 
-the lazy
-dog bitch
-
-
 FROM fairest creatures we desire increase,
 That thereby beauty's rose might never die,
 But as the riper should by time decease,
