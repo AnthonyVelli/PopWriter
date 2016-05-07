@@ -9,6 +9,10 @@ app.factory('ScreenplaysFactory', function($http){
         getAllByUser: function(userId) {
         	return $http.get('/api/users/' + userId + '/screenplays/')
         	.then(parseData);
+        },
+        addOne: function(userId, script){
+        	return $http.post('/api/users/' + userId + 'screenplays', script)
+        	.then(parseData);
         }
 
     };

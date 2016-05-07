@@ -22,11 +22,15 @@ app.config($stateProvider => {
 	.state('userHome.screenplays', {
 		url: '/screenplays',
 		templateUrl: 'js/userhome/userscreenplays.html'
+	})
+	.state('userHome.screenplays.add', {
+		url: '/screenplays/add',
+		templateUrl: 'js/userhome/usersscreenplaysadd.html'
 	});
 });
 
 
-app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays) => {
+app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
 	$scope.user = user;
 	$scope.screenplays = theScreenplays;
 	console.log($scope.user);
@@ -37,5 +41,11 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays
 			console.log("updated User info");
 		});
 	};
+	$scope.addScreenplay = (screenplay) => {
+		ScreenplaysFactory.addOne(screenplay)
+		.then(function(screenplay){
+			console.log("screenplay was created:", screenplay);
+		});
+	}
 });
 
