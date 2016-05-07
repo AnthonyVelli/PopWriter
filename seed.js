@@ -99,9 +99,10 @@ var seedScreenplays = function(){
         // why is there a header here
         newlyCreatedComponent.forEach(comp => {
             if(comp.type === 'dialogue') dialogue = comp;
-            if(comp.type === 'location') header = comp;
-            else compArr.push(comp._id);
+            // if(comp.type === 'location') header = comp;
+            // else compArr.push(comp._id);
         });
+        compArr = newlyCreatedComponent;
         dialogue.character = currentChar._id
         return dialogue.save();
         // return
@@ -111,7 +112,7 @@ var seedScreenplays = function(){
         return currentChar.save();
     })
     .then( () => {
-        return Scene.create({header: header, components: compArr});
+        return Scene.create({components: compArr});
     })
     .then((scene) => {
         screenP.scenes = [scene._id];

@@ -29,7 +29,8 @@ schema.pre('validate', function(next) {
     if (compstoPop.length === 0){next(); }
     Component.find({'_id': { $in: compstoPop}})
     .then(foundComps => {
-        if (!foundComps) {next(); }
+        if (!foundComps.length) {next(); }
+        console.log(foundComps);
         this.header = foundComps.find(ele => ele.type === 'location').text;
         next();
     });
