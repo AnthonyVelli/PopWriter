@@ -1,9 +1,12 @@
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
 <div class="container">
-    <h1>I'm the editor!!!</h1>
+    <h1>EDITOR</h1>
+    <select name="select" ng-model="comp">
+      <option ng-repeat="component in components" >{{ component }}</option>
+    </select>
     <form method="post">
-      <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+      <textarea  id="editor" ng-keydown="type($event)" ng-model="text" cursor-position="position"></textarea>
     </form>
     <button ng-click="clickMe()">click me</button>
     <button ui-sref="userHome">home</button>
@@ -11,3 +14,4 @@
 
 
 
+<!-- ng-model="tinymceModel" ui-tinymce="tinymceOptions" -->

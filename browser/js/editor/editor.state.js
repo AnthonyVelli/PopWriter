@@ -12,21 +12,24 @@ app.config($stateProvider => {
         $scope.screenplay = screenplay;
     });
 
-    $scope.clickMe = () => {
-        console.log($scope.tinymceModel);
-    }
+    $scope.components = ['Header', 'Action', 'Character', 'Dialogue'];
+    if(!$scope.comp) $scope.comp = $scope.components[0];
 
-    $scope.tinymceOptions = {
-          menu: {
-            file: {title: 'File', items: 'newdocument'},
-            edit: {title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall'},
-            insert: {title: 'Insert', items: 'link media | template hr'},
-            view: {title: 'View', items: 'visualaid'},
-            format: {title: 'Format', items: 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
-            table: {title: 'Table', items: 'inserttable tableprops deletetable | cell row column'},
-            tools: {title: 'Tools', items: 'spellchecker code'}
-          },
-          min_height: 400
+    $scope.clickMe = () => {
+        console.log($scope.text);
+        console.log($scope.comp);
+        console.log($scope.position.get);
+    };
+
+    $scope.type = (event) => {
+        console.log(event.code);
+        var compArray = $scope.components;
+        var nextIdx = $scope.components.indexOf($scope.comp) + 1;
+        if(event.code === 'Tab'){
+            event.preventDefault();
+            if(!compArray[nextIdx]) nextIdx = 0;
+            $scope.comp = compArray[nextIdx];
+        }
     };
 
 })
