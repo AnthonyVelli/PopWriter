@@ -8,6 +8,10 @@ app.config($stateProvider => {
 		resolve: {
 			user: (AuthService) => {
 				return AuthService.getLoggedInUser();
+
+			},
+			theScreenplays: function(user, ScreenplaysFactory, $http) {
+				return ScreenplaysFactory.getAllByUser(user._id);
 			}
 		}
 	})
@@ -19,17 +23,19 @@ app.config($stateProvider => {
 		url: '/screenplays',
 		templateUrl: 'js/userhome/userscreenplays.html'
 	});
-})
+});
 
-app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory) => {
+
+app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays) => {
 	$scope.user = user;
-	console.log($scope.user)
+	$scope.screenplays = theScreenplays;
+	console.log($scope.user);
 	$scope.save = () => {
 		UserFactory.updateUser($scope.user._id, $scope.user)
 		.then(updatedUser => {
 			$scope.user = updatedUser;
-			console.log("updated User info")
-		})
-	}
-})
+			console.log("updated User info");
+		});
+	};
+});
 
