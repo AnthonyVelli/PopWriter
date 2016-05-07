@@ -7,9 +7,12 @@ module.exports = router;
 
 // get all characters
 router.get('/', (req, res, next) => {
-	Character.find({})
-	.then(characters => res.json(characters))
-	.catch(next);
+	if(!req.user) res.sendStatus(403)
+	else {
+		Character.find({})
+		.then(characters => res.json(characters))
+		.catch(next);
+	};
 });
 
 // create to a user
@@ -30,14 +33,19 @@ router.param('id', (req, res, next, id) => {
 
 // update a character
 router.put('/:id', (req, res, next) => {
-	req.requestedCharacter.update(req.body)
-	.then(updatedCharacter => res.json(updatedCharacter))
-	.catch(next);
+	if(!req.user) res.sendStatus(401)
+	else if (req.user.isAdmin || req.user.equals(req.requestedCharacter)) {
+		req.requestedCharacter.update(req.body)
+		.then(updatedCharacter => res.json(updatedCharacter))
+		.catch(next);
+	} else res.sendStatus(401)
 });
 
 // delete a character
 router.delete("/:id", (req, res, next) => {
-	req.requestedCharacter.remove()
-	.then(() => res.sendStatus(204))
-	.catch(next);
+	if(req.user || req.user.isAdmin) {
+		req.requestedCharacter.remove()
+		.then(() => res.sendStatus(204))
+		.catch(next);
+	} else res.sendStatus(401)
 });
