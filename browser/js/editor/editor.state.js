@@ -10,6 +10,10 @@ app.config($stateProvider => {
     ScreenplaysFactory.getOne($stateParams.id)
     .then(screenplay => {
         $scope.screenplay = screenplay;
-    })
+    });
+
+    $scope.clickMe = () => {
+        console.log($scope.tinymceModel);
+    }
 
 })

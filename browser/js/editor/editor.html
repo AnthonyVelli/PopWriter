@@ -2,8 +2,11 @@
 <script>tinymce.init({ selector:'textarea' });</script>
 <div class="container">
     <h1>I'm the editor!!!</h1>
+    <form method="post">
+      <textarea ui-tinymce ng-model="tinymceModel"></textarea>
+    </form>
+    <button ng-click="clickMe()">click me</button>
     <button ui-sref="userHome">home</button>
-    <textarea></textarea>
 </div>
 
 

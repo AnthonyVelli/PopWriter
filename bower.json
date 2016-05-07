@@ -1,0 +1,20 @@
+{
+  "name": "FullstackGeneratedApp",
+  "description": "A generated project at Fullstack Academy",
+  "main": "server/start.js",
+  "authors": [
+    "Massimo Crapanzano <massimo.crapanzano@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/AnthonyVelli/PopWriter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-tinymce": "^0.0.15"
+  }
+}
