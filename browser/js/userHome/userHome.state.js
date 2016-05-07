@@ -33,7 +33,6 @@ app.config($stateProvider => {
 app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
 	$scope.user = user;
 	$scope.screenplays = theScreenplays;
-	console.log($scope.user);
 	$scope.save = () => {
 		UserFactory.updateUser($scope.user._id, $scope.user)
 		.then(updatedUser => {
@@ -41,8 +40,9 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays
 			console.log("updated User info");
 		});
 	};
-	$scope.addScreenplay = (screenplay) => {
-		ScreenplaysFactory.addOne(screenplay)
+	$scope.addScreenplay = (id, screenplay) => {
+		console.log("controller addScreenplay");
+		ScreenplaysFactory.addOne(id, screenplay)
 		.then(function(screenplay){
 			console.log("screenplay was created:", screenplay);
 		});

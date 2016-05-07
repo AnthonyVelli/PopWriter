@@ -11,7 +11,8 @@ app.factory('ScreenplaysFactory', function($http){
         	.then(parseData);
         },
         addOne: function(userId, script){
-        	return $http.post('/api/users/' + userId + 'screenplays', script)
+        	console.log("addone  in factory", userId, script);
+        	return $http.post('/api/users/' + userId + '/screenplays/', script)
         	.then(parseData);
         }
 
