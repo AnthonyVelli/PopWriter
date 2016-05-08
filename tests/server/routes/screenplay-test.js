@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 var models = require('../models/create-dummy-entries');
 
@@ -95,5 +94,3 @@ describe('Screenplay Route', function () {
 	});
 
 });
-
-
