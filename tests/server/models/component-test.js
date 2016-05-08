@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var models = require('./create-dummy-entries');
  
-
+ 
 const Component = models.Component;
 
 describe('Component model', function () {

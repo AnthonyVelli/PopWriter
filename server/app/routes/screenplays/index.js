@@ -1,34 +1,46 @@
 'use strict';
-
+const mongoose = require('mongoose');
 const router = require('express').Router();
-const Screenplay = require('mongoose').model('Screenplay');
-
-router.get('/', (req, res, next) => {
-	Screenplay.find({_id: {$in: req.requestUser.screenplay}})
-	.then(screenplays => res.json(screenplays))
-	.catch(next);
-});
-
-router.post('/', (req, res, next) => {
-	Screenplay.create(req.body)
-	.then(newSceenPlay => res.status(201).json(newSceenPlay))
-	.catch(next);
-});
+const Screenplay = mongoose.model('Screenplay');
+const Scene = mongoose.model('Scene');
 
 router.param('screenplayId', (req, res, next, screenplayId) => {
-	Screenplay.findbyId(screenplayId)
+	var foundSP;
+	Screenplay.findById(screenplayId)
 	.then(screenplay => {
-		req.wantedScreenplay = screenplay;
-		next();
-	})
+		foundSP = screenplay;
+		return Scene.find({'_id': {$in: screenplay.scenes}}); })
+	.then(foundScenes => {
+		req.wantedScreenplay = foundSP;
+		req.wantedScreenplay.scenes = foundScenes; 
+		next(); })
 	.catch(next);
-})
+});
+
+router.get('/:screenplayId?', (req, res, next) => {
+	if (req.params.screenplayId) {
+		res.json(req.wantedScreenplay);
+	} else {
+		Screenplay.find()
+			.then(function(foundComponents){
+				res.json(foundComponents);
+			})
+			.catch(next);
+	}
+});
+ 
+router.post('/', (req, res, next) => {
+	Screenplay.create(req.body)
+	.then(newScreenPlay => res.status(201).json(newScreenPlay))
+	.catch(next);
+});
 
 router.put('/:screenplayId', (req, res, next) => {
-	req.wantedScreenplay.update(req.body)
-	.then(updatedScreenplay => res.json(updatedScreenplay))
+	req.wantedScreenplay.updateScenes(req.body)
+	.then(updatedSP => res.json(updatedSP))
 	.catch(next);
-})
+});
+
 router.delete('/:screenplayId', (req, res, next) => {
 	req.wantedScreenplay.remove()
 	.then(() => res.sendStatus(204))

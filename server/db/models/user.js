@@ -1,7 +1,9 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Screenplay = mongoose.model('Screenplay');
 var _ = require('lodash');
+var Promise = require('bluebird');
 
 var schema = new mongoose.Schema({
     email: {
@@ -30,6 +32,25 @@ var schema = new mongoose.Schema({
         ref: 'Screenplay'
     }
 });
+
+schema.methods.updateScreenplay = function(screenplayToUpdate){
+    var currentUser = this;
+    var updatePromise = screenplayToUpdate.map(function(ele) {
+        if (ele._id) {
+            var eleID = ele._id;
+            delete ele._id;
+            return Screenplay.findOneAndUpdate({_id: eleID}, ele, {new: true, runValidators: true})
+                .exec();
+        } else {
+            return Screenplay.create(ele);
+        }
+    }); 
+    return Promise.all(updatePromise)
+        .then(allPromise => {
+            currentUser.Screenplay = allPromise;
+            return currentUser.save();
+        });
+};
 
 // method to remove sensitive information from user objects before sending them out
 schema.methods.sanitize = function () {
