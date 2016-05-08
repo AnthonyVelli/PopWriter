@@ -10,7 +10,7 @@ var supertest = require('supertest');
 var app = require('../../../server/app');
 
 var Screenplay = models.Screenplay;
- 
+  
 describe('Screenplay Route', function () {
 	var screenplay;
 	var guestAgent;
