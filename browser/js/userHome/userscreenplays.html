@@ -2,6 +2,7 @@
 	<h1>Screenplays</h1>
 	<div ng-repeat="screenplay in screenplays">
 		<h2>{{screenplay.title}}</h2>
+		<button type='btn btn-primary'>Add a Scene to {{screenplay.title}}</button>
 	</div>
 	<h2>Click to Add a Screenplay</h2>
 		<button ui-sref="userHome.screenplays.add" type='btn btn-primary'>Add a Screenplay</button>
