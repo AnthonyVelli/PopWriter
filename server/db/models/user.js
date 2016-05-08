@@ -7,10 +7,12 @@ var Promise = require('bluebird');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     salt: {
         type: String
@@ -30,6 +32,10 @@ var schema = new mongoose.Schema({
     screenplay: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Screenplay'
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 

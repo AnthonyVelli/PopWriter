@@ -48,4 +48,5 @@ schema.pre('update', function(next) {
 
 
 
-module.exports = mongoose.model('Screenplay', schema);
+mongoose.model('Screenplay', schema);
+
