@@ -40,11 +40,14 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays
 			console.log("updated User info");
 		});
 	};
-	$scope.addScreenplay = (id, screenplay) => {
+	$scope.cat = "Hello friend!";
+	$scope.addNewScreenplay = function (id, screenplay) {
 		console.log("controller addScreenplay");
+		console.log(id, screenplay);
 		ScreenplaysFactory.addOne(id, screenplay)
 		.then(function(screenplay){
 			console.log("screenplay was created:", screenplay);
+			return screenplay;
 		});
 	}
 });
