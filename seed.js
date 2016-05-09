@@ -29,7 +29,7 @@ var Scene = mongoose.model('Scene');
 var screenplays = require('./seed/screenplays');
 var characters = require('./seed/characters');
 var components = require('./seed/components');
-var scenes = require('./seed/scenes')
+var scenes = require('./seed/scenes');
 
 
 var wipeCollections = function () {
@@ -112,11 +112,11 @@ var seedScreenplays = function(){
         return currentChar.save();
     })
     .then( () => {
-        return Scene.create({components: compArr});
+        return Scene.create({components: compArr, header: 'header to satisfy requirement'});
     })
-    .then((scene) => {
-        screenP.scenes = [scene._id];
-        return screenP.save();
+    .then(scene1 => {
+        screenP[0].scenes = [scene1._id];
+        return screenP[0].save();
     })
     .catch(console.error.bind(console));
 

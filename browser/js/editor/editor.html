@@ -1,12 +1,13 @@
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
 <div>
-	<scenes screenplay="{{screenplay}}"></scenes>
+	<scenes screenplay="screenplay"></scenes>
 </div>
 <div class="container">
-    <h1>EDITOR</h1>
-    <div contenteditable="true" id="editor" ng-keydown="type($event)">
-    </div>
+
+	<h1>screenplay: {{screenplay.title}}</h1>
+    <h1>I'm the editor!!</h1>
+
     <button ui-sref="userHome">home</button>
     <button ng-click="save()">save</button>
 </div>

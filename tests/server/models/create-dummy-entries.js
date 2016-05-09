@@ -14,13 +14,19 @@ docs.createComponents = function(){
 
 docs.createScene = function(){
 	return this.createComponents()
-		.then((comps, comps2) => this.Scene.create({components: [comps, comps2], synopsis: 'some information about my scene dog', date: 10/14/83}));
+		.then((comps, comps2) => this.Scene.create({components: [comps, comps2], header: 'heres a simple header, just a simple header', synopsis: 'some information about my scene dog', date: 10/14/83}));
 };
 
 docs.createScreenplay = function(){
 	return this.createScene()
-		.then(createdScene => this.Screenplay.create({title: 'taleof twocities', scenes: createdScene}));
+		.then(createdScene => {
+
+			return this.Screenplay.create({title: 'taleof twocities', scenes: createdScene}); });
+};
+
+docs.createCharacter = function(){
+	return this.createComponents()
+		.then((comps, comps2) => this.Character.create({name: 'jonny bonaduchi', dialogue: [comps, comps2]}));
 };
 
 module.exports = docs;
-
