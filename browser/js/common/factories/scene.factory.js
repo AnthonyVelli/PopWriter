@@ -6,6 +6,5 @@ app.factory('SceneFactory', function($http){
         	return $http.post('/api/scenes', scene)
         	.then(parseData);
         }
-
     };
 });
