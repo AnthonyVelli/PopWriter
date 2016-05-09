@@ -15,4 +15,7 @@ app.controller('ScenesCtrl', function($scope){
     $scope.showForm = function() {
         $scope.showform = true;
     };
+    $scope.hideForm = function() {
+        $scope.showform = false;
+    };
 });
