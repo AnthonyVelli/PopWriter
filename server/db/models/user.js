@@ -1,6 +1,8 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Screenplay = mongoose.model('Screenplay');
+var updateSubDocuments = require('./updateSubDocuments');
 var _ = require('lodash');
 
 var schema = new mongoose.Schema({
@@ -36,6 +38,11 @@ var schema = new mongoose.Schema({
         default: false
     }
 });
+
+schema.methods.update = function(toUpdate){
+    var targetDoc = this;
+    return updateSubDocuments(toUpdate, Screenplay, 'screenplay', targetDoc);
+};
 
 // method to remove sensitive information from user objects before sending them out
 schema.methods.sanitize = function () {
