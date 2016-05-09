@@ -3,7 +3,6 @@ app.factory('SceneFactory', function($http){
 
     return {
         addOne: function(script){
-        	console.log("addone  in factory", scene);
         	return $http.post('/api/scenes', scene)
         	.then(parseData);
         }
