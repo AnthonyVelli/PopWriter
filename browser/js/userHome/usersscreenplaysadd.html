@@ -1,0 +1,13 @@
+<div>
+		<form id="add-screenplay" name="addScreenplay" ng-submit="addNewScreenplay(user._id, newscreenplay)">
+			<fieldset class="form-group">
+		  		<label for="title">Title</label>
+		  		<input type="text" ng-model="newscreenplay.title" ng-required="true" class="form-control" id="title" placeholder="Enter screenplay title here">
+		  	</fieldset>
+		  	<fieldset class="form-group">
+			  	<label for="synopsis">Screenplay synopsis</label>
+			  	<textarea class="form-control" id="synopsis" ng-model="newscreenplay.synopsis"  rows="4" placeholder="Enter screenplay synopsis here"></textarea>
+		  	</fieldset>
+		  	<button type="submit" class="btn btn-default">Add Screenplay</button>
+		</form>
+	</div>
