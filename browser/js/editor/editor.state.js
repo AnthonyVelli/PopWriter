@@ -11,16 +11,18 @@ app.config($stateProvider => {
     });
 })
 .controller('EditorController', ($scope, screenplay) => {
-    var editor = document.getElementById('editor');
+
+    $scope.options = mediumEditorOptions;
+    $scope.text="<h1 class='awesome'>TITLE</h1>";
 
     $scope.components = ["header","action", "character", "dialogue"];
 
+
     $scope.save = () => {
-        console.log(editor);
+        console.log($scope.text);
     }
 
     $scope.type = function(event) {
-        console.log(event.code);
         if(event.code === 'tab') {
             event.preventDefault();
         }
