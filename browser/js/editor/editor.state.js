@@ -16,6 +16,7 @@ app.config($stateProvider => {
     $scope.text="<h1 class='awesome'>TITLE</h1>";
 
     $scope.components = ["header","action", "character", "dialogue"];
+    $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
@@ -23,8 +24,12 @@ app.config($stateProvider => {
     }
 
     $scope.type = function(event) {
-        if(event.code === 'tab') {
+        if(event.code === 'Tab') {
+            var compIdx = $scope.components.indexOf($scope.selected);
             event.preventDefault();
+            if(!$scope.components[compIdx + 1]) $scope.selected = $scope.components[0]
+            else $scope.selected = $scope.components[compIdx + 1];
+            console.log($scope.selected);
         }
     }
 

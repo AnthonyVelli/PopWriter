@@ -8,7 +8,7 @@
 	<h1>screenplay: {{screenplay.title}}</h1>
     <h1>Editor</h1>
     <select>
-        <option ng-repeat="component in components">{{ component }}</option>
+        <option ng-repeat="component in components" ng-model="selected">{{ selected }}</option>
     </select>
 
 <!--     <h1 ng-model="title" medium-editor bind-options="{disableReturn: true, disableExtraSpaces: true, toolbar: false}" data-placeholder="Enter a title"></h1><br>
