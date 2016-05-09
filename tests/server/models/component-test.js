@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var models = require('./create-dummy-entries');
  
-
+ 
 const Component = models.Component;
 
 describe('Component model', function () {
@@ -17,10 +17,10 @@ describe('Component model', function () {
     beforeEach('Establish DB connection', function () {
         return models.createComponents();
     });
-
+  
     afterEach('Clear test database', function (done) {
         clearDB(done);
-    });
+    });  
 
     describe('CRUD', function () {
 

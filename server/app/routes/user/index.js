@@ -5,9 +5,17 @@ const User = require("mongoose").model('User');
 
 module.exports = router;
 
+
+router.param('id', (req, res, next, id) => {
+	User.findById(id)
+	.then(user => {
+		req.requestUser = user;
+		next();
+	})
+	.catch(next);
+});
 // get all users
 router.get('/', (req, res, next) => {
-	console.log(req.user)
 	if(req.user.isAdmin) {
 		User.find({})
 		.then(users => res.json(users))
@@ -21,14 +29,6 @@ router.post('/', (req, res, next) => {
 	.catch(next);
 });
 
-router.param('id', (req, res, next, id) => {
-	User.findById(id)
-	.then(user => {
-		req.requestUser = user;
-		next();
-	})
-	.catch(next);
-});
 
 router.put("/:id", (req, res, next) => {
 	if(!req.user) res.sendStatus(401)

@@ -9,7 +9,7 @@ var clearDB = require('mocha-mongoose')(dbURI);
 
 var supertest = require('supertest');
 var app = require('../../../server/app');
-
+ 
 describe('Component Route', function () {
 	var comp1;
 	var comp2;

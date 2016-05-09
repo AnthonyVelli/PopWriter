@@ -1,44 +1,49 @@
 
 'use strict';
-
+const mongoose = require('mongoose');
 const router = require('express').Router();
-const Screenplay = require('mongoose').model('Screenplay');
+const Screenplay = mongoose.model('Screenplay');
+const Scene = mongoose.model('Scene');
 
-// find a single user's screenplays
-router.get('/', (req, res, next) => {
-	Screenplay.find({_id: {$in: req.requestUser.screenplay}})
-	.then(screenplays => res.json(screenplays))
+// find a screenplay, populate its scenes & attach to req object
+router.param('screenplayId', (req, res, next, screenplayId) => {
+	var foundSP;
+	Screenplay.findById(screenplayId)
+	.then(screenplay => {
+		foundSP = screenplay;
+		return Scene.find({'_id': {$in: screenplay.scenes}}); })
+	.then(foundScenes => {
+		req.wantedScreenplay = foundSP;
+		req.wantedScreenplay.scenes = foundScenes; 
+		next(); })
 	.catch(next);
 });
 
-// create a new screenplay
+//send a single screenplay with scenes populated, or all screenplays without scenes populated
+router.get('/:screenplayId?', (req, res, next) => {
+	if (req.params.screenplayId) {
+		res.json(req.wantedScreenplay);
+	} else {
+		Screenplay.find()
+			.then(function(foundScreenplays){
+				res.json(foundScreenplays);
+			})
+			.catch(next);
+	}
+});
+
+// create a screenplay
 router.post('/', (req, res, next) => {
 	Screenplay.create(req.body)
 	.then(newScreenPlay => res.status(201).json(newScreenPlay))
 	.catch(next);
 });
 
-// add screenplay object to req object
-router.param('screenplayId', (req, res, next, screenplayId) => {
-	Screenplay.findById(screenplayId)
-	.populate('scenes')
-	.exec(function(err, screenplay){
-		if (err) { throw new Error }
-		else { req.wantedScreenplay = screenplay; }
-		next();
-	})
-	.catch(next);
-});
-
-// get a single screenplay
-router.get('/:screenplayId', (req, res, next) => {
-	res.json(req.wantedScreenplay);
-});
 
 // update a screenplay
 router.put('/:screenplayId', (req, res, next) => {
 	req.wantedScreenplay.update(req.body)
-	.then(updatedScreenplay => res.json(updatedScreenplay))
+	.then(updatedSP => res.json(updatedSP))
 	.catch(next);
 });
 
