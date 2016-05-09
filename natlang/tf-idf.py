@@ -3,6 +3,7 @@ import string
 from collections import Counter
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 stop = stopwords.words('english')
 tokenizer = RegexpTokenizer(r'\w+')
@@ -23,8 +24,9 @@ def get_tokens():
 		return tokens
 
 tokens = get_tokens()
+print(tokens)
 count = Counter(tokens)
-print("MOST COMMON before stopwords", count.most_common(10))
+# print("MOST COMMON before stopwords", count.most_common(10))
 
 #this will remove stop words
 holder = []
@@ -32,4 +34,5 @@ for i in tokens:
 	if i not in stop:
 		holder.append(i)
 count = Counter(holder)
-print("After STOPWORDS filter", count.most_common(100))
+# print("After STOPWORDS filter", count.most_common(100))
+# print(sent_tokenize(tokens))
