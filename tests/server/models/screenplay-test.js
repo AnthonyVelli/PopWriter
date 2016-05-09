@@ -66,7 +66,11 @@ describe('Screenplay Model', function () {
         beforeEach('Seed Test Data', function () {
             return Screenplay.create({title: 'seed Screenplay'})
             .then(function(ele) { 
-                return ele.updateScenes({scenes: [{header: 'scede scene being added in Before Each'}, {header: 'a second scene, you know, to test with?'}]}); })
+                console.log(ele);
+                var scenes = [{header: 'scede scene being added in Before Each'}, {header: 'a second scene, you know, to test with?'}];
+                console.log(scenes);
+                ele.scenes = scenes;
+                return ele.update({scenes: scenes}); })
             .then(function(updatedSP) {
                 createdSP = updatedSP;
             });
@@ -85,7 +89,7 @@ describe('Screenplay Model', function () {
             var originalScenes = createdSP.scenes;
             var newSceneHolder = [{_id: originalScenes[1]._id, header: 'sometimes we change our data'}, {_id: originalScenes[0]._id, header: originalScenes[0].header}];
             newSceneHolder.push({header: 'sometimes we mix old scenes with new scenes! chaos!'});
-            return createdSP.updateScenes({scenes: newSceneHolder})
+            return createdSP.update({scenes: newSceneHolder})
                 .then(function(updatedSP){
                     expect(updatedSP.scenes).to.have.length(3);
                     expect(updatedSP.scenes[0].header).to.equal('sometimes we change our data');

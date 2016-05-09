@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
 
 // update a screenplay
 router.put('/:screenplayId', (req, res, next) => {
-	req.wantedScreenplay.updateScenes(req.body)
+	req.wantedScreenplay.update(req.body)
 	.then(updatedSP => res.json(updatedSP))
 	.catch(next);
 });

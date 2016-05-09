@@ -17,10 +17,10 @@ describe('Component model', function () {
     beforeEach('Establish DB connection', function () {
         return models.createComponents();
     });
-
+  
     afterEach('Clear test database', function (done) {
         clearDB(done);
-    });
+    });  
 
     describe('CRUD', function () {
 

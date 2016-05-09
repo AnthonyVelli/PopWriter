@@ -40,7 +40,7 @@ describe('Character model', function () {
 
         it('should save a Character with multiple Components', function () {
             return Character.findOne()
-            .then(function(ele) {expect(ele.components).to.have.length(2); });
+            .then(function(ele) {expect(ele.dialogue).to.have.length(2); });
         });
 
         it('should save multiple custom fields', function () {
