@@ -4,9 +4,12 @@
 	<scenes screenplay="{{screenplay}}"></scenes>
 </div>
 <div class="container">
-    <h1>I'm the editor!!!</h1>
+    <h1>EDITOR</h1>
+    <div contenteditable="true" id="editor">
+        <div id="start"></div>
+    </div>
     <button ui-sref="userHome">home</button>
-    <textarea></textarea>
+    <button ng-click="save()">save</button>
 </div>
 
 

@@ -2,14 +2,20 @@ app.config($stateProvider => {
     $stateProvider.state('editor', {
         url: '/editor/:id',
         templateUrl: '/js/editor/editor.html',
-        controller: 'EditorController'
+        controller: 'EditorController',
+        resolve: {
+            screenplay: function(ScreenplaysFactory, $stateParams){
+                return ScreenplaysFactory.getOne($stateParams.id);
+            }
+        }
     });
 })
-.controller('EditorController', ($scope, ScreenplaysFactory, $stateParams) => {
+.controller('EditorController', ($scope, screenplay) => {
+    var editor = document.getElementById('editor');
 
-    ScreenplaysFactory.getOne($stateParams.id)
-    .then(screenplay => {
-        $scope.screenplay = screenplay;
-    })
+    $scope.save = () => {
+        console.log(editor);
+    }
+
 
 })
