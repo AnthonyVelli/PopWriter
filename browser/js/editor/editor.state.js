@@ -13,8 +13,17 @@ app.config($stateProvider => {
 .controller('EditorController', ($scope, screenplay) => {
     var editor = document.getElementById('editor');
 
+    $scope.components = ["header","action", "character", "dialogue"];
+
     $scope.save = () => {
         console.log(editor);
+    }
+
+    $scope.type = function(event) {
+        console.log(event.code);
+        if(event.code === 'tab') {
+            event.preventDefault();
+        }
     }
 
 
