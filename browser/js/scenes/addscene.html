@@ -1,20 +1,14 @@
-<h3>Inside Directive: {{screenplay.title}}</h3>
-<button type='btn btn-primary' ng-click="showForm()">Add Scene</button>
-<div ng-show="showform">
+<div>
 	<h3>{{screenplay.title}}</h3>
-	<h4>Show Add Scene Form Here</h4>
-		<form id="add-scene" name="addScene" ng-submit="addNewScene(user._id, newscene)">
+			<form id="add-scene" name="addScene" ng-submit="addNewScene(user._id, newscene)">
 			<fieldset class="form-group">
 		  		<label for="title">Title</label>
 		  		<input type="text" ng-model="newscene.title" ng-required="true" class="form-control" id="title" placeholder="Enter scene title here">
 		  	</fieldset>
 		  	<fieldset class="form-group">
-			  	<label for="synopsis">Scene Synopsis</label>
+			  	<label for="synopsis">Scene synopsis</label>
 			  	<textarea class="form-control" id="synopsis" ng-model="newscene.synopsis"  rows="4" placeholder="Enter scene synopsis here"></textarea>
 		  	</fieldset>
 		  	<button type="submit" class="btn btn-default">Add Scene</button>
 		</form>
-</div>
-<div ng-repeat="scene in screenplay.scenes">
-	<h3>{{scene.synopsis}}</h3>
 </div>
