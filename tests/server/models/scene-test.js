@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 var models = require('./create-dummy-entries');
-
+var _ = require('lodash');
 const Scene = models.Scene;
 
 describe('Scene model', function () {
@@ -48,21 +48,15 @@ describe('Scene model', function () {
             });
         });
 
-        it('should save a custom field', function () {
+        it('should save multiple custom fields', function () {
             return Scene.findOne()
-            .then(function(foundScene){ 
-                var testObj = {history: 'dark'};
-                var testObj2 = {future: ['unknown', 444]};
-                var testObj3 = {past: 'murky',
-                present: 'really going well! :)'};
-                foundScene.custom.push(testObj);
-                foundScene.custom.push(testObj2);
-                foundScene.custom.push(testObj3);
+            .then(function(foundScene) {
+                _.extend(foundScene, {custom: {'customfieldONE': 'whatever i feel like!!!', 'customfieldTWO': 'no, exactly as we say'}});
                 return foundScene.save(); })
             .then(function(updatedScene) {
-                expect(updatedScene.custom).to.have.length(3);
-                expect(updatedScene.custom[2].past).to.equal('murky');
-                expect(updatedScene.custom[1].future[1]).to.equal(444); 
+                expect (updatedScene.custom).to.have.property('customfieldONE');
+                expect (updatedScene.custom).to.have.property('customfieldTWO');
+                expect (updatedScene.custom.customfieldONE).to.equal('whatever i feel like!!!');
             });
         });
 

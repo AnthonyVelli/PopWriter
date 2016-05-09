@@ -2,8 +2,8 @@
 
 app.config($stateProvider => {
 	$stateProvider.state('userHome', {
-		url: '/userhome',
-		templateUrl: 'js/userhome/userhome.html',
+		url: '/userHome',
+		templateUrl: 'js/userHome/userhome.html',
 		controller: 'UserhomeCtrl',
 		resolve: {
 			user: (AuthService) => {
@@ -17,15 +17,15 @@ app.config($stateProvider => {
 	})
 	.state('userHome.settings', {
 		url: '/settings',
-		templateUrl: 'js/userhome/usersetting.html'
+		templateUrl: 'js/userHome/usersetting.html'
 	})
 	.state('userHome.screenplays', {
 		url: '/screenplays',
-		templateUrl: 'js/userhome/userscreenplays.html'
+		templateUrl: 'js/userHome/userscreenplays.html'
 	})
 	.state('userHome.screenplays.add', {
-		url: '/add',
-		templateUrl: 'js/userhome/usersscreenplaysadd.html'
+		url: '/screenplays/add',
+		templateUrl: 'js/userHome/usersscreenplaysadd.html'
 	});
 });
 
