@@ -81,8 +81,7 @@ count = Counter(usefulWords)
 
 ################################################################
 # Analytics 4 
-# Text Classifier for sentiment analysis 
-# Positive versus negative 
+# Sends request out to API for sentiment of overall script
 
 def get_sentiment(someScript):
 	r = requests.post("http://text-processing.com/api/sentiment/", data={'text': someScript})
