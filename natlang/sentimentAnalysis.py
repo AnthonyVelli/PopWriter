@@ -86,7 +86,7 @@ count = Counter(usefulWords)
 def get_sentiment(someScript):
 	r = requests.post("http://text-processing.com/api/sentiment/", data={'text': someScript})
 	print(r.text)
-sentiment = get_sentiment(count)
+sentiment = get_sentiment("")
 
 ################################################################
 
