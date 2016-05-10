@@ -1,17 +1,8 @@
-import urllib
-import requests
-import nltk
-import string
-import os
-import random
+import requests, nltk, string, os
 from collections import Counter
-from nltk.corpus import stopwords
-from nltk.corpus import movie_reviews
-from nltk.tokenize import RegexpTokenizer
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.corpus import stopwords, state_union
+from nltk.tokenize import sent_tokenize, word_tokenize, RegexpTokenizer, PunktSentenceTokenizer
 from nltk.stem import PorterStemmer
-from nltk.corpus import state_union
-from nltk.tokenize import PunktSentenceTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 
@@ -33,6 +24,7 @@ script = get_script()
 
 ################################################################
 # ANALYTICS #1 this tokenizes words and shows how often they appear 
+# This also takes away any punctutation a script might have
 mainHolder = ""
 def get_tokens():
 	global mainHolder
@@ -68,40 +60,24 @@ count = Counter(usefulWords)
 # PunktSentenceTokenizer is unsupervised ML tokenizer
 # comes pretrained 
 
-def punkt_sent_tok():
-	train_text = state_union.raw('2005-GWBush.txt')
-	custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
-	tokenized = custom_sent_tokenizer.tokenize(script)
-	def process_content():
-		try:
-			for i in tokenized:
-				words = nltk.word_tokenize(i)
-				tagged = nltk.pos_tag(words)
-				return tagged
-		except Exception as e:
-			print(str(e))
-	newCount = process_content()
-	print(newCount, len(newCount))
-	return newCount
-# punkt_sent_tok()
+# def punkt_sent_tok():
+# 	train_text = state_union.raw('2005-GWBush.txt')
+# 	custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
+# 	tokenized = custom_sent_tokenizer.tokenize(script)
+# 	def process_content():
+# 		try:
+# 			for i in tokenized:
+# 				words = nltk.word_tokenize(i)
+# 				tagged = nltk.pos_tag(words)
+# 				return tagged
+# 		except Exception as e:
+# 			print(str(e))
+# 	newCount = process_content()
+# 	print(newCount, len(newCount))
+# 	return newCount
+# # punkt_sent_tok()
 
 ################################################################
-
-################################################################
-# Analytics # 3
-
-# stemmer = PorterStemmer()
-
-# def stem_tokens(tokens, stemmer):
-# 	stemmed = []
-# 	for item in tokens:
-# 		stemmed.append(stemmer.stem(item))
-# 	return stemmed
-
-# def tokenize(text):
-# 	tokens = nltk.word_tokenize(text)
-# 	stems = stem_tokens(tokens, stemmer)
-# 	return stems
 
 ################################################################
 # Analytics 4 
@@ -110,33 +86,11 @@ def punkt_sent_tok():
 
 def get_sentiment(someScript):
 	r = requests.post("http://text-processing.com/api/sentiment/", data={'text': someScript})
-	return r.text
-sentiment = get_sentiment()
+	print(r.text)
+sentiment = get_sentiment(count)
 
 ################################################################
 
-# documents = [(list(movie_reviews.words(fileid)), category)
-# 			for category in movie_reviews.categories()
-# 			for fileid in movie_reviews.fileids(category)]
-
-# random.shuffle(documents)
-
-# all_words = []
-# for words in movie_reviews.words():
-# 	all_words.append(words.lower())
-
-# all_words = nltk.FreqDist(all_words)
-# word_features = list(all_words.keys())[:3000]
-
-# def find_features(documents):
-# 	words = set(documents)
-# 	features = {}
-# 	# if a word is in the top 3000 words
-# 	for word in word_features:
-# 		features[w] = (word in words)
-# 	return features
-
-# print((find_features()))
 
 
 
