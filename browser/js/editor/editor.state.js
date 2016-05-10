@@ -20,7 +20,6 @@ app.config($stateProvider => {
 
 
     $scope.save = () => {
-        console.log($scope.text);
     }
 
     $scope.type = function(event) {
@@ -29,7 +28,6 @@ app.config($stateProvider => {
             event.preventDefault();
             if(!$scope.components[compIdx + 1]) $scope.selected = $scope.components[0]
             else $scope.selected = $scope.components[compIdx + 1];
-            console.log($scope.selected);
         }
     }
 
