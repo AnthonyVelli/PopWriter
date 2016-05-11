@@ -223,7 +223,6 @@ const sinAndCos = () => {
             });
         }
 
-        /* Inspired by Lee Byron's test data generator. */
         function stream_layers(n, m, o) {
             if (arguments.length < 3) o = 0;
             function bump(a) {
@@ -243,7 +242,6 @@ const sinAndCos = () => {
             });
         }
 
-        /* Another layer generator using gamma distributions. */
         function stream_waves(n, m) {
             return d3.range(n).map(function(i) {
                 return d3.range(m).map(function(j) {
