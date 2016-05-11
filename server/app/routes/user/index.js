@@ -14,14 +14,16 @@ router.param('id', (req, res, next, id) => {
 	})
 	.catch(next);
 });
+
+
 // get all users
-router.get('/', (req, res, next) => {
-	if(req.user.isAdmin) {
-		User.find({})
-		.then(users => res.json(users))
-		.catch(next);
-	} else {res.sendStatus(403)}
-});
+// router.get('/', (req, res, next) => {
+// 	if(req.user.isAdmin) {
+// 		User.find({})
+// 		.then(users => res.json(users))
+// 		.catch(next);
+// 	} else {res.sendStatus(403)}
+// });
 
 router.post('/', (req, res, next) => {
 	User.create(req.body)
@@ -31,24 +33,24 @@ router.post('/', (req, res, next) => {
 
 
 router.put("/:id", (req, res, next) => {
-	if(!req.user) res.sendStatus(401)
-	else if (req.user.isAdmin || req.user.equals(req.requestUser)){
-		User.findById(req.requestUser._id)
-		.then(user => {
-			user.set(req.body);
-			return user.save();
-		})
+	// if(!req.user) res.sendStatus(401);
+	if (req.user.isAdmin || req.user.equals(req.requestUser)){
+		return req.requestUser.update(req.body)
 		.then(updatedUser => res.json(updatedUser))
-		.catch(next);
-	} else res.sendStatus(401)
+		.catch(next); 
+	} else {
+		res.sendStatus(401);
+	}
 });
 
 router.delete('/:id', (req, res, next) => {
-	if(req.user || req.user.isAdmin){
+	if(req.user.isAdmin){
 		req.requestUser.remove()
 		.then(() => res.sendStatus(204))
 		.catch(next);
-	} else res.sendStatus(401)
+	} else {
+		res.sendStatus(401);
+	}
 });
 
 router.use('/:id/screenplays', require('../screenplays'))
