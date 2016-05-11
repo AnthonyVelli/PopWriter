@@ -12,9 +12,6 @@
     <button ui-sref="userHome">home</button>
     <button ng-click="save()">save</button>
 
-<!--     <h1 ng-model="title" medium-editor bind-options="{disableReturn: true, disableExtraSpaces: true, toolbar: false}" data-placeholder="Enter a title"></h1><br>
-    <p ng-model="description" medium-editor bind-options="{'toolbar': {'buttons': ['bold', 'italic', 'underline']}}" data-placeholder="Enter a description"></p> -->
-
     <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)">
     <div id="slug"></div>
     </medium-editor>
