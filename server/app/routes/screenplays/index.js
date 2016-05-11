@@ -1,9 +1,9 @@
-
 'use strict';
 const mongoose = require('mongoose');
 const router = require('express').Router();
 const Screenplay = mongoose.model('Screenplay');
 const Scene = mongoose.model('Scene');
+const analytics = require('../../analytics/analytics.js')
 
 // find a screenplay, populate its scenes & attach to req object
 router.param('screenplayId', (req, res, next, screenplayId) => {
@@ -18,6 +18,8 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 		next(); })
 	.catch(next);
 });
+
+
 
 //send a single screenplay with scenes populated, or all screenplays without scenes populated
 router.get('/:screenplayId?', (req, res, next) => {
