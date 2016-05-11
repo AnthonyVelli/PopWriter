@@ -15,3 +15,4 @@ var wordCount = (screenplay) => {
 module.exports = {
 	wordCount: wordCount
 }
+
