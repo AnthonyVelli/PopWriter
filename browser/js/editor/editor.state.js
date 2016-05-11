@@ -14,14 +14,14 @@ app.config($stateProvider => {
     $scope.screenplay = screenplay;
     console.log(screenplay);
     $scope.options = mediumEditorOptions;
-    $scope.text="<p class='header'>int.</p>";
+    $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
 
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        console.log(typeof $scope.text);
+        console.log($scope.text);
     }
 
     $scope.type = function(event) {
