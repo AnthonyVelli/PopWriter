@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const Screenplay = mongoose.model('Screenplay');
 const Scene = mongoose.model('Scene');
-const analytics = require('../../analytics/analytics.js')
 
 // find a screenplay, populate its scenes & attach to req object
 router.param('screenplayId', (req, res, next, screenplayId) => {
