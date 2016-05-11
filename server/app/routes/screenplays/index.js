@@ -9,12 +9,9 @@ const analytics = require('../../analytics/analytics.js')
 router.param('screenplayId', (req, res, next, screenplayId) => {
 	var foundSP;
 	Screenplay.findById(screenplayId)
+	.populate('scenes')
 	.then(screenplay => {
-		foundSP = screenplay;
-		return Scene.find({'_id': {$in: screenplay.scenes}}); })
-	.then(foundScenes => {
-		req.wantedScreenplay = foundSP;
-		req.wantedScreenplay.scenes = foundScenes; 
+		req.wantedScreenplay = screenplay;
 		next(); })
 	.catch(next);
 });

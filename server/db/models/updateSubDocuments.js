@@ -5,6 +5,8 @@ var _ = require('lodash');
 // function to update users, screenplay, scenes, and characters
 // toUpdate = req.body; all other args defined in Model function
 module.exports = function(toUpdate, Model, property, targetDoc){
+    delete toUpdate._id;
+    delete toUpdate.__v;
     // overwrites mongoose document with udpated information
     _.extend(targetDoc, toUpdate);
     // if "property" array sent by front end is not empty, update array
@@ -13,7 +15,6 @@ module.exports = function(toUpdate, Model, property, targetDoc){
             if (ele._id) {
                 var eleID = ele._id;
                 delete ele._id;
-                delete ele._v;
                 return Model.findOneAndUpdate({_id: eleID}, ele, {new: true, runValidators: true})
                     .exec();
             } else {

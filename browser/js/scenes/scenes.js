@@ -24,8 +24,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
         screenplay.scenes.push(newscene);
         SceneFactory.addOrUpdate(screenplay)
         .then(function(updatedScreenplay) {
-            // be sure to save data in editor before updating editor state
-            $state.go('editor', {id: updatedScreenplay._id});
+            console.log("Yeah!  The screenplay was updated.");
         });
             $scope.showform = false;
     };
@@ -41,8 +40,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
 
         SceneFactory.addOrUpdate(screenplay)
         .then(function(updatedScreenplay) {
-            // be sure to save data in editor before updating editor state
-            $state.go('editor', { id: updatedScreenplay._id});
+             console.log("Yeah!  The screenplay was updated.");
         });
 
     };
