@@ -11,7 +11,7 @@ app.config($stateProvider => {
     });
 })
 .controller('EditorController', ($scope, screenplay) => {
-
+    $scope.screenplay = screenplay;
     $scope.options = mediumEditorOptions;
     $scope.text="<h1 class='awesome'>TITLE</h1>";
 
