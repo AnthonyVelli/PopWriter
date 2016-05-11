@@ -13,6 +13,7 @@ module.exports = function(toUpdate, Model, property, targetDoc){
             if (ele._id) {
                 var eleID = ele._id;
                 delete ele._id;
+                delete ele._v;
                 return Model.findOneAndUpdate({_id: eleID}, ele, {new: true, runValidators: true})
                     .exec();
             } else {

@@ -16,6 +16,6 @@
 		  	<button ng-click="hideForm()" class="btn btn-default">Cancel</button>
 		</form>
 </div>
-<div ng-repeat="scene in screenplay.scenes">
-	<h3>{{scene.synopsis}}</h3>
+<div ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
+	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{scene.synopsis}} {{$index}}</h3>
 </div>
