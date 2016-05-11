@@ -2,8 +2,8 @@
 
 // get wordCount in a screenplay
 var wordCount = (screenplay) => {
-    let words = screenplay.split(/[^\w]+/gi);
-    let frequencyMap = {}
+    var words = screenplay.split(/[^\w]+/gi);
+    var frequencyMap = {}
     words.forEach((word) => {
         if(!frequencyMap[word]) {
             frequencyMap[word] = 0
@@ -13,5 +13,5 @@ var wordCount = (screenplay) => {
 }
 
 module.exports = {
-	wordCount: wordCount()
+	wordCount: wordCount
 }
