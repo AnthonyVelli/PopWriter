@@ -14,7 +14,7 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 		return Scene.find({'_id': {$in: screenplay.scenes}}); })
 	.then(foundScenes => {
 		req.wantedScreenplay = foundSP;
-		req.wantedScreenplay.scenes = foundScenes; 
+		req.wantedScreenplay.scenes = foundScenes;
 		next(); })
 	.catch(next);
 });

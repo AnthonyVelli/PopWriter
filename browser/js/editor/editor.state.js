@@ -12,6 +12,7 @@ app.config($stateProvider => {
 })
 .controller('EditorController', ($scope, screenplay) => {
     $scope.screenplay = screenplay;
+    console.log(screenplay);
     $scope.options = mediumEditorOptions;
     $scope.text="<p class='header'>int.</p>";
 
@@ -26,15 +27,16 @@ app.config($stateProvider => {
     $scope.type = function(event) {
         var compIdx = $scope.components.indexOf($scope.selected);
         var currentClass = $scope.components[compIdx];
+        var currentElement;
         if(event.code === 'Tab') {
-            var currentElement = getSelectionStart();
+            currentElement = getSelectionStart();
             event.preventDefault();
             if(!$scope.components[compIdx + 1]) $scope.selected = $scope.components[0];
             else $scope.selected = $scope.components[compIdx + 1];
             currentElement.classList.remove(currentClass);
             currentElement.classList.add($scope.selected);
         } else if (event.code === 'Enter') {
-            var currentElement = getSelectionStart();
+            currentElement = getSelectionStart();
             setTimeout(()=> {
                 currentElement = getSelectionStart();
                 if(currentClass === 'header' || currentClass === 'character'){
@@ -50,7 +52,7 @@ app.config($stateProvider => {
                 $scope.$digest();
             }, 5)
         } else if(event.code === 'Backspace') {
-                var currentElement = getSelectionStart();
+                currentElement = getSelectionStart();
                 if(!currentElement.previousSibling && !currentElement.textContent) event.preventDefault();
             setTimeout(()=> {
                 currentElement = getSelectionStart();
