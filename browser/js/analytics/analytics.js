@@ -6,5 +6,5 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('analytics', function($scope, AnalyticsFact){
-
+	
 });
