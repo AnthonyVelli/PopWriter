@@ -10,8 +10,11 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 	var foundSP;
 	Screenplay.findById(screenplayId)
 	.then(screenplay => {
+        console.log(screenplay)
 		foundSP = screenplay;
-		return Scene.find({'_id': {$in: screenplay.scenes}}); })
+		return Scene.find({'_id': {$in: screenplay.scenes}})
+        .populate('components');
+    })
 	.then(foundScenes => {
 		req.wantedScreenplay = foundSP;
 		req.wantedScreenplay.scenes = foundScenes;
