@@ -1,4 +1,4 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, $location) {
 
     return {
         restrict: 'E',
@@ -10,6 +10,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 { label: 'Home', state: 'home' },
                 { label: 'About', state: 'about' },
                 { label: 'Documentation', state: 'docs' },
+                { label: 'User Dashboard', state: 'userHome', auth: true },
                 { label: 'Analytics', state: 'analytics', auth: true }
             ];
 
@@ -41,8 +42,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
             $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
+            console.log("hi!");
+            console.log("current state:", $state.current.name);
+            console.log("$state:", $state);
+            console.log("is home?", $state.current.name === "home");
+
+
         }
-
     };
-
 });
