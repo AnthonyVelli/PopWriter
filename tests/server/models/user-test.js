@@ -4,11 +4,13 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
+var model = require('./create-dummy-entries');
 
 // Require in all models.
 require('../../../server/db/models');
 
-var User = mongoose.model('User');
+var User = model.User;
+var Screenplay = model.Screenplay;
 
 describe('User model', function () {
 
@@ -130,7 +132,7 @@ describe('User model', function () {
                    expect(user.salt).to.be.equal(generatedSalt);
                    done();
                });
-            });
+           });
 
             it('should set user.password to the encrypted password', function (done) {
                 createUser().then(function (user) {
@@ -145,6 +147,7 @@ describe('User model', function () {
         describe('sanitize method', function () {
 
             var createUser = function () {
+                model.createScreenplay
                 return User.create({ email: 'obama@gmail.com', password: 'potus' });
             };
 
@@ -161,4 +164,34 @@ describe('User model', function () {
 
     });
 
+    describe('Update Screenplays', function () {
+
+        var createUser = function () {
+            return model.createScreenplay()
+            .then(screenplay => User.create({ email: 'obama@gmail.com', password: 'potus', screenplay: [screenplay]}));
+        };
+        
+
+        it('Scenes Saved to User are Valid Screenplays Refs', function () {
+            return createUser()
+            .then(newusr => newusr.update({screenplay: newusr.screenplay.concat([{title: 'test screenplay title AGAIN'}])}))
+            .then(updatedusr => {
+                expect(updatedusr.screenplay[1].title).to.equal('test screenplay title AGAIN');
+                expect(updatedusr.screenplay).to.have.length(2);
+                return Screenplay.findById(updatedusr.screenplay[1]._id); })
+            .then(foundScreenplay => expect(foundScreenplay._id).to.exist); 
+        });
+
+        it('Should Create New Screenplays and Rearrange Screenplays to Match Array Order', function () {
+            return createUser()
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}, {title: 'another new screen play, FOR GOOD MEASURE'}].concat(createdUser.screenplay)}); })
+            .then(function(updatedUser){
+                expect(updatedUser.screenplay).to.have.length(3);
+                expect(updatedUser.screenplay[2].title).to.equal('taleof twocities');
+                expect(updatedUser.screenplay[2].scenes).to.have.length(1);
+                expect(updatedUser.screenplay[0].title).equal('new screenplay for testing in final test woot!'); 
+            });
+        });
+    });
 });

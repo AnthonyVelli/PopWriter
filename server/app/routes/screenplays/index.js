@@ -11,7 +11,14 @@ router.param('screenplayId', (req, res, next, screenplayId) => {
 	Screenplay.findById(screenplayId)
 	.populate('scenes')
 	.then(screenplay => {
-		req.wantedScreenplay = screenplay;
+
+		foundSP = screenplay;
+		return Scene.find({'_id': {$in: screenplay.scenes}})
+        .populate('components');
+    })
+	.then(foundScenes => {
+		req.wantedScreenplay = foundSP;
+		req.wantedScreenplay.scenes = foundScenes;
 		next(); })
 	.catch(next);
 });

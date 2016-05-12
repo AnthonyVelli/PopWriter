@@ -1,8 +1,35 @@
+// #editor {
+//     width: 100%;
+//     height: 300px;
+// }
+
 #editor {
-    width: 100%;
-    height: 300px;
+    padding-top: 30px;
+    font-family: courier;
+    font-size: 1.8vw;
+    outline: 0px;
+    .header, .character {
+        text-transform: uppercase;
+    }
+    .header {
+        padding-top: 4%;
+    }
+    .header, .action {
+        padding-left: 17%;
+        padding-right: 11%;
+    }
+    .character {
+        padding-top:1%;
+        padding-left: 41%;
+        margin-bottom: .5%;
+    }
+    .dialogue {
+        padding-left: 32%;
+        padding-right: 37%;
+    }
+    .action {
+        padding-top: .5%;
+    }
 }
 
-.awesome {
-    color:red;
-}
+
