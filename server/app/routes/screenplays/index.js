@@ -1,17 +1,27 @@
 'use strict';
 const mongoose = require('mongoose');
+const Promise = require('bluebird');
 const router = require('express').Router();
 const Screenplay = mongoose.model('Screenplay');
 const Scene = mongoose.model('Scene');
 
 // find a screenplay, populate its scenes & attach to req object
 router.param('screenplayId', (req, res, next, screenplayId) => {
+	var screenplayExt;
 	Screenplay.findById(screenplayId)
 	.populate('scenes')
 	.then(screenplay => {
-		req.wantedScreenplay = screenplay;
-		next();
-    })
+		screenplayExt = screenplay;
+		if (screenplayExt.scenes.length===0){
+			req.wantedScreenplay = screenplayExt;
+			next();
+		}
+		var populatedScenePromise = screenplayExt.scenes.map(ele => Scene.findById(ele).populate('components').exec());
+		return Promise.all(populatedScenePromise); })
+	.then(populatedComponents => {
+		req.wantedScreenplay = screenplayExt;
+		req.wantedScreenplay.scenes = populatedComponents;
+		next(); })
 	.catch(next);
 });
 
@@ -40,8 +50,13 @@ router.post('/', (req, res, next) => {
 
 // update a screenplay
 router.put('/:screenplayId', (req, res, next) => {
+	console.log(req.wantedScreenplay);
+	console.log(req.body);
 	req.wantedScreenplay.update(req.body)
-	.then(updatedSP => res.json(updatedSP))
+	.then(updatedSP => {
+		console.log(updatedSP);
+		res.json(updatedSP);
+	})
 	.catch(next);
 });
 
