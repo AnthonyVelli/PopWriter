@@ -8,7 +8,9 @@ const Scene = mongoose.model('Scene');
 router.param('screenplayId', (req, res, next, screenplayId) => {
 	var foundSP;
 	Screenplay.findById(screenplayId)
+	.populate('scenes')
 	.then(screenplay => {
+
 		foundSP = screenplay;
 		return Scene.find({'_id': {$in: screenplay.scenes}})
         .populate('components');
@@ -45,8 +47,13 @@ router.post('/', (req, res, next) => {
 
 // update a screenplay
 router.put('/:screenplayId', (req, res, next) => {
+	console.log(req.wantedScreenplay);
+	console.log(req.body);
 	req.wantedScreenplay.update(req.body)
-	.then(updatedSP => res.json(updatedSP))
+	.then(updatedSP => {
+		console.log(updatedSP);
+		res.json(updatedSP);
+	})
 	.catch(next);
 });
 

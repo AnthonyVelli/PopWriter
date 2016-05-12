@@ -12,7 +12,6 @@ app.config($stateProvider => {
 })
 .controller('EditorController', ($scope, screenplay) => {
     $scope.screenplay = screenplay;
-    console.log(screenplay);
     $scope.options = mediumEditorOptions;
     $scope.text="<p class='header'>int.</p>";
 
@@ -60,6 +59,8 @@ app.config($stateProvider => {
                 $scope.$digest();
             }, 5)
         }
-    }
-})
+
+    };
+
+});
 

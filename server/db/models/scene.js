@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
     components: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Component'}
     ],
-    synposis: {
+    synopsis: {
         type: String
     },
     custom: {},
