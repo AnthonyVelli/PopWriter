@@ -11,10 +11,12 @@ module.exports = function (app) {
     var publicPath = path.join(root, './public');
     var browserPath = path.join(root, './browser');
     var bowerPath = path.join(root, './bower_components');
+    var images = path.join(root, './images');
 
     app.use(favicon(app.getValue('faviconPath')));
     app.use(express.static(npmPath));
     app.use(express.static(publicPath));
     app.use(express.static(browserPath));
     app.use(express.static(bowerPath));
+    app.use(express.static(images));
 };
