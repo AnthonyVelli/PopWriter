@@ -14,8 +14,17 @@ navbar {
     background: rgba(0,0,0, 0.35);
     background-image: linear-gradient(
     to left,
-    rgba(0,0,0, 0.4) , rgba(0,0,0,0) 35%
+    rgba(0,0,0, 0.4) 35%, rgba(0,0,0,0) 
     );
+  }
+
+  &.nonhomebar {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(
+    to left,
+    rgba(0,0,0, 0.4) 35%, rgba(0,0,0,0)),
+    url(popwriter_hero.jpeg);
   }
 
   .container {
