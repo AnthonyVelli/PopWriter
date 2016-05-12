@@ -29,10 +29,10 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    screenplay: {
-        type: [mongoose.Schema.Types.ObjectId],
+    screenplay: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Screenplay'
-    },
+    }],
     isAdmin: {
         type: Boolean,
         default: false

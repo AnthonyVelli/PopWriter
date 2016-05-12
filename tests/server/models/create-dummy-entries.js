@@ -20,7 +20,6 @@ docs.createScene = function(){
 docs.createScreenplay = function(){
 	return this.createScene()
 		.then(createdScene => {
-
 			return this.Screenplay.create({title: 'taleof twocities', scenes: createdScene}); });
 };
 
