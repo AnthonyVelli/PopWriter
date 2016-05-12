@@ -1,9 +1,10 @@
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
+<div class="container">
 <div>
 	<scenes screenplay="screenplay"></scenes>
 </div>
-<div class="container">
+<div >
 
 	<h1>screenplay: {{screenplay.title}}</h1>
     <h1>Editor</h1>
@@ -20,6 +21,6 @@
     <button ui-sref="userHome">home</button>
     <button ng-click="save()">save</button>
 </div>
-
+</div>
 
 

@@ -14,9 +14,13 @@ body {
   }
 }
 
-#main {
+main {
   padding-top: 60px;
   margin: 0 auto;
+}
+
+.container {
+	padding-top: 100px;
 }
 
 @import 'directives/main';

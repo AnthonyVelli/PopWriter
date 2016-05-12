@@ -1,6 +1,12 @@
 .hero {
-	color: #fff;
-	background: 000 center url(images/popwriter_hero.jpeg);
+	paddig-top: 60px;
+	color: rgb(230,230,230);
+	background-image: 
+		radial-gradient(
+			rgba(0,0,0, 0.3),
+			rgba(0,0,0, 0)
+		),
+		url(images/popwriter_hero.jpeg);
 	background-size: cover;
 	text-align: center;
 	height: 100vh;
@@ -8,17 +14,57 @@
 	width: 100%;
 }
 
-h1.splash {
-    
-  /*font-family: 'Vast Shadow';*/
-	/*font-weight: normal;
-	text-transform: uppercase;
-	text-align: center;*/
-	font-size: 6vw;
-	/*line-height: 1;
-	margin: 0;
+div.splash {
+	text-align: center;
 	display: table-cell;
 	vertical-align: middle;
-	background-color: rgba(0,0,0, .4);*/
+}
+
+h1.splash {
+    
+    /*font-family: 'Cutive';*/
+    /*font-family: 'Special Elite';*/
+    font-family: 'Fredericka the Great';
+	text-align: center;
+	font-weight: normal;
+	/*text-transform: uppercase;*/
+	font-size: 8vw;
+	line-height: 1;
+	margin-bottom: 30px;
+	/*margin: 0;*/
+	
+	/*background-color: rgba(0,0,0, .4);*/
+}
+
+h2.byline {
+	font-family: 'Cutive';
+	font-size: 2vw;
+	text-align: center;
+	line-height: 2;
+	margin-bottom: 90px;
+	/*display: table-cell;*/
+	/*vertical-align: middle;*/
+	
+}
+
+main {
+	/*font-size: 1.4rem;
+	line-height: 1.6;
+	max-width: 40em;
+	margin: auto;
+	padding: 1em;*/
+	margin: 0;
+	/*padding-top: 60px;*/
+}
+
+.scroll-down {
+	position: absolute;
+	bottom: 20px;
+	left: calc(50% - 20px);
+	background: url(images/down-arrow-circle.svg) no-repeat;
+	width: 40px;
+	height: 40px;
+	text-indent: -9999px;
+	opacity: .6;
 }
 
