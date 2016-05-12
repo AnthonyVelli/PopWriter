@@ -3,16 +3,17 @@
 function scriptify(screenplay){
     var script = '';
     screenplay.scenes.forEach( scene => {
-        script += '<p id="' + scene._id + '" class="header">' + scene.header + '"</p>"';
+        script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '"</p>"';
         scene.components.forEach( component => {
-            if(component.character) script += '<p id=' + component.character + ' class="character">' + component.name + '</p>';
-            script += '<p id=' + component._id + ' class="'+ component.type +'">' + component.text + '</p>';
+            if(component.character) script += '<p id="' + component.character + '" class="character">' + component.name + '</p>';
+            script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
         })
     })
     return script;
 }
 
 function textToObj(text) {
+    console.log(text);
     var scenesArray = [];
     //create an array of all the paragraph elements in the editor and id if it does have it
     // var scriptPartsArray = text.match(/(\d+"\sclass=")?\w+">[^<]+/g);
@@ -28,7 +29,7 @@ function textToObj(text) {
         if (id) ele = ele.replace(/\w{24}"\s/, '');
         //creates and array of the type of component as first element and the text that contains as second element
         // console.log('hello, I am here', ele);
-        var elementParts = ele.match(/[^class".\>]+[\w\s]+/g);
+        var elementParts = ele.match(/[^".\>]+[\w\s]+/g).slice(1, 3);
         // console.log('I am getting here', elementParts);
         if(elementParts[0] === 'header'){
             sceneObj = { header: elementParts[1], components: [] };
