@@ -7,13 +7,21 @@ navbar {
   width: 100%;
   font-family: 'Cutive';
   display: block;
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 14px -3px black;
   background: rgba(0,0,0, 0.35);
-  background-image: linear-gradient(
+    background-image: linear-gradient(
     to left,
     rgba(0,0,0, 0.4) , rgba(0,0,0,0) 35%
     );
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
+
+  .homebar {
+    background: rgba(0,0,0, 0.35);
+    background-image: linear-gradient(
+    to left,
+    rgba(0,0,0, 0.4) , rgba(0,0,0,0) 35%
+    );
+  }
 
   .container {
     width: 91%;
