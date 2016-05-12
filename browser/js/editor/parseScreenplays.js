@@ -28,9 +28,8 @@ function textToObj(text) {
         //if there is an id in the string, it replaces it with an empty string.
         if (id) ele = ele.replace(/\w{24}"\s/, '');
         //creates and array of the type of component as first element and the text that contains as second element
-        // console.log('hello, I am here', ele);
-        var elementParts = ele.match(/[^".\>]+[\w\s]+/g).slice(1, 3);
-        // console.log('I am getting here', elementParts);
+        var elementParts = ele.match(/[^".\>]+[\w\s]+/g);
+        if(id) elementParts = elementParts.slice(1, 3);
         if(elementParts[0] === 'header'){
             sceneObj = { header: elementParts[1], components: [] };
             if(id) sceneObj._id = id;

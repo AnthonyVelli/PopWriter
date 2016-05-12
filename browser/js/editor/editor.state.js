@@ -40,6 +40,7 @@ app.config($stateProvider => {
             currentElement = getSelectionStart();
             setTimeout(()=> {
                 currentElement = getSelectionStart();
+                currentElement.removeAttribute('id');
                 if(currentClass === 'header' || currentClass === 'character'){
                     $scope.selected = $scope.components[compIdx + 1];
                     currentElement.classList.remove(currentClass);
