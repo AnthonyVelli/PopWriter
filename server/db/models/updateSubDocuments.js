@@ -4,16 +4,23 @@ var _ = require('lodash');
 
 
 module.exports = function(toUpdate, Model, property, targetDoc){
+    delete toUpdate.__v;
+    delete toUpdate._id;
+    var subDocuments = toUpdate[property];
+    delete toUpdate[property];
     _.extend(targetDoc, toUpdate);
-    if (toUpdate[property].length) {
-        var updatePromise = toUpdate[property].map(function(ele) {
+    if (subDocuments.length) {
+        var updatePromise = subDocuments.map(function(ele) {
             if (ele._id) {
                 var eleID = ele._id;
                 delete ele._id;
+                delete ele.__v;
                 return Model.findOneAndUpdate({_id: eleID}, ele, {new: true, runValidators: true})
                     .exec();
-            } else {
+            } else if (typeof ele === 'object') {
                 return Model.create(ele);
+            } else {
+                return Model.findById(ele).exec();
             }
         }); 
         return Promise.all(updatePromise)

@@ -6,17 +6,12 @@ const Scene = mongoose.model('Scene');
 
 // find a screenplay, populate its scenes & attach to req object
 router.param('screenplayId', (req, res, next, screenplayId) => {
-	var foundSP;
 	Screenplay.findById(screenplayId)
+	.populate('scenes')
 	.then(screenplay => {
-		foundSP = screenplay;
-		return Scene.find({'_id': {$in: screenplay.scenes}})
-        .populate('components');
+		req.wantedScreenplay = screenplay;
+		next();
     })
-	.then(foundScenes => {
-		req.wantedScreenplay = foundSP;
-		req.wantedScreenplay.scenes = foundScenes;
-		next(); })
 	.catch(next);
 });
 
