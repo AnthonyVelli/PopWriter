@@ -29,7 +29,7 @@
 
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <navbar></navbar>
+    <navbar  ng-class="{ homebar: currentState.name === 'home'}"></navbar>
     <div id="main" ui-view></div>
 </body>
 </html>
