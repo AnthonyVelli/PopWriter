@@ -24,11 +24,11 @@ function textToObj(text) {
     var newObj;
     scriptPartsArray.forEach(ele => {
         //getting the id if it's in the string
-        var id = /\w{24}/.test(ele) ? ele.match(/\w{24}/)[0] : null;
+        var id = /(?=.*\d)\w{24}/.test(ele) ? ele.match(/(?=.*\d)\w{24}/)[0] : null;
         //if there is an id in the string, it replaces it with an empty string.
         if (id) ele = ele.replace(/\w{24}"\s/, '');
         //creates and array of the type of component as first element and the text that contains as second element
-        var elementParts = ele.match(/[^".\>]+[\w\s]+/g);
+        var elementParts = ele.match(/[\w\s\.\,\:\?\!\;]+[^"\>]+/gi);
         if(id) elementParts = elementParts.slice(1, 3);
         if(elementParts[0] === 'header'){
             sceneObj = { header: elementParts[1], components: [] };
