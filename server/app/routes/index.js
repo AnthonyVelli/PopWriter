@@ -7,6 +7,7 @@ router.use('/components', require('./components'));
 router.use('/screenplays', require('./screenplays'));
 router.use('/users', require('./user'));
 router.use('/character', require('./character'));
+router.use('/analytics', require('./analytics'));
 
 
 
