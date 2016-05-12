@@ -14,14 +14,16 @@ app.config($stateProvider => {
     $scope.screenplay = screenplay;
     console.log(screenplay);
     $scope.options = mediumEditorOptions;
-    $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
+    $scope.text = `<p class="header">int. house - day</p><p class="character">hello</p><p class="dialogue">coolio.</p><p class="character">max</p><p class="dialogue">hello to you too sir</p><br><p class="action">What is wrong with youuu!</p><p class="header">ext. school - night</p><p class="action">in the dark</p><p class="character">massimo</p><p class="dialogue">the zombies are coming!</p>`
+    //$scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
 
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        console.log($scope.text);
+        var tobeSaved = textToObj($scope.text);
+        console.log(tobeSaved);
     }
 
     $scope.type = function(event) {

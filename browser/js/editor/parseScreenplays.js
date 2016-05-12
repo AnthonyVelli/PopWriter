@@ -9,26 +9,21 @@ function scriptify(screenplay){
             script += '<p class="'+ component.type +'">' + component.text + '</p>';
         })
     })
-
     return script;
 }
 
 function textToObj(text) {
     var scenesArray = [];
-    var scriptPartsArray = text.match(/"\w+">[^<]+/);
+    var scriptPartsArray = text.match(/"\w+">[^<]+/g);
     var sceneObj = {};
     scriptPartsArray.forEach(ele => {
-        var elementParts = ele.split(/">?/);
+        var elementParts = ele.split(/["><]+/g).splice(1, 2);
         if(elementParts[0] === 'header'){
-            if (Object.keys(sceneObj).length !== 0) {
-                scenesArray.push(sceneObj);
-            }
-            sceneObj = { header: elementParts[0], components: [] };
+            sceneObj = { header: elementParts[1], components: [] };
+            scenesArray.push(sceneObj);
         } else {
-            sceneObj['components'].push(elementParts[1]);
+            sceneObj['components'].push({ type: elementParts[0], text: elementParts[1] });
         }
-
     });
-
     return scenesArray;
 }
