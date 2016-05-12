@@ -10,7 +10,7 @@ navbar {
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
 
-  .homebar {
+  &.homebar {
     background: rgba(0,0,0, 0.35);
     background-image: linear-gradient(
     to left,

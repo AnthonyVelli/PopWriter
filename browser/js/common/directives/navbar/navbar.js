@@ -2,7 +2,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
     return {
         restrict: 'E',
-        scope: {},
+        // scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
 
@@ -41,12 +41,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
             $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
-
-            console.log("hi!");
-            console.log("current state:", $state.current.name);
-            console.log("$state:", $state);
-            console.log("is home?", $state.current.name === "home");
-
 
         }
     };
