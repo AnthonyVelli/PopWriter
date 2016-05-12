@@ -1,5 +1,4 @@
 
-
 // get wordCount in a screenplay
 var wordCount = (screenplay) => {
     var words = screenplay.split(/[^\w]+/gi);
@@ -14,5 +13,6 @@ var wordCount = (screenplay) => {
 
 module.exports = {
 	wordCount: wordCount
+
 }
 

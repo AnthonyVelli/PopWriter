@@ -10,11 +10,9 @@ app.factory('ScreenplaysFactory', function($http){
         	return $http.get('/api/users/' + userId + '/screenplays/')
         	.then(parseData);
         },
-        addOne: function(userId, script){
-        	console.log("addone  in factory", userId, script);
-        	return $http.post('/api/users/' + userId + '/screenplays/', script)
+        addOne: function(userId, screenplay){
+        	return $http.post('/api/users/' + userId + '/screenplays/', screenplay)
         	.then(parseData);
         }
-
     };
 });

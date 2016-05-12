@@ -1,0 +1,14 @@
+/* scenes directive styling */
+
+.scene {
+	background-color: grey;
+	border: 1px solid black;
+}
+
+[ng-drag].drag-over {
+            border: solid 1px red;
+        }
+
+[ng-drag].dragging {
+    opacity: 0.5;
+}
