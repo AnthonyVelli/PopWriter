@@ -24,12 +24,32 @@ app.config(function ($stateProvider) {
 	})
 	.state('analytics.lineChart', {
 		url: '/lineChart',
-		templateUrl: 'js/analytics/lineChart.html'
+		templateUrl: 'js/analytics/lineChart.html',
+		controller: function($scope, lineChartData) {
+				console.log(lineChartData)
+				$scope.options = lineChartOptions
+				$scope.data = lineChartData
+		},
+		resolve: {
+        	lineChartData: (AnalyticsFactory) => {
+       			return AnalyticsFactory.getSentiment()
+        		.then(sentiment => {
+					var sentimentHolder = [{
+						color: "#337ab7",
+						key: "Sentiment",
+						values: sentiment
+					}]
+					return sentimentHolder;
+				})
+        	}
+        }
 	})
 });
 
-app.controller('analytics', function($scope){
-	
+app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory){
+		// $scope.options = lineChartOptions
+		// $scope.data = lineChartData
+		
 		$scope.pieChartOptionsToggle = () => {
 			$scope.options = pieChartOptions;
 			$scope.data = pieData;
@@ -51,8 +71,7 @@ app.controller('analytics', function($scope){
 		}
 
 		$scope.lineChartOptionsToggle = () => {
-			$scope.options = lineChartOptions
-			$scope.data = sinAndCos();
+			console.log('tf')
 		}
     });
 

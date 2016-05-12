@@ -79,7 +79,7 @@ const barChartOptions = {
                 left: 45
             },
             clipEdge: true,
-            //staggerLabels: true,
+            staggerLabels: true,
             duration: 500,
             stacked: true,
             xAxis: {
@@ -122,19 +122,19 @@ const lineChartOptions = {
                     axisLabel: 'Time (ms)'
                 },
                 yAxis: {
-                    axisLabel: 'Voltage (v)',
+                    axisLabel: 'Sentiment',
                     tickFormat: function(d){
-                        return d3.format('.02f')(d);
+                        return d3.format('.04f')(d);
                     },
                     axisLabelDistance: -10
                 },
-                callback: function(chart){
-                    console.log("!!! lineChart callback !!!");
-                }
+                // callback: function(chart){
+                //     console.log("!!! lineChart callback !!!");
+                // }
             },
             title: {
                 enable: true,
-                text: 'Title for Line Chart'
+                text: 'Sentiment'
             },
             subtitle: {
                 enable: true,
