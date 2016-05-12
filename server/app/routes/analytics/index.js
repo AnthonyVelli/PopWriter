@@ -31,9 +31,7 @@ router.get('/', (req, res, next) => {
 		
 		
 		res.json(200); })
-	.catch(err => console.error(err));
-
-	
+	.catch(err => console.error(err));	
 });
 
 
