@@ -2,9 +2,9 @@ app.directive('scenes', function ($state) {
 
     return {
         restrict: 'E',
-        scope: {
-            screenplay: '='
-        },
+        // scope: {
+        //     screenplay: '='
+        // },
         templateUrl: 'js/scenes/scenes.html',
         controller: 'ScenesCtrl'
     };
