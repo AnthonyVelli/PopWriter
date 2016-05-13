@@ -193,5 +193,17 @@ describe('User model', function () {
                 expect(updatedUser.screenplay[0].title).equal('new screenplay for testing in final test woot!'); 
             });
         });
+
+        it('Can Create Deeply Nested Documents', function () {
+            return User.create({ email: 'obama@gmail.com', password: 'potus'})
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!', scenes: [{header: 'really deep scene creation dog'}]}]}); })
+            .then(function(updatedUser){
+                expect(updatedUser.screenplay.title).to.equal('new screenplay for testing in final test woot!');
+                expect(updatedUser.screenplay._id).to.exist;
+                expect(updatedUser.screenplay.scenes.header).to.equal('really deep scene creation dog');
+                expect(updatedUser.screenplay.scenes).to.exist;
+            });
+        });
     });
 });
