@@ -10,17 +10,20 @@ app.config($stateProvider => {
         }
     });
 })
-.controller('EditorController', ($scope, screenplay) => {
+.controller('EditorController', ($scope, screenplay, ScreenplaysFactory) => {
     $scope.screenplay = screenplay;
     $scope.options = mediumEditorOptions;
-    $scope.text="<p class='header'>int.</p>";
-
+    $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        console.log(typeof $scope.text);
+        var toBeSaved = textToObj($scope.text);
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+        .then( screenplay => {
+            console.log('udpate screenplay', screenplay);
+        })
     }
 
     $scope.type = function(event) {
@@ -38,6 +41,7 @@ app.config($stateProvider => {
             currentElement = getSelectionStart();
             setTimeout(()=> {
                 currentElement = getSelectionStart();
+                currentElement.removeAttribute('id');
                 if(currentClass === 'header' || currentClass === 'character'){
                     $scope.selected = $scope.components[compIdx + 1];
                     currentElement.classList.remove(currentClass);

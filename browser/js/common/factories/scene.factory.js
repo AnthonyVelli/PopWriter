@@ -3,7 +3,7 @@ app.factory('SceneFactory', function($http){
 
     return {
         addOrUpdate: function(screenplay){
-        	return $http.put('/api/screenplays/' + screenplay._id, screenplay)
+        	return $http.put('/api/scenes/' + screenplay._id, screenplay)
         	.then(parseData);
         }
     };
