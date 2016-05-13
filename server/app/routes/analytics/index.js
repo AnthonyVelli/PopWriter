@@ -12,6 +12,7 @@ const TfIdf = new natural.TfIdf();
 
  
 router.get('/', (req, res, next) => {
+	console.log("IM GETTING HERE")
 	screenplayRepo.findOne()
 	.then(ele => {
 		var sweeeeeeeetEmotion = [];
@@ -27,11 +28,21 @@ router.get('/', (req, res, next) => {
 			}
 			sweeeeeeeetEmotion.push(sentiment(sentence));
 		});
-		sweeeeeeeetEmotion.forEach(x => console.log(x.score));
+		var newCats = sweeeeeeeetEmotion.map((x, idx) => {
+			return {x:idx, y:x.score}
+		});
+		console.log(sweeeeeeeetEmotion[169]);
 		
 		
+<<<<<<< HEAD
 		res.json(200); })
 	.catch(err => console.error(err));	
+=======
+		res.send(newCats)})
+	.catch(err => console.error(err));
+
+	
+>>>>>>> master
 });
 
 

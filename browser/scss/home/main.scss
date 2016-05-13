@@ -6,7 +6,7 @@
 			rgba(0,0,0, 0.3),
 			rgba(0,0,0, 0)
 		),
-		url(images/popwriter_hero.jpeg);
+		url(popwriter_hero.jpeg);
 	background-size: cover;
 	text-align: center;
 	height: 100vh;
@@ -30,10 +30,9 @@ h1.splash {
 	/*text-transform: uppercase;*/
 	font-size: 7vw;
 	line-height: 1;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 	/*margin: 0;*/
 	
-	/*background-color: rgba(0,0,0, .4);*/
 }
 
 h2.byline {
@@ -41,7 +40,7 @@ h2.byline {
 	font-size: 2vw;
 	text-align: center;
 	line-height: 2;
-	margin-bottom: 90px;
+	/*margin-bottom: 80px;*/
 	/*display: table-cell;*/
 	/*vertical-align: middle;*/
 	
@@ -61,7 +60,7 @@ main {
 	position: absolute;
 	bottom: 20px;
 	left: calc(50% - 20px);
-	background: url(images/down-arrow-circle.svg) no-repeat;
+	background: url(down-arrow-circle.svg) no-repeat;
 	width: 40px;
 	height: 40px;
 	text-indent: -9999px;
