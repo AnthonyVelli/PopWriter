@@ -3,10 +3,12 @@
 function scriptify(screenplay){
     var script = '';
     screenplay.scenes.forEach( scene => {
-        script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '"</p>"';
+        script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '</p>';
         scene.components.forEach( component => {
-            if(component.character) script += '<p id="' + component.character + '" class="character">' + component.name + '</p>';
-            script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
+            if(component.character) script += '<p id="' + component.character + '" class="character">' + component.charName + '</p>';
+            else script += '<p class="character">' + component.charName + '</p>';
+            if(component._id) script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
+            else script += '<p class="'+ component.type +'">' + component.text + '</p>';
         })
     })
     return script;
@@ -40,11 +42,11 @@ function textToObj(text) {
         } else if(elementParts[0] === 'dialogue') {
             newObj = {
                 type: elementParts[0],
-                name: currentCharacter,
+                charName: currentCharacter,
                 text: elementParts[1]
             }
             if(id) newObj._id = id;
-            if(currentCharacterId) newObj.character = currentCharacterId;
+            if(currentCharacterId) newObj.character._id = currentCharacterId;
             sceneObj['components'].push(newObj);
         } else {
             newObj = {

@@ -10,19 +10,23 @@ app.config($stateProvider => {
         }
     });
 })
-.controller('EditorController', ($scope, screenplay) => {
+.controller('EditorController', ($scope, screenplay, ScreenplaysFactory) => {
     $scope.screenplay = screenplay;
     $scope.options = mediumEditorOptions;
     // $scope.text = `<p class="header">int. house - day</p><p id="317984628956139" class="character">hello</p><p class="dialogue">coolio.</p><p class="character">max</p><p class="dialogue">hello to you too sir</p><br><p class="action">What is wrong with youuu!</p><p class="header">ext. school - night</p><p class="action">in the dark</p><p class="character">massimo</p><p class="dialogue">the zombies are coming!</p>`
     $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
-
+    console.log(screenplay);
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        var tobeSaved = textToObj($scope.text);
-        console.log(tobeSaved);
+        var toBeSaved = textToObj($scope.text);
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+        .then( screenplay => {
+            console.log('udpate screenplay', screenplay);
+        })
+        console.log(toBeSaved);
     }
 
     $scope.type = function(event) {
