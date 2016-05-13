@@ -50,19 +50,14 @@
     padding: 10px;
 }
 
-/*.editor-contain {
-    border: 10px solid black;
-    flex: 3;
-    flex-basis: 60%;
+.flex-child {
+
 }
 
-.flex-child {
-    
-}
-*/
 .outer-editor {
     /*border: 10px solid black;*/
     display: flex;
+    /*flex: 1 1 auto;*/
     /*flex-direction: row;*/
     justify-content: space-between;
     width: 90%;
