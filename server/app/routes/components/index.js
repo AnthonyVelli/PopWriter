@@ -25,8 +25,7 @@ router.get('/:componentId?', function (req, res, next) {
 });
 
 router.put('/:componentId', function (req, res, next) {
-	req.component.set(req.body);
-	req.component.save()
+	req.component.update(req.body)
 	.then(function(updatedComponent){
 		res.json(updatedComponent);
 	})
