@@ -12,9 +12,7 @@ const TfIdf = new natural.TfIdf();
 
 router.get('/', (req, res, next) => {
 	screenplayRepo.find({WordCount: {$gt: 1000}}, {name: 1, WordCount: 1})
-	.then(allSPs => {
-		console.log(allSPs);
-		res.send(allSPs); })
+	.then(allSPs => res.send(allSPs))
 	.catch(next);
 });
 
@@ -38,10 +36,6 @@ router.get('/:id', (req, res, next) => {
 		var newCats = sweeeeeeeetEmotion.map((x, idx) => {
 			return {x:idx, y:x.score}
 		});
-		console.log(sweeeeeeeetEmotion[169]);
-		
-		
-
 		res.send(newCats)})
 	.catch(err => console.error(err));
 });

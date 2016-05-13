@@ -1,9 +1,12 @@
 app.factory('AnalyticsFactory', ($http) => {
 	const parseData = res => res.data;
 	return {
-		getSentiment: () => {
-			console.log('called get sent');
+		getScreenPlays: () => {
 			return $http.get('/api/analytics')
+			.then(parseData)
+		},
+		getSentiment: (id) => {
+			return $http.get('/api/analytics/' + id)
 			.then(parseData)
 		}
 	}

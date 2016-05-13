@@ -2,6 +2,12 @@
 
 <div class="container">
 	<div>
+		<select ng-model="selectedScreenplay"> 
+		<option>Select a Script</option>                                
+		<option ng-repeat="script in scripts" value="{{script._id}}">{{script.name}}</option>
+		</select>
+	</div>
+	<div>
 	</style>
 		<button ng-click="pieChartOptionsToggle()" ui-sref="analytics.pieChart" type="button" class="btn btn-primary btn-lg">Pie Chart</button>
 		<button ng-click="donutChartOptionsToggle()" ui-sref="analytics.barChart" type="button" class="btn btn-danger btn-lg">Bar Chart</button>

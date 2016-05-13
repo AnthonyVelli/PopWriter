@@ -26,13 +26,14 @@ app.config(function ($stateProvider) {
 		url: '/lineChart',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData) {
-				console.log(lineChartData)
+				console.log('linechart');
 				$scope.options = lineChartOptions
 				$scope.data = lineChartData
 		},
 		resolve: {
-        	lineChartData: (AnalyticsFactory) => {
-       			return AnalyticsFactory.getSentiment()
+        	lineChartData: (AnalyticsFactory, selectedScreenplay) => {
+        		console.log(selectedScreenplay);
+       			return AnalyticsFactory.getSentiment(selectedScreenplay)
         		.then(sentiment => {
 					var sentimentHolder = [{
 						color: "#337ab7",
@@ -46,10 +47,15 @@ app.config(function ($stateProvider) {
 	})
 });
 
-app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory){
-		// $scope.options = lineChartOptions
-		// $scope.data = lineChartData
-		
+app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory, $state){
+
+		AnalyticsFactory.getScreenPlays()
+		.then(screenplays => $scope.scripts = screenplays)
+	
+		// AnalyticsFactory.getSentiment($scope.value)
+		// .then(screenplay => )
+		$scope.changeChart = (spId) => $state.go('analytics.lineChart', {id: spId})
+
 		$scope.pieChartOptionsToggle = () => {
 			$scope.options = pieChartOptions;
 			$scope.data = pieData;
