@@ -3,7 +3,7 @@ app.directive('scenes', function ($state) {
     return {
         restrict: 'E',
         scope: {
-            screenplay: '=' 
+            screenplay: '='
         },
         templateUrl: 'js/scenes/scenes.html',
         controller: 'ScenesCtrl'
@@ -20,7 +20,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
         $scope.showform = false;
     };
     $scope.addNewScene = function (screenplay, newscene){
-        
+
         screenplay.scenes.push(newscene);
         SceneFactory.addOrUpdate(screenplay)
         .then(function(updatedScreenplay) {

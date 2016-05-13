@@ -4,18 +4,20 @@
 	<h3>{{screenplay.title}}</h3>
 	<h4>Show Add Scene Form Here</h4>
 		<form id="add-scene" name="addScene" ng-submit="addNewScene(screenplay, newscene)">
-			
+
 		  		<label for="header">Title</label>
 		  		<input type="text" ng-model="newscene.header" ng-required="true" class="form-control" id="header" placeholder="Enter scene title here">
-		  	
-		  	
+
+
 			  	<label for="synopsis">Scene Synopsis</label>
 			  	<textarea class="form-control" id="synopsis" ng-model="newscene.synopsis"  rows="4" placeholder="Enter scene synopsis here"></textarea>
-		  	
+
 		  	<button type="submit" class="btn btn-default">Add Scene</button>
 		  	<button ng-click="hideForm()" class="btn btn-default">Cancel</button>
 		</form>
 </div>
-<div ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)" class="scene-drop">
-	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name" class="scene-drag">{{scene.synopsis}} {{$index}}</h3>
+
+<div ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
+	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{scene.header}} {{$index}}</h3>
+
 </div>

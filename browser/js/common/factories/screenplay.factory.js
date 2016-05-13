@@ -13,6 +13,10 @@ app.factory('ScreenplaysFactory', function($http){
         addOne: function(userId, screenplay){
         	return $http.post('/api/users/' + userId + '/screenplays/', screenplay)
         	.then(parseData);
+        },
+        updateScreenplay: function(screenplayId, screenplay){
+            return $http.put('/api/screenplays/' + screenplayId, screenplay)
+            .then(parseData);
         }
     };
 });
