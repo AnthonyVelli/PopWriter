@@ -45,7 +45,7 @@ app.config(function ($stateProvider) {
 	})
 });
 
-app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory, $state){
+app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory){
 
 		AnalyticsFactory.getScreenPlays()
 		.then(screenplays => $scope.scripts = screenplays)
