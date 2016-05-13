@@ -23,16 +23,15 @@ app.config(function ($stateProvider) {
 		templateUrl: 'js/analytics/donutChart.html'
 	})
 	.state('analytics.lineChart', {
-		url: '/lineChart',
+		url: '/lineChart/:id',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData) {
-				console.log(lineChartData)
 				$scope.options = lineChartOptions
 				$scope.data = lineChartData
 		},
 		resolve: {
-        	lineChartData: (AnalyticsFactory) => {
-       			return AnalyticsFactory.getSentiment()
+        	lineChartData: (AnalyticsFactory, $stateParams) => {
+       			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
 					var sentimentHolder = [{
 						color: "#337ab7",
@@ -47,9 +46,12 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory){
-		// $scope.options = lineChartOptions
-		// $scope.data = lineChartData
-		
+
+		AnalyticsFactory.getScreenPlays()
+		.then(screenplays => $scope.scripts = screenplays)
+	
+		$scope.changeSP = (spId) => $scope.currentSP = spId;
+
 		$scope.pieChartOptionsToggle = () => {
 			$scope.options = pieChartOptions;
 			$scope.data = pieData;
@@ -68,10 +70,6 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 		$scope.barChartOptionsToggle = () => {
 			$scope.options = barChartOptions
 			$scope.data = generateData();
-		}
-
-		$scope.lineChartOptionsToggle = () => {
-			console.log('tf')
 		}
     });
 
