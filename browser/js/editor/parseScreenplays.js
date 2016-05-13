@@ -5,10 +5,11 @@ function scriptify(screenplay){
     screenplay.scenes.forEach( scene => {
         script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '</p>';
         scene.components.forEach( component => {
-            if(component.character) script += '<p id="' + component.character + '" class="character">' + component.charName + '</p>';
-            else script += '<p class="character">' + component.charName + '</p>';
-            if(component._id) script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
-            else script += '<p class="'+ component.type +'">' + component.text + '</p>';
+            if(component.charName) {
+                    if (component.character) script += '<p id="' + component.character + '" class="character">' + component.charName + '</p>';
+                    else script += '<p class="character">' + component.charName + '</p>';
+                }
+            script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
         })
     })
     return script;
