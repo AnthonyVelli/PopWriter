@@ -46,7 +46,6 @@ router.get('/:id/characters', (req, res , next)=>{
 			return (char.wordcount > 10 && !/(INT|EXT|-|:|\d|!)/.test(char.name) && char.name.split(" ").length <= 3);
 		})
 		characters = characters.map(name => {
-			console.log("IM A NAME",name)
 			return {key: name.name, y: name.wordcount}
 		})
 		res.json(characters);
