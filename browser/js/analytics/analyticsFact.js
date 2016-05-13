@@ -8,6 +8,10 @@ app.factory('AnalyticsFactory', ($http) => {
 		getSentiment: (id) => {
 			return $http.get('/api/analytics/' + id)
 			.then(parseData)
+		},
+		getCharacters: (id) => {
+			return $http.get('/api/analytics/' + id + "/characters")
+			.then(parseData)
 		}
 	}
 });
