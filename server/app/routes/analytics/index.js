@@ -16,7 +16,6 @@ router.get('/', (req, res, next) => {
 	.catch(next);
 });
 
-
 router.get('/:id', (req, res, next) => {
 	screenplayRepo.findOne()
 	.then(ele => {
@@ -39,5 +38,3 @@ router.get('/:id', (req, res, next) => {
 		res.send(newCats)})
 	.catch(err => console.error(err));
 });
-
-

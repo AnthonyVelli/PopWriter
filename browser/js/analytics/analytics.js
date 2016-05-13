@@ -23,17 +23,15 @@ app.config(function ($stateProvider) {
 		templateUrl: 'js/analytics/donutChart.html'
 	})
 	.state('analytics.lineChart', {
-		url: '/lineChart',
+		url: '/lineChart/:id',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData) {
-				console.log('linechart');
 				$scope.options = lineChartOptions
 				$scope.data = lineChartData
 		},
 		resolve: {
-        	lineChartData: (AnalyticsFactory, selectedScreenplay) => {
-        		console.log(selectedScreenplay);
-       			return AnalyticsFactory.getSentiment(selectedScreenplay)
+        	lineChartData: (AnalyticsFactory, $stateParams) => {
+       			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
 					var sentimentHolder = [{
 						color: "#337ab7",
@@ -52,9 +50,7 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 		AnalyticsFactory.getScreenPlays()
 		.then(screenplays => $scope.scripts = screenplays)
 	
-		// AnalyticsFactory.getSentiment($scope.value)
-		// .then(screenplay => )
-		$scope.changeChart = (spId) => $state.go('analytics.lineChart', {id: spId})
+		$scope.changeSP = (spId) => $scope.currentSP = spId;
 
 		$scope.pieChartOptionsToggle = () => {
 			$scope.options = pieChartOptions;
@@ -74,10 +70,6 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 		$scope.barChartOptionsToggle = () => {
 			$scope.options = barChartOptions
 			$scope.data = generateData();
-		}
-
-		$scope.lineChartOptionsToggle = () => {
-			console.log('tf')
 		}
     });
 
