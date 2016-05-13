@@ -34,15 +34,9 @@ router.get('/', (req, res, next) => {
 		console.log(sweeeeeeeetEmotion[169]);
 		
 		
-<<<<<<< HEAD
-		res.json(200); })
-	.catch(err => console.error(err));	
-=======
+
 		res.send(newCats)})
 	.catch(err => console.error(err));
-
-	
->>>>>>> master
 });
 
 

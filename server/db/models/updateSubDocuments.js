@@ -18,9 +18,7 @@ module.exports = function(toUpdate, Model, property, targetDoc){
                     .then(doc => doc.update(ele));
             } else if (ele.id) {
                 return Model.findById(ele)
-                .then(foundsp => console.log(foundsp));
-                    // exec();
-            
+                .exec();
             } else {
                 return Model.create(ele);
             }
