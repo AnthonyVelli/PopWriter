@@ -18,7 +18,7 @@ describe('User model', function () {
         if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);
     });
-
+ 
     afterEach('Clear test database', function (done) {
         clearDB(done);
     });
@@ -172,7 +172,7 @@ describe('User model', function () {
         };
         
 
-        it('Scenes Saved to User are Valid Screenplays Refs', function () {
+        it('Screenplays Saved to User are Valid Screenplays Refs', function () {
             return createUser()
             .then(newusr => newusr.update({screenplay: newusr.screenplay.concat([{title: 'test screenplay title AGAIN'}])}))
             .then(updatedusr => {
@@ -191,6 +191,18 @@ describe('User model', function () {
                 expect(updatedUser.screenplay[2].title).to.equal('taleof twocities');
                 expect(updatedUser.screenplay[2].scenes).to.have.length(1);
                 expect(updatedUser.screenplay[0].title).equal('new screenplay for testing in final test woot!'); 
+            });
+        });
+
+        it('Can Create Deeply Nested Documents', function () {
+            return User.create({ email: 'obama@gmail.com', password: 'potus'})
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!', scenes: [{header: 'really deep scene creation dog'}]}]}); })
+            .then(function(updatedUser){
+                expect(updatedUser.screenplay.title).to.equal('new screenplay for testing in final test woot!');
+                expect(updatedUser.screenplay._id).to.exist;
+                expect(updatedUser.screenplay.scenes.header).to.equal('really deep scene creation dog');
+                expect(updatedUser.screenplay.scenes).to.exist;
             });
         });
     });

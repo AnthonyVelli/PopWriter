@@ -41,10 +41,9 @@ router.get('/:id', (req, res, next) => {
 		console.log(sweeeeeeeetEmotion[169]);
 		
 		
+
 		res.send(newCats)})
 	.catch(err => console.error(err));
-
-	
 });
 
 
