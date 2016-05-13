@@ -16,7 +16,6 @@ function scriptify(screenplay){
 }
 
 function textToObj(text) {
-    console.log(text);
     var scenesArray = [];
     //create an array of all the paragraph elements in the editor and id if it does have it
     // var scriptPartsArray = text.match(/(\d+"\sclass=")?\w+">[^<]+/g);
