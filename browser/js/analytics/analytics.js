@@ -59,13 +59,7 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 
 		AnalyticsFactory.getScreenPlays()
 		.then(screenplays => $scope.scripts = screenplays)
-	
 		$scope.changeSP = (spId) => $scope.currentSP = spId;
-
-		// $scope.pieChartOptionsToggle = () => {
-		// 	$scope.options = pieChartOptions;
-		// 	$scope.data = pieData;
-		// }; 
 
 		$scope.donutChartOptionsToggle = () => {
 			$scope.options = donutChartOptions;
