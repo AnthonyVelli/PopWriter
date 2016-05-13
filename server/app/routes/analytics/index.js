@@ -10,9 +10,16 @@ module.exports = router;
 
 const TfIdf = new natural.TfIdf();
 
- 
 router.get('/', (req, res, next) => {
-	console.log("IM GETTING HERE")
+	screenplayRepo.find({WordCount: {$gt: 1000}}, {name: 1, WordCount: 1})
+	.then(allSPs => {
+		console.log(allSPs);
+		res.send(allSPs); })
+	.catch(next);
+});
+
+
+router.get('/:id', (req, res, next) => {
 	screenplayRepo.findOne()
 	.then(ele => {
 		var sweeeeeeeetEmotion = [];
