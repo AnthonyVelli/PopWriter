@@ -66,9 +66,7 @@ describe('Screenplay Model', function () {
         beforeEach('Seed Test Data', function () {
             return Screenplay.create({title: 'seed Screenplay'})
             .then(function(ele) { 
-                console.log(ele);
                 var scenes = [{header: 'scede scene being added in Before Each'}, {header: 'a second scene, you know, to test with?'}];
-                console.log(scenes);
                 ele.scenes = scenes;
                 return ele.update({scenes: scenes}); })
             .then(function(updatedSP) {

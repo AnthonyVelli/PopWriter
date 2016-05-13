@@ -23,7 +23,7 @@ describe('Component Route', function () {
 	afterEach('Clear test database', function (done) {
 		clearDB(done);
 	}); 
-
+ 
 	describe('RESTful Functionality', function () {
 
 		beforeEach('Create guest agent', function () {

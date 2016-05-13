@@ -10,26 +10,28 @@ module.exports = function(toUpdate, Model, property, targetDoc){
     var subDocuments = toUpdate[property];
     delete toUpdate[property];
     _.extend(targetDoc, toUpdate);
-    if (subDocuments.length) {
+    
+    if (subDocuments && subDocuments.length) {
         var updatePromise = subDocuments.map(function(ele) {
             if (ele._id) {
-                var eleID = ele._id;
-                delete ele._id;
-                delete ele.__v;
-                return Model.findOneAndUpdate({_id: eleID}, ele, {new: true, runValidators: true})
-                    .exec();
-            } else if (typeof ele === 'object') {
-                return Model.create(ele);
+                return Model.findById(ele._id)
+                    .then(doc => doc.update(ele));
+            } else if (ele.id) {
+                return Model.findById(ele)
+                .then(foundsp => console.log(foundsp));
+                    // exec();
+            
             } else {
-                return Model.findById(ele).exec();
+                return Model.create(ele);
             }
         }); 
         return Promise.all(updatePromise)
-            .then(allPromise => {
-                // update array/subdoc in db with new array;
-                targetDoc[property] = allPromise;
-                return targetDoc.save();
-            });
+        .then(allPromise => {
+            // update array/subdoc in db with new array;
+            targetDoc[property] = allPromise;
+            return targetDoc.save(); 
+        });
+        
     } else {
         // if "property" array is empty, save document
         return targetDoc.save();

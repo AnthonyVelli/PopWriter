@@ -50,11 +50,8 @@ router.post('/', (req, res, next) => {
 
 // update a screenplay
 router.put('/:screenplayId', (req, res, next) => {
-	console.log(req.wantedScreenplay);
-	console.log(req.body);
 	req.wantedScreenplay.update(req.body)
 	.then(updatedSP => {
-		console.log(updatedSP);
 		res.json(updatedSP);
 	})
 	.catch(next);

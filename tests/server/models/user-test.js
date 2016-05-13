@@ -18,7 +18,7 @@ describe('User model', function () {
         if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);
     });
-
+ 
     afterEach('Clear test database', function (done) {
         clearDB(done);
     });
@@ -172,7 +172,7 @@ describe('User model', function () {
         };
         
 
-        it('Scenes Saved to User are Valid Screenplays Refs', function () {
+        it('Screenplays Saved to User are Valid Screenplays Refs', function () {
             return createUser()
             .then(newusr => newusr.update({screenplay: newusr.screenplay.concat([{title: 'test screenplay title AGAIN'}])}))
             .then(updatedusr => {
