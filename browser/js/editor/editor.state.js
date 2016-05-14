@@ -19,13 +19,10 @@ app.config($stateProvider => {
 
 
     $scope.save = () => {
-        // whatever();
         var toBeSaved = textToObj();
-        console.log(toBeSaved);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
-            // $scope.text= scriptify(screenplay);
-            console.log('udpate screenplay', screenplay);
+            console.log('udpated screenplay', screenplay);
         })
     }
 
@@ -41,10 +38,7 @@ app.config($stateProvider => {
             var toBeSaved = textToObj($scope.text);
             ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
                 .then( screenplay => {
-                   currentElement.id = getIdAndAssign(screenplay);
-                 // $scope.text = scriptify(screenplay);
-                // console.log(getIdAndAssign(screenplay));
-                // console.log('udpate screenplay', screenplay);
+                   if(!currentElement.id) currentElement.id = getId(screenplay);
             });
 
         }
@@ -54,13 +48,6 @@ app.config($stateProvider => {
     $scope.click = () => {
         EditorFactory.setScopeClick($scope);
     };
-
-    // setInterval(()=>{
-    //     var toBeSaved = textToObj($scope.text);
-    //     ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
-    //         .then( screenplay => {
-    //     });
-    // }, 10000);
 
 });
 

@@ -16,7 +16,7 @@ function scriptify(screenplay){
 }
 
 
-function getIdAndAssign(updatedScreenplay) {
+function getId(updatedScreenplay) {
     var scenes = updatedScreenplay.scenes;
     var lastScene = scenes[scenes.length -1];
     var currentId;
