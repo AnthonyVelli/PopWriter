@@ -27,17 +27,35 @@ app.config($stateProvider => {
         })
     }
 
+
+
     $scope.check = () => {
         console.log(screenplay);
     }
 
     $scope.type = function(event) {
+        if(event.code === "Enter" || event.code === "Tab"){
+            var toBeSaved = textToObj($scope.text);
+            ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+                .then( screenplay => {
+                console.log('udpate screenplay', screenplay);
+            });
+        }
         EditorFactory.setScopeKeyDown(event, $scope);
     };
 
     $scope.click = () => {
+        console.log('clicked');
         EditorFactory.setScopeClick($scope);
     };
+
+    setInterval(()=>{
+        var toBeSaved = textToObj($scope.text);
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+            .then( screenplay => {
+            console.log('udpate screenplay', screenplay);
+        });
+    }, 10000);
 
 });
 
