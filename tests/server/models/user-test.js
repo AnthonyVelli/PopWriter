@@ -1,6 +1,6 @@
 var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
-
+var _ = require('lodash');
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
@@ -194,15 +194,83 @@ describe('User model', function () {
                 expect(updatedUser.screenplay[0].title).equal('new screenplay for testing in final test woot!'); 
             });
         });
+    });
 
-        it('Can Create Deeply Nested Documents', function () {
+    describe('Deep Creation/Population', function(){
+
+        it('Can Create & Edit Screenplays', function () {
             return User.create({ email: 'obama@gmail.com', password: 'potus'})
             .then(createdUser => {
-                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}]}); })
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}, {title: 'two screenplays at once.  NICE!'}]}); })
             .then(function(updatedUser){
-                console.log(updatedUser);
-                expect(updatedUser.screenplay.title).to.equal('new screenplay for testing in final test woot!');
-                expect(updatedUser.screenplay._id).to.exist;
+                expect(updatedUser.screenplay).to.have.length(2);
+                expect(updatedUser.screenplay[0].title).to.equal('new screenplay for testing in final test woot!');
+                expect(updatedUser.screenplay[0]._id).to.exist; });
+        });
+
+        it('Can Create & Edit Screenplays & Scenes', function () {
+            return User.create({ email: 'obama@gmail.com', password: 'potus'})
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}, {title: 'two screenplays at once.  NICE!'}]}); })
+            .then(function(updatedUser){
+                var tempUser = updatedUser.toObject();
+                tempUser.screenplay[0].scenes = [{header: 'devastating scene creation!'}, {header: 'back at it again!'}];
+                return updatedUser.update(tempUser); })
+            .then(function(updatedScenesUser){
+                expect(updatedScenesUser.screenplay[0].scenes[0].header).to.equal('devastating scene creation!');
+                expect(updatedScenesUser.screenplay[0].scenes).to.have.length(2); });
+        });
+
+        it('Can Create & Edit Screenplays, Scenes & Components', function () {
+            return User.create({ email: 'obama@gmail.com', password: 'potus'})
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}, {title: 'two screenplays at once.  NICE!'}]}); })
+            .then(function(updatedUser){
+                var tempUser = updatedUser.toObject();
+                tempUser.screenplay[0].scenes = [{header: 'devastating scene creation!'}, {header: 'back at it again!'}];
+                return updatedUser.update(tempUser); })
+            .then(function(updatedScenesUser){
+                var tempUser = updatedScenesUser.toObject();
+                tempUser.screenplay[0].scenes[0].components = [{type: 'action', text: 'the walls... theyre closing in!!!'}, {type: 'action', text: 'i kno kun fu'}];
+                tempUser.screenplay[0].scenes.push({header: 'try try try'});
+                tempUser.screenplay[0].scenes[0].header = 'even more devastating!';
+                return updatedScenesUser.update(tempUser); })
+            .then(function(updatedCompUser){
+                expect(updatedCompUser.screenplay[0].scenes[0].header).to.equal('even more devastating!');
+                expect(updatedCompUser.screenplay[0].scenes[2].header).to.equal('try try try');
+                expect(updatedCompUser.screenplay[0].scenes[0].components[0].text).to.equal('the walls... theyre closing in!!!');
+                expect(updatedCompUser.screenplay[0].scenes[0].components).to.have.length(2); });
+        });
+
+        it('Can Create & Edit Screenplays, Scenes, Components & Chars', function () {
+            return User.create({ email: 'obama@gmail.com', password: 'potus'})
+            .then(createdUser => {
+                return createdUser.update({screenplay: [{title: 'new screenplay for testing in final test woot!'}, {title: 'two screenplays at once.  NICE!'}]}); })
+            .then(function(updatedUser){
+                var tempUser = updatedUser.toObject();
+                tempUser.screenplay[0].scenes = [{header: 'devastating scene creation!'}, {header: 'back at it again!'}];
+                return updatedUser.update(tempUser); })
+            .then(function(updatedScenesUser){
+                var tempUser = updatedScenesUser.toObject();
+                tempUser.screenplay[0].scenes[0].components = [{type: 'action', text: 'the walls... theyre closing in!!!'}, {type: 'action', text: 'i kno kun fu'}];
+                tempUser.screenplay[0].scenes.push({header: 'try try try'});
+                tempUser.screenplay[0].scenes[0].header = 'even more devastating!';
+                return updatedScenesUser.update(tempUser); })
+            .then(function(updatedCompUser){
+                var tempUser = updatedCompUser.toObject();
+                tempUser.screenplay[0].scenes[0].components[0].character = {name: 'jon bon jovi'};
+                tempUser.screenplay[0].scenes[0].components[0].text = 'the void of space';
+                return updatedCompUser.update(tempUser); })
+            .then(function(updatedCharUser){
+                expect(updatedCharUser.screenplay[0].scenes[0].components[0].text).to.equal('the void of space');
+                expect(updatedCharUser.screenplay[0].scenes[0].components[0].charName).to.equal('jon bon jovi');
+                expect(updatedCharUser.screenplay[0].scenes[0].components[0].character._id).to.exist;
+                expect(updatedCharUser.screenplay[0].scenes[0].components[0].character.name).to.equal('jon bon jovi');
+                var tempUser = updatedCharUser;
+                tempUser.screenplay[0].scenes[0].components[0].character.name = 'some other guy';
+                return updatedCharUser.update(tempUser); })
+            .then(function(editedCharUser){
+                expect(editedCharUser.screenplay[0].scenes[0].components[0].character.name).to.equal('some other guy'); 
             });
         });
     });

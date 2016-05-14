@@ -17,7 +17,7 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     }
-}, {toObject: {virtuals: true}, toJSON: {virtuals: true}});
+});
 
 schema.virtual('intExt').get(function () {
   if(this.type === 'location'){
@@ -34,32 +34,38 @@ schema.virtual('location').get(function () {
 schema.methods.update = function(toUpdate){
     delete toUpdate.__v;
     delete toUpdate._id;
-    _.extend(this, toUpdate);
+    var currentComp = this;
+    _.extend(currentComp, toUpdate);
     if (toUpdate.character) {
-        if (toUpdate.character._id){
-            var eleID = toUpdate._id;
-            delete toUpdate.character._id;
-            delete toUpdate.character.__v;
-            return Character.findOneAndUpdate({_id: eleID}, toUpdate.character, {new: true, runValidators: true})
+        var char = {}
+        _.extend(char,toUpdate.character);
+        if (char._id){
+            var eleID = char._id;
+            delete char._id;
+            delete char.__v;
+            return Character.findOneAndUpdate({_id: eleID}, char, {new: true, runValidators: true})
                 .then(updatedChar => {
-                    this.charName = updatedChar.name;
-                    this.character = updatedChar;
+                    currentComp.charName = updatedChar.name;
+                    currentComp.character = updatedChar;
+                    return currentComp.save();
                 });
         } else if (typeof toUpdate.character === 'object') {
             return Character.create(toUpdate.character)
                 .then(createdChar => {
-                    this.charName = createdChar.name;
-                    this.character = createdChar;
+                    currentComp.charName = createdChar.name;
+                    currentComp.character = createdChar;
+                    return currentComp.save();
                 });
         } else {
-            return Character.findById(this.character)
+            return Character.findById(toUpdate.character)
             .then(foundChar => {
-                this.charName = foundChar.name;
-                this.character = foundChar;
+                currentComp.charName = foundChar.name;
+                currentComp.character = foundChar;
+                return currentComp.save();
             });
         }
     } else {
-        return this.save();
+        return currentComp.save();
     }
 };
 
