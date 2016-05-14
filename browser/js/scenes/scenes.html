@@ -19,6 +19,6 @@
 
 <div class="scene-box" ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
 	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{$index + 1}}  {{scene.header}}</h3>
-	<div class-"edit-btn">+</div>
+	<div class-"edit-btn edit-btn-cursor">+</div>
 
 </div>

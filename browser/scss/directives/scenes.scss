@@ -19,13 +19,14 @@
 	/*padding: 5px 3px;*/
 	cursor: move;
 	display: flex;
+	justify-content: space-between;
+	background-color: rgba(200,200,200,0.8);
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
 .scene {
 	width: 90%;
-	background-color: rgba(200,200,200,0.8);
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
 	padding: 5px 8px 2px;
 	line-height: 1.2em;
 	margin: 2px 0;
@@ -33,11 +34,11 @@
 
 
 .edit-btn {
-	padding: 4%;
+	padding: 20%;
 	width: 50%;
 	height: 20px;
 	text-align: center;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	background-color: rgba(200,200,200,0.8);
+	}
+.edit-btn.edit-btn-cursor {
+	cursor: pointer;
 }
