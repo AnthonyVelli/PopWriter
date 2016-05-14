@@ -7,8 +7,18 @@ app.config(function ($stateProvider) {
         controller: 'analytics'
     })
     .state('analytics.pieChart', {
-    	url: '/pieChart',
-    	templateUrl: 'js/analytics/pieChart.html'
+    	url: '/pieChart/:id',
+    	templateUrl: 'js/analytics/pieChart.html',
+    	controller: ($scope, pieChartData) => {
+    		$scope.options = pieChartOptions;
+    		$scope.data = pieChartData;
+    	},
+    	resolve: {
+    		pieChartData: (AnalyticsFactory, $stateParams) => {
+    			return AnalyticsFactory.getCharacters($stateParams.id)
+    			.then(characters => characters)
+    		}
+    	}
     })
     .state('analytics.barChart', {
 		url: '/barChart',
@@ -49,13 +59,7 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 
 		AnalyticsFactory.getScreenPlays()
 		.then(screenplays => $scope.scripts = screenplays)
-	
 		$scope.changeSP = (spId) => $scope.currentSP = spId;
-
-		$scope.pieChartOptionsToggle = () => {
-			$scope.options = pieChartOptions;
-			$scope.data = pieData;
-		}; 
 
 		$scope.donutChartOptionsToggle = () => {
 			$scope.options = donutChartOptions;

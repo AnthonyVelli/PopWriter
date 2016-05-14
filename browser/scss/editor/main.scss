@@ -3,6 +3,18 @@
     font-family: courier;
     font-size: 1.3vw;
     outline: 0px;
+
+    /* added by ESF */
+    display: block;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-bottom-color: rgba(0,0,0,0.25);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+    background-color: #fff;
+    margin-top: 15px;
+    padding-bottom: 100px;
+
+
+
     .header, .character {
         text-transform: uppercase;
     }
@@ -30,6 +42,32 @@
 #slug {
     width: 100%;
     height: 300px;
+}
+
+.scenes {
+    width: 33%;
+    background: pink;
+}
+
+.editor-contain {
+    width: 65%;
+    background: lightblue;
+    padding: 10px;
+}
+
+.flex-child {
+
+}
+
+.outer-editor {
+    padding-right: 0px;
+    /*border: 10px solid black;*/
+    display: flex;
+    /*flex: 1 1 auto;*/
+    /*flex-direction: row;*/
+    justify-content: space-between;
+    width: 100%;
+    background-color: grey;
 }
 
 

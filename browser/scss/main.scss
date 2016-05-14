@@ -19,8 +19,10 @@ main {
   margin: 0 auto;
 }
 
-.container {
-	padding-top: 100px;
+.state-container {
+  padding-top: 120px;
+  width: 91%;
+  margin: 0 auto;
 }
 
 @import 'directives/main';

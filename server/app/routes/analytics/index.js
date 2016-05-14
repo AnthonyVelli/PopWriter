@@ -38,3 +38,17 @@ router.get('/:id', (req, res, next) => {
 		res.send(newCats)})
 	.catch(err => console.error(err));
 });
+
+router.get('/:id/characters', (req, res , next)=>{
+	characterRepo.find({ screenplay: req.params.id })
+	.then(characters => {
+		characters = characters.filter(char => {
+			return (char.wordcount > 10 && !/(INT|EXT|-|:|\d|!)/.test(char.name) && char.name.split(" ").length <= 3);
+		})
+		characters = characters.map(name => {
+			return {key: name.name, y: name.wordcount}
+		})
+		res.json(characters);
+	})
+	.catch(err => console.error(err));	
+})

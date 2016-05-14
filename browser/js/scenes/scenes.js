@@ -18,14 +18,6 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
     };
     // $scope.addNewScene = function (screenplay, newscene){
 
-    //     screenplay.scenes.push(newscene);
-    //     SceneFactory.addOrUpdate(screenplay)
-    //     .then(function(updatedScreenplay) {
-    //         console.log("Yeah!  The screenplay was updated.");
-    //     });
-    //         $scope.showform = false;
-    // };
-
 // **** ngDraggable DRAG AND DROP **** //
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){
         // newIdx - index of drop location element
