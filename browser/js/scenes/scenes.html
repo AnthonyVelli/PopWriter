@@ -17,7 +17,7 @@
 		</form>
 </div>
 
-<div ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
+<div class="scene-cursor" ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
 	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{scene.header}} {{$index}}</h3>
 
 </div>
