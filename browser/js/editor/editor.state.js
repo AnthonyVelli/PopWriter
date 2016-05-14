@@ -20,7 +20,6 @@ app.config($stateProvider => {
 
     $scope.save = () => {
         var toBeSaved = textToObj($scope.text);
-        console.log(toBeSaved);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
             console.log('udpate screenplay', screenplay);
@@ -45,7 +44,6 @@ app.config($stateProvider => {
     };
 
     $scope.click = () => {
-        console.log('clicked');
         EditorFactory.setScopeClick($scope);
     };
 
