@@ -8,7 +8,15 @@ const screenplayRepo = mongoose.model('screenplayRepo');
 const characterRepo = mongoose.model('characterRepo');
 module.exports = router;
 
-const TfIdf = new natural.TfIdf();
+
+
+router.param('screenplayId', (req, res, next, screenplayId) => {
+	screenplayRepo.findById(screenplayId)
+	.then(screenplay => {
+		req.screenplay = screenplay;
+		next(); })
+	.catch(next);
+});
 
 router.get('/', (req, res, next) => {
 	screenplayRepo.find({WordCount: {$gt: 1000}}, {name: 1, WordCount: 1})
@@ -16,28 +24,37 @@ router.get('/', (req, res, next) => {
 	.catch(next);
 });
 
-router.get('/:id', (req, res, next) => {
-	screenplayRepo.findOne()
-	.then(ele => {
-		var sweeeeeeeetEmotion = [];
-		ele.components.forEach(comp => {
-			TfIdf.addDocument(comp[1]);
-		});
-		TfIdf.documents.forEach(comp => {
-			var sentence = '';
-			for (var n in comp){
-				for (var x = 0; x < comp[n] && n !== '__key'; x++){
-					sentence += (n + ' ');
-				}
+router.get('/:screenplayId/emotion', (req, res, next) => {
+	const TfIdf = new natural.TfIdf();
+	var emotion = [];
+	var scenes = req.screenplay.scenes();
+
+	scenes.forEach(scene => {
+		var sceneString = scene.reduce((orig,comp) => {
+			if (comp[1]) {
+				return orig += (comp[1] + ' ');
 			}
-			sweeeeeeeetEmotion.push(sentiment(sentence));
-		});
-		var newCats = sweeeeeeeetEmotion.map((x, idx) => {
-			return {x:idx, y:x.score}
-		});
-		res.send(newCats)})
-	.catch(err => console.error(err));
+			return orig;
+		}, '');
+		console.log(sceneString);
+
+		TfIdf.addDocument(sceneString);
+	});
+	TfIdf.documents.forEach(comp => {
+		var sentence = '';
+		for (var n in comp){
+			for (var x = 0; x < comp[n] && n !== '__key'; x++){
+				sentence += (n + ' ');
+			}
+		}
+		emotion.push(sentiment(sentence));
+	});
+	var parsedEmotion = emotion.map((x, idx) => {
+		return {x:idx, y:x.score};
+	});
+	res.send(parsedEmotion);
 });
+
 
 router.get('/:id/characters', (req, res , next)=>{
 	characterRepo.find({ screenplay: req.params.id })
@@ -52,3 +69,15 @@ router.get('/:id/characters', (req, res , next)=>{
 	})
 	.catch(err => console.error(err));
 })
+
+router.get('/:screenplayId/wordcount', (req, res , next)=>{
+	characterRepo.filter(req.screenplay)
+	.then(filteredChars => {
+		var formattedforWordCount = filteredChars.map(name => {
+			return {key: name.name, y: name.wordcount};
+		});
+		res.json(formattedforWordCount); })
+
+	.catch(next);
+});
+

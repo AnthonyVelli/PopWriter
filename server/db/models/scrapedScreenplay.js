@@ -15,7 +15,21 @@ var charschema = new mongoose.Schema({
     text: {type: String}
 });
 
+spschema.methods.scenes = function(){
+	var sceneSize = Math.ceil(this.components.length / 100);
+	var sceneArray = [];
+	for (var x = 0; x < this.components.length; x+= sceneSize){
+		sceneArray.push(this.components.slice(0,x));
+	}
+	return sceneArray;
+};
 
+charschema.statics.filter = function(screenplay){
+	return this.find({screenplay: screenplay._id})
+	.then(foundChars => {
+		return foundChars.filter(char => char.wordcount / screenplay.WordCount > .1);
+	});
+};
 
 
 mongoose.model('screenplayRepo', spschema, 'screenplayrepos');
