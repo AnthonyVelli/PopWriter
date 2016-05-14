@@ -22,6 +22,7 @@ app.config($stateProvider => {
         var toBeSaved = textToObj($scope.text);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
+            $scope.text= scriptify(screenplay);
             console.log('udpate screenplay', screenplay);
         })
     }
@@ -37,7 +38,8 @@ app.config($stateProvider => {
             var toBeSaved = textToObj($scope.text);
             ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
                 .then( screenplay => {
-                console.log('udpate screenplay', screenplay);
+                    $scope.text= scriptify(screenplay);
+                    console.log('udpate screenplay', screenplay);
             });
         }
         EditorFactory.setScopeKeyDown(event, $scope);
@@ -51,6 +53,7 @@ app.config($stateProvider => {
         var toBeSaved = textToObj($scope.text);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
             .then( screenplay => {
+                $scope.text= scriptify(screenplay);
             console.log('udpate screenplay', screenplay);
         });
     }, 10000);
