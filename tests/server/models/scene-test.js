@@ -60,11 +60,17 @@ describe('Scene model', function () {
             });
         });
 
-        it('Pre-Save Hook to Populate Heading', function () {
-            return Scene.findOne()
-            .then(function(foundScene){
-                expect(foundScene.header).to.be.a('string') ;
+    });
+
+     describe('Update Function', function () {
+
+        it('Create Character', function () {
+            return Scene.create({header: 'heres a header'})
+            .then(createdScene => createdScene.update({character: {name: 'jonjonthejonny boy'}}))
+            .then(updatedScene => {
+                console.log(updatedScene);
+                expect (updatedScene.character.name).to.equal('jonjonthejonny boy');
+            });
             });
         });
-    });
 });
