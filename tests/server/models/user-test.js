@@ -203,8 +203,6 @@ describe('User model', function () {
                 console.log(updatedUser);
                 expect(updatedUser.screenplay.title).to.equal('new screenplay for testing in final test woot!');
                 expect(updatedUser.screenplay._id).to.exist;
-                // expect(updatedUser.screenplay.scenes.header).to.equal('really deep scene creation dog');
-                // expect(updatedUser.screenplay.scenes).to.exist;
             });
         });
     });
