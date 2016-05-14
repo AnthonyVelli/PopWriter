@@ -26,6 +26,10 @@ app.config($stateProvider => {
         })
     }
 
+    $scope.check = () => {
+        console.log(screenplay);
+    }
+
     $scope.type = function(event) {
         var compIdx = $scope.components.indexOf($scope.selected);
         var currentClass = $scope.components[compIdx];

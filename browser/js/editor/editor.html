@@ -12,10 +12,11 @@
     <h1>{{ selected.toUpperCase() }}</h1>
     <button ui-sref="userHome">home</button>
     <button ng-click="save()">save</button>
+    <button ng-click="check()">check</button>
 
     <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)">
     <div id="slug"></div>
     </medium-editor>
-    <br>
+    <div id="slug"></div>
 </div>
 
