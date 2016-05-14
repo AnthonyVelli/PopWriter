@@ -59,15 +59,13 @@ describe('Component Route', function () {
 			});
 		});
 
-		it('should post & return new components with virtuals populated', function (done) {
+		it('should post & return new components', function (done) {
 			guestAgent.post('/api/components/').send({type: 'location', text: 'INT. the mountain top'})
 			.expect(201)
 			.end(function(err, res){
 				if (err) return done(err);
 				expect(res.body.text).to.equal('INT. the mountain top');
 				expect(res.body).to.have.property('_id');
-				expect(res.body).to.have.property('location');
-				expect(res.body).to.have.property('intExt');
 				done();
 			});
 		});
