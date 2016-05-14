@@ -27,7 +27,7 @@ spschema.methods.scenes = function(){
 charschema.statics.filter = function(screenplay){
 	return this.find({screenplay: screenplay._id})
 	.then(foundChars => {
-		return foundChars.filter(char => char.wordcount / screenplay.WordCount > .1);
+		return foundChars.filter(char => char.wordcount / screenplay.WordCount > .007);
 	});
 };
 

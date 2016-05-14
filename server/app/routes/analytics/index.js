@@ -35,9 +35,7 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 				return orig += (comp[1] + ' ');
 			}
 			return orig;
-		}, '');
-		console.log(sceneString);
-		
+		}, '');		
 		TfIdf.addDocument(sceneString);
 	});
 	TfIdf.documents.forEach(comp => {
