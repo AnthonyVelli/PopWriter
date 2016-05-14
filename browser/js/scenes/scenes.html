@@ -1,4 +1,4 @@
-<h3>Inside Directive: {{screenplay.title}}</h3>
+<h3>Scenes</h3>
 <button type='btn btn-primary' ng-click="showForm()">New Scene</button>
 <div ng-show="showform">
 	<h3>{{screenplay.title}}</h3>
@@ -16,6 +16,8 @@
 		  	<button ng-click="hideForm()" class="btn btn-default">Cancel</button>
 		</form>
 </div>
-<div ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
+
+<div class="scene-cursor" ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
 	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{scene.header}} {{$index}}</h3>
+
 </div>

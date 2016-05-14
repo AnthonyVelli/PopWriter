@@ -1,21 +1,28 @@
 
-<div class="container">
+<div class="state-container">
+    <div class="outer-editor">
+        <div class="scenes flex-child">
+        	<scenes screenplay="screenplay"></scenes>
+        </div>
 
-<div>
-	<scenes screenplay="screenplay"></scenes>
-</div>
-	<h1>screenplay: {{screenplay.title}}</h1>
-    <h1>Editor</h1>
-    <select>
-        <option ng-repeat="component in components" ng-model="selected">{{ component }}</option>
-    </select>
-    <h1>{{ selected.toUpperCase() }}</h1>
-    <button ui-sref="userHome">home</button>
-    <button ng-click="save()">save</button>
 
-    <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)">
-    <div id="slug"></div>
-    </medium-editor>
-    <br>
+        <div class="editor-contain flex-child">
+
+        	<h1>screenplay: {{screenplay.title}}</h1>
+            <h1>Editor</h1>
+            <select>
+                <option ng-repeat="component in components" ng-model="selected">{{ component }}</option>
+            </select>
+            <h1>{{ selected.toUpperCase() }}</h1>
+            <button ui-sref="userHome">home</button>
+            <button ng-click="save()">save</button>
+
+            <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)">
+            <div id="slug"></div>
+            </medium-editor>
+            <br>
+        </div>
+    </div>
+
 </div>
 
