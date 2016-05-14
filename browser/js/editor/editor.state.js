@@ -20,6 +20,7 @@ app.config($stateProvider => {
 
     $scope.save = () => {
         var toBeSaved = textToObj($scope.text);
+        console.log(toBeSaved);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
             console.log('udpate screenplay', screenplay);
@@ -69,6 +70,15 @@ app.config($stateProvider => {
         }
 
     };
+
+    $scope.click = () => {
+        var currentElement;
+        setTimeout(()=> {
+            currentElement = getSelectionStart(0);
+            $scope.selected = currentElement.classList[0];
+            $scope.$digest();
+        }, 5);
+    }
 
 });
 

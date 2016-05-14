@@ -31,8 +31,6 @@ app.config($stateProvider => {
 
 
 app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
-    console.log(theScreenplays);
-    console.log('something');
 	$scope.user = user;
 	$scope.screenplays = theScreenplays;
 	$scope.save = () => {

@@ -18,13 +18,13 @@ router.param('id', (req, res, next, id) => {
 
 
 // get all users
-// router.get('/', (req, res, next) => {
-// 	if(req.user.isAdmin) {
-// 		User.find({})
-// 		.then(users => res.json(users))
-// 		.catch(next);
-// 	} else {res.sendStatus(403)}
-// });
+router.get('/', (req, res, next) => {
+	if(req.user.isAdmin) {
+		User.find({})
+		.then(users => res.json(users))
+		.catch(next);
+	} else {res.sendStatus(403)}
+});
 
 router.post('/', (req, res, next) => {
 	User.create(req.body)
