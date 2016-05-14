@@ -19,10 +19,12 @@ app.config($stateProvider => {
 
 
     $scope.save = () => {
-        var toBeSaved = textToObj($scope.text);
+        // whatever();
+        var toBeSaved = textToObj();
+        console.log(toBeSaved);
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
-            $scope.text= scriptify(screenplay);
+            // $scope.text= scriptify(screenplay);
             console.log('udpate screenplay', screenplay);
         })
     }
@@ -34,13 +36,17 @@ app.config($stateProvider => {
     }
 
     $scope.type = function(event) {
-        if(event.code === "Enter" || event.code === "Tab"){
+        if(event.code === 'Enter') {
+            var currentElement = getSelectionStart();
             var toBeSaved = textToObj($scope.text);
             ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
                 .then( screenplay => {
-                    $scope.text= scriptify(screenplay);
-                    console.log('udpate screenplay', screenplay);
+                   currentElement.id = getIdAndAssign(screenplay);
+                 // $scope.text = scriptify(screenplay);
+                // console.log(getIdAndAssign(screenplay));
+                // console.log('udpate screenplay', screenplay);
             });
+
         }
         EditorFactory.setScopeKeyDown(event, $scope);
     };
@@ -49,14 +55,12 @@ app.config($stateProvider => {
         EditorFactory.setScopeClick($scope);
     };
 
-    setInterval(()=>{
-        var toBeSaved = textToObj($scope.text);
-        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
-            .then( screenplay => {
-                $scope.text= scriptify(screenplay);
-            console.log('udpate screenplay', screenplay);
-        });
-    }, 10000);
+    // setInterval(()=>{
+    //     var toBeSaved = textToObj($scope.text);
+    //     ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+    //         .then( screenplay => {
+    //     });
+    // }, 10000);
 
 });
 
