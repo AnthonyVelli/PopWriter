@@ -20,6 +20,8 @@ module.exports = function(toUpdate, Model, property, targetDoc){
                 return Model.findById(ele)
                 .exec();
             } else {
+                console.log('in create');
+                console.log(ele);
                 return Model.create(ele);
             }
         }); 
