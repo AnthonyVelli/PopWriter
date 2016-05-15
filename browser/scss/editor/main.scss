@@ -14,7 +14,6 @@
     padding-bottom: 100px;
 
     
-
     .header, .character {
         text-transform: uppercase;
     }
@@ -40,12 +39,22 @@
 }
 
 .scenes {
-    width: 33%;
+    width: 28%;
     background: pink;
 }
 
+.slide-bar {
+    color: rgb(220,220,220);
+    padding-top: 5px;
+    text-align: center;
+    width: 2%;
+    margin: 0;
+    background-color: #271E23;
+    cursor: pointer;
+}
+
 .editor-contain {
-    width: 65%;
+    width: 70%;
     background: lightblue;
     padding: 10px;
 }
@@ -65,4 +74,7 @@
     background-color: grey;
 }
 
+.editor-wrapper {
+    padding-top: 92px;
+}
 
