@@ -49,10 +49,10 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 		for (var char in scene){
 			var sentimentRes = sentiment(scene[char].tokenizeAndStem().join(' '));
 			if (emotion[char]) {
-				emotion[char].push({x: idx, y: sentimentRes.score, sentiment: sentimentRes});
+				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
 			} else if (scene[char]) {
 				emotion[char] = [];
-				emotion[char].push({x: idx, y: sentimentRes.score, sentiment: sentimentRes});
+				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
 			}
 		}
 	});
