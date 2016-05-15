@@ -30,6 +30,7 @@ var screenplays = require('./seed/screenplays');
 var characters = require('./seed/characters');
 var components = require('./seed/components');
 var scenes = require('./seed/scenes');
+var argo = require('./seed/screenplay.one');
 
 
 var wipeCollections = function () {
@@ -121,6 +122,39 @@ var seedScreenplays = function(){
     .catch(console.error.bind(console));
 
 };
+
+function seedScreenplaysTwo(screenplay){
+    var currentSP, currentScenes;
+    Screenplay.create(screenplay.screenplay)
+    .then(createdScreenplay => {
+        currentSP = createdScreenplay;
+    })
+    .then(() => {
+        Scene.create(screenplay.scenes);
+    })
+    .then(scenes => {
+        currentScenes = scenes;
+        ScenesIds = currentScenes.map(ele => {
+            return ele._id;
+        });
+        currentSP.scenes = ScenesIds;
+        return CurrentSp.save();
+    })
+    .then(() => {
+        compPromiseArray = screenplay.components.map( ele => {
+            return Component.create(ele);
+        });
+        return Promise.all(compPromiseArray);
+    })
+    .then(createdComponents => {
+        createdComponents.forEach((arrayOfComp, index) => {
+            currentScenes[index] = arrayOfComp.map(comp =>{
+                return comp._id;
+            });
+        });
+        return currentScenes.save();
+    });
+}
 
 // Dialogue => Character => Scene =>
 
