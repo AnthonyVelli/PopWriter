@@ -68,7 +68,8 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 			TfIdf.addDocument(name.text);
 		});
 		var formattedforWordCount = filteredChars.map((name, idx) => {
-			return {key: name.name, y: name.wordcount, tfidf: TfIdf.documents[idx]};
+			
+			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
 		res.json(formattedforWordCount); })
 	.catch(next);	
