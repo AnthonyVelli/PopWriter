@@ -38,37 +38,43 @@
     }
 }
 
+.hide {
+    flex: 0 0 0;
+    padding: 0;
+}
+
+.flex-child {
+    flex-basis: 0;
+}
+
 .scenes {
-    width: 28%;
+    /*width: 28%;*/
     background: pink;
+    flex-grow: 3;
+    overflow: hidden;
 }
 
 .slide-bar {
+    flex-grow: 0.2;
     padding-top: 20px;
     color: rgb(220,220,220);
     text-align: center;
-    width: 2%;
+    /*width: 2%;*/
     margin: 0;
     background-color: #271E23;
     cursor: pointer;
 }
 
 .editor-contain {
-    width: 70%;
+    flex-grow: 8;
+    /*width: 70%;*/
     background: lightblue;
-    padding: 10px;
-}
-
-.flex-child {
-
+    padding: 15px;
 }
 
 .outer-editor {
     padding-right: 0px;
-    /*border: 10px solid black;*/
     display: flex;
-    /*flex: 1 1 auto;*/
-    /*flex-direction: row;*/
     justify-content: space-between;
     width: 100%;
     background-color: grey;

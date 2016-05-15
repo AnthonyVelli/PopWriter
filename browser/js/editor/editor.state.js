@@ -26,6 +26,16 @@ app.config($stateProvider => {
         })
     }
 
+    $scope.show = false;
+
+    $scope.toggleScenes = function() {
+        if ($scope.show === false) {
+            $scope.show = true;
+        } else {
+            $scope.show = false;
+        }
+    }
+
     $scope.type = function(event) {
         var compIdx = $scope.components.indexOf($scope.selected);
         var currentClass = $scope.components[compIdx];
