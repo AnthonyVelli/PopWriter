@@ -3,6 +3,7 @@
 const router = require('express').Router();
 const sentiment = require('sentiment');
 const natural = require('natural');
+natural.PorterStemmer.attach();
 const mongoose = require('mongoose');
 const screenplayRepo = mongoose.model('screenplayRepo');
 const characterRepo = mongoose.model('characterRepo');
@@ -25,34 +26,39 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:screenplayId/emotion', (req, res, next) => {
-	const TfIdf = new natural.TfIdf();
-	var emotion = [];
+  	const tokenizer = new natural.WordTokenizer();
 	var scenes = req.screenplay.scenes();
-
-	scenes.forEach(scene => {
-		var sceneString = scene.reduce((orig,comp) => {
+	var sceneMaster = [];
+	scenes.forEach(function(scene) {
+		var charByScene = {};
+		charByScene.sceneText = '';
+		scene.forEach(function(comp) {
 			if (comp[1]) {
-				return orig += (comp[1] + ' ');
+				charByScene.sceneText += (' ' + comp[1]);
+				if (charByScene[comp[0]]) {
+					charByScene[comp[0]] += (' '+comp[1]);
+				} else {
+					charByScene[comp[0]] = comp[1];
+				}
 			}
-			return orig;
-		}, '');
-		console.log(sceneString);
+		});
+		sceneMaster.push(charByScene);
 
-		TfIdf.addDocument(sceneString);
 	});
-	TfIdf.documents.forEach(comp => {
-		var sentence = '';
-		for (var n in comp){
-			for (var x = 0; x < comp[n] && n !== '__key'; x++){
-				sentence += (n + ' ');
+	var emotion = {};
+	sceneMaster.forEach((scene, idx) => {
+		for (var char in scene){
+			var sentimentRes = sentiment(scene[char].tokenizeAndStem().join(' '));
+			if (emotion[char]) {
+				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
+			} else if (scene[char]) {
+				emotion[char] = [];
+				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
 			}
 		}
-		emotion.push(sentiment(sentence));
 	});
-	var parsedEmotion = emotion.map((x, idx) => {
-		return {x:idx, y:x.score};
-	});
-	res.send(parsedEmotion);
+
+	res.json(emotion);
 });
 
 
@@ -71,13 +77,16 @@ router.get('/:id/characters', (req, res , next)=>{
 })
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
+	const TfIdf = new natural.TfIdf();
 	characterRepo.filter(req.screenplay)
 	.then(filteredChars => {
-		var formattedforWordCount = filteredChars.map(name => {
-			return {key: name.name, y: name.wordcount};
+		filteredChars.forEach(name => {
+			TfIdf.addDocument(name.text);
+		});
+		var formattedforWordCount = filteredChars.map((name, idx) => {
+			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
 		res.json(formattedforWordCount); })
-
 	.catch(next);
 });
 
