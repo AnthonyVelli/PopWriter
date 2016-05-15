@@ -49,10 +49,10 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 		for (var char in scene){
 			var sentimentRes = sentiment(scene[char].tokenizeAndStem().join(' '));
 			if (emotion[char]) {
-				emotion[char].push({x: idx, y: sentimentRes.score});
+				emotion[char].push({x: idx, y: sentimentRes.score, sentiment: sentimentRes});
 			} else if (scene[char]) {
 				emotion[char] = [];
-				emotion[char].push({x: idx, y: sentimentRes.score});
+				emotion[char].push({x: idx, y: sentimentRes.score, sentiment: sentimentRes});
 			}
 		}
 	});
@@ -68,7 +68,6 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 			TfIdf.addDocument(name.text);
 		});
 		var formattedforWordCount = filteredChars.map((name, idx) => {
-			
 			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
 		res.json(formattedforWordCount); })
