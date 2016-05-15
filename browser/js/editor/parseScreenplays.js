@@ -20,7 +20,6 @@ function getId(updatedScreenplay) {
     var scenes = updatedScreenplay.scenes;
     var lastScene = scenes[scenes.length -1];
     var currentId;
-    console.log('lastscene', lastScene);
     if(lastScene.components.length) {
         currentId = lastScene.components[lastScene.components.length -1]._id;
     } else {
@@ -67,21 +66,3 @@ function textToObj() {
 
     return arrayOfScenes;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
