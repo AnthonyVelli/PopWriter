@@ -3,6 +3,6 @@ app.factory('AnalyticsFactory', ($http) => {
 	return {
 		getScreenPlays: () => $http.get('/api/analytics').then(parseData),
 		getSentiment: (id) => $http.get('/api/analytics/' + id + '/emotion').then(parseData),
-		getCharacters: (id) => $http.get('/api/analytics/' + id + "/wordcount").then(parseData)
+		getCharacters: (id) => $http.get('/api/analytics/' + id + '/wordcount').then(parseData)
 	}
 });
