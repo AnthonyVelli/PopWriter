@@ -30,7 +30,7 @@ var screenplays = require('./seed/screenplays');
 var characters = require('./seed/characters');
 var components = require('./seed/components');
 var scenes = require('./seed/scenes');
-var argo = require('./seed/screenplay.one');
+var allScreenplays = require('./seed/screenplay.one');
 
 
 var wipeCollections = function () {
@@ -187,7 +187,9 @@ connectToDb
         return seedScreenplays();
     })
     .then(function(){
-        return seedScreenplaysTwo(argo);
+        return Promise.all(allScreenplays.map(sp => {
+            return seedScreenplaysTwo(sp);
+        }));
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

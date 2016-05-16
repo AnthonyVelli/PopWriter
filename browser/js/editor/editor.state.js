@@ -34,6 +34,7 @@ app.config($stateProvider => {
 
     $scope.type = function(event) {
         if(event.code === 'Enter') {
+            // debugger;
             var currentElement = getSelectionStart();
             var toBeSaved = textToObj($scope.text);
             console.log(toBeSaved);
