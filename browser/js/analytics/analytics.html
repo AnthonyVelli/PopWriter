@@ -9,10 +9,14 @@
 	</div>
 	<div>
 	</style>
-		<button ng-click="pieChartOptionsToggle()" ui-sref="analytics.pieChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Pie Chart</button>
-		<button ng-click="donutChartOptionsToggle()" ui-sref="analytics.barChart" type="button" class="btn btn-danger btn-lg">Bar Chart</button>
+		<button ui-sref="analytics.pieChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Pie Chart</button>
+
+		<button ui-sref="analytics.donutChart({id: currentSP})" type="button" class="btn btn-danger btn-lg">Donut Chart</button>
+
 		<button ng-click="horizontalChartOptionsToggle()" ui-sref="analytics.horizontalChart" type="button" class="btn btn-success btn-lg">Comparative Bar Chart</button>
+
 		<button ng-click="barChartOptionsToggle()" ui-sref="analytics.donutChart" type="button" class="btn btn-info btn-lg">Another Chart</button>
+
 		<button ui-sref="analytics.lineChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Line Chart</button>
 	</div>
 	<ui-view></ui-view>

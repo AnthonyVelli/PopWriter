@@ -2,9 +2,6 @@ app.directive('scenes', function ($state) {
 
     return {
         restrict: 'E',
-        scope: {
-            screenplay: '='
-        },
         templateUrl: 'js/scenes/scenes.html',
         controller: 'ScenesCtrl'
     };
@@ -19,13 +16,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
     $scope.hideForm = function() {
         $scope.showform = false;
     };
-    $scope.addNewScene = function (screenplay, newscene){
-
-        screenplay.scenes.push(newscene);
-        SceneFactory.addOrUpdate(screenplay)
-        .then(function(updatedScreenplay) {
-        });
-    };     
+    // $scope.addNewScene = function (screenplay, newscene){
 
 // **** ngDraggable DRAG AND DROP **** //
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){
@@ -35,11 +26,11 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
         var valToMove = screenplay.scenes.splice(oldIdx, 1)[0];
         screenplay.scenes.splice(newIdx, 0, valToMove);
         console.log("screenplay after splices: ", screenplay);
-
-        SceneFactory.addOrUpdate(screenplay)
-        .then(function(updatedScreenplay) {
-             console.log("Yeah!  The screenplay was updated.");
-        });
+        $scope.text = scriptify(screenplay);
+        // SceneFactory.addOrUpdate(screenplay)
+        // .then(function(updatedScreenplay) {
+        //      console.log("Yeah!  The screenplay was updated.");
+        // });
 
     };
 

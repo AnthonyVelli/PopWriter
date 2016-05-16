@@ -43,6 +43,7 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 			}
 		});
 		sceneMaster.push(charByScene);
+
 	});
 	var emotion = {};
 	sceneMaster.forEach((scene, idx) => {
@@ -60,6 +61,21 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 	res.json(emotion);
 });
 
+
+router.get('/:id/characters', (req, res , next)=>{
+	characterRepo.find({ screenplay: req.params.id })
+	.then(characters => {
+		characters = characters.filter(char => {
+			return (char.wordcount > 100 && !/(:|\d)/.test(char.name) && char.name.split(" ").length <= 3);
+		})
+		characters = characters.map(name => {
+			return {key: name.name, y: name.wordcount}
+		})
+		res.json(characters);
+	})
+	.catch(err => console.error(err));
+})
+
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
 	const TfIdf = new natural.TfIdf();
 	characterRepo.filter(req.screenplay)
@@ -70,6 +86,16 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		var formattedforWordCount = filteredChars.map((name, idx) => {
 			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
-		res.json(formattedforWordCount); })
+		var donutData = [];
+		formattedforWordCount.forEach(char => {
+			var charObj = {character: char.key, words: []};
+			donutData.push(charObj)
+			for(var i = 0; i < 10; i++){
+				var ele = char.tfidf[i];
+				charObj.words.push({key: ele.term, y: ele.tfidf});
+			}
+		})
+		res.json([formattedforWordCount, donutData]); })
 	.catch(next);	
 });
+
