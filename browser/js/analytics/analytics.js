@@ -45,15 +45,38 @@ app.config(function ($stateProvider) {
 	.state('analytics.multiBarChart', {
 		url: '/multiBarChart/:id',
 		templateUrl: 'js/analytics/barChart.html',
-		controller: ($scope, multiBarChartData) => {
+		controller: ($scope, barChartData) => {
 			$scope.options = barChartOptions
+			console.log(barChartData)
 			$scope.data = barChartData
 		},
 		resolve: {
 			barChartData: (AnalyticsFactory, $stateParams) => {
-				console.log($stateParams)
 				return AnalyticsFactory.getSentiment($stateParams.id)
-				.then(info => console.log(info))
+				.then(info => {
+
+					var negative = {key: 'negative', values: []};
+					var positive = {key: 'positive', values: []};
+					var neutral = {key: 'neutral', values: []};
+					var beastLord = [negative, positive];
+					for (var char in info) {
+						if (char === 'scriptText') {
+							continue;
+						}
+						beastLord[0].values.push({x: char, y: info[char].reduce((orig,scene) => {
+							return orig += scene.sentiment.negative.length
+						}, 0)});
+						beastLord[1].values.push({x: char, y: info[char].reduce((orig,scene) => {
+							return orig += scene.sentiment.positive.length
+						}, 0)});
+						// beastLord[2].values.push({x: char, y: info[char].reduce((orig,scene) => {
+						// 	return orig += scene.sentiment.tokens.length
+						// }, 0)})	
+					}
+					console.log(beastLord);
+					return beastLord;
+
+				});
 			}
 		}
 	})
@@ -68,15 +91,10 @@ app.config(function ($stateProvider) {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
-        			console.log(sentiment)
 					var sentimentHolder = [{
 						color: "#337ab7",
 						key: "Sentiment",
 						values: sentiment.sceneText
-					}, {
-						color: "#EEA9B8",
-						key: "BROWN",
-						values: sentiment.BROWN
 					}]
 					return sentimentHolder;
 				})
@@ -91,19 +109,15 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 		.then(screenplays => $scope.scripts = screenplays)
 		$scope.changeSP = (spId) => $scope.currentSP = spId;
 
-		// $scope.donutChartOptionsToggle = () => {
-		// 	$scope.options = donutChartOptions;
-		// 	$scope.data = pieData;
-		// };
-
 		// $scope.horizontalChartOptionsToggle = () => {
 		// 	$scope.options = horizontalChartOptions
 		// 	$scope.data = someData;
 		// }
 
-		$scope.barChartOptionsToggle = () => {
-			$scope.options = barChartOptions
-			$scope.data = generateData();
-		}
+		// $scope.barChartOptionsToggle = () => {
+		// 	$scope.options = barChartOptions
+		// 	console.log(generateData())
+		// 	$scope.data = generateData();
+		// }
     });
 
