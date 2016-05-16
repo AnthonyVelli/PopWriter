@@ -1,9 +1,15 @@
 <section class="state-container">
 	<div>
 		<h2>Click to Access Your User Settings</h2>
-		<button ui-sref="userHome.settings" type="btn btn-primary">Settings</button>
-		<h2>Click to Access Your Screenplays</h2>
-		<button ui-sref="userHome.screenplays" type='btn btn-primary'>Screenplays</button>
-		<ui-view></ui-view>
+		<button ui-sref="userHome.settings" class="btn btn-primary">Settings</button>
+	</div>
+	<div>
+		<h1>Screenplays</h1>
+		<div ng-repeat="screenplay in screenplays">
+			<h2>{{screenplay.title}}</h2>
+			<button ui-sref="editor({id: screenplay._id})" class='btn btn-primary'>Edit {{screenplay.title}}</button>
+		</div>
+		<h2>Click to Add a Screenplay</h2>
+			<button ui-sref="userHome.screenplays.add" class='btn btn-primary'>Add a Screenplay</button>
 	</div>
 </section>

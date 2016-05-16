@@ -19,10 +19,6 @@ app.config($stateProvider => {
 		url: '/settings',
 		templateUrl: 'js/userHome/usersetting.html'
 	})
-	.state('userHome.screenplays', {
-		url: '/screenplays',
-		templateUrl: 'js/userHome/userscreenplays.html'
-	})
 	.state('userHome.screenplays.add', {
 		url: '/screenplays/add',
 		templateUrl: 'js/userHome/usersscreenplaysadd.html'
