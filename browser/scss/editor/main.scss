@@ -48,9 +48,8 @@
 }
 
 .scenes {
-    /*width: 28%;*/
-    background: pink;
-    flex-grow: 3;
+    background-image: url(tex-paper-wrinkled.jpg);
+    flex-grow: 2;
     overflow: hidden;
 }
 
@@ -59,7 +58,6 @@
     padding-top: 20px;
     color: rgb(220,220,220);
     text-align: center;
-    /*width: 2%;*/
     margin: 0;
     background-color: #271E23;
     cursor: pointer;
@@ -67,9 +65,8 @@
 
 .editor-contain {
     flex-grow: 8;
-    /*width: 70%;*/
-    background: lightblue;
     padding: 15px;
+    background-image: url(tex-paper-wrinkled.jpg);
 }
 
 .outer-editor {
@@ -77,7 +74,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: grey;
 }
 
 .editor-wrapper {
