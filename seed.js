@@ -64,6 +64,10 @@ var seedUsers = function () {
             email: 'zeke@zeke.zeke',
             password: 'zeke',
             isAdmin: true
+        },
+        {
+            email: 'kim@gmail.com',
+            password: 'kim'
         }
     ];
 
@@ -124,23 +128,34 @@ var seedScreenplays = function(){
 };
 
 function seedScreenplaysTwo(screenplay){
-    var currentSP, currentScenes;
-    Screenplay.create(screenplay.screenplay)
-    .then(createdScreenplay => {
-        currentSP = createdScreenplay;
+    var currentSP, currentScenes, user;
+    return User.findOne({email: 'kim@gmail.com'})
+    .then(selectedUser => {
+        user = selectedUser;
     })
     .then(() => {
-        Scene.create(screenplay.scenes);
+        return Screenplay.create(screenplay.screenplay)
+    })
+    .then(createdScreenplay => {
+        currentSP = createdScreenplay;
+        if(!user.screenplay) user.screenplay = [];
+        user.screenplay.push(currentSP._id);
+        return user.save();
+    })
+    .then(() => {
+        return Scene.create(screenplay.scenes);
     })
     .then(scenes => {
+        // console.log(scenes);
         currentScenes = scenes;
         ScenesIds = currentScenes.map(ele => {
             return ele._id;
         });
         currentSP.scenes = ScenesIds;
-        return CurrentSp.save();
+        return currentSP.save();
     })
     .then(() => {
+        // console.log(currentScenes);
         compPromiseArray = screenplay.components.map( ele => {
             return Component.create(ele);
         });
@@ -148,12 +163,15 @@ function seedScreenplaysTwo(screenplay){
     })
     .then(createdComponents => {
         createdComponents.forEach((arrayOfComp, index) => {
-            currentScenes[index] = arrayOfComp.map(comp =>{
+            currentScenes[index].components = arrayOfComp.map( comp =>{
                 return comp._id;
             });
         });
-        return currentScenes.save();
-    });
+        return Promise.all(currentScenes.map(scene => scene.save()));
+    })
+    .then(() => {
+        console.log('scenes saved');
+    })
 }
 
 // Dialogue => Character => Scene =>
@@ -167,6 +185,9 @@ connectToDb
     })
     .then(function(){
         return seedScreenplays();
+    })
+    .then(function(){
+        return seedScreenplaysTwo(argo);
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

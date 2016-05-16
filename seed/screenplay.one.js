@@ -21,16 +21,6 @@ module.exports = {
             components: [],
             synopsis: 'something',
             header: 'INT. CONSULATE OFFICE - MORNING'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'something'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'something'
         }
         ],
     components: [[{

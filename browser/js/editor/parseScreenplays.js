@@ -35,7 +35,7 @@ function textToObj() {
     var arrayOfScenes = [];
     var toBeSaved = {};
     var currentCharacter;
-    var currentCharacterId;
+    // var currentCharacterId;
 
     for(var key = 0; key < editor.length; key++ ){
 
@@ -49,16 +49,17 @@ function textToObj() {
             arrayOfScenes.push(toBeSaved);
         } else if (currentClass === "character"){
             currentCharacter = editor[key].textContent;
-            currentCharacterId = editor[key].id;
+            // currentCharacterId = editor[key].id;
         } else {
             if(!toBeSaved.components) toBeSaved.components = [];
             component = {
                 type: currentClass,
                 text: editor[key].textContent,
+                // _id: editor[key].id
             }
             if(currentClass === 'dialogue') {
                 component.charName = currentCharacter;
-                component.character = currentCharacterId;
+                // component.character = currentCharacterId;
             }
             toBeSaved.components.push(component);
         }
