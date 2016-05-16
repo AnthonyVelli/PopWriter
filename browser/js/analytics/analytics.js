@@ -10,9 +10,8 @@ app.config(function ($stateProvider) {
     	url: '/pieChart/:id',
     	templateUrl: 'js/analytics/pieChart.html',
     	controller: ($scope, pieChartData) => {
-    		console.log(pieChartData);
     		$scope.options = pieChartOptions;
-    		$scope.data = pieChartData;
+    		$scope.data = pieChartData[0];
     	},
     	resolve: {
     		pieChartData: (AnalyticsFactory, $stateParams) => {
@@ -21,17 +20,34 @@ app.config(function ($stateProvider) {
     		}
     	}
     })
-    .state('analytics.barChart', {
-		url: '/barChart',
-		templateUrl: 'js/analytics/barChart.html'
-    })
+    .state('analytics.donutChart', {
+		url: '/donutChart/:id',
+		templateUrl: 'js/analytics/donutChart.html',
+		controller: ($scope, pieChartData) => {
+			$scope.options = donutChartOptions
+			// console.log(pieChartData[1][0])
+			$scope.data = pieChartData[1];
+			pieChartData[1].forEach(objOfChar => {
+				console.log(objOfChar);
+				if(objOfChar.character === $scope.selectedCharacter){
+					$scope.data = objOfChar.words;
+				}
+			})
+		},
+    	resolve: {
+			pieChartData: (AnalyticsFactory, $stateParams) => {
+				return AnalyticsFactory.getCharacters($stateParams.id)
+				.then(characters => characters)
+			}
+	   	}
+	})
     .state('analytics.horizontalChart', {
 		url: '/horizontalChart',
 		templateUrl: 'js/analytics/horizontalChart.html'
     })
-	.state('analytics.donutChart', {
-		url: '/donutChart',
-		templateUrl: 'js/analytics/donutChart.html'
+	.state('analytics.barChart', {
+		url: '/barChart',
+		templateUrl: 'js/analytics/barChart.html'
 	})
 	.state('analytics.lineChart', {
 		url: '/lineChart/:id',
@@ -44,7 +60,6 @@ app.config(function ($stateProvider) {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
-        			console.log(sentiment);
 					var sentimentHolder = [{
 						color: "#337ab7",
 						key: "Sentiment",
@@ -63,10 +78,10 @@ app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactor
 		.then(screenplays => $scope.scripts = screenplays)
 		$scope.changeSP = (spId) => $scope.currentSP = spId;
 
-		$scope.donutChartOptionsToggle = () => {
-			$scope.options = donutChartOptions;
-			$scope.data = pieData;
-		};
+		// $scope.donutChartOptionsToggle = () => {
+		// 	$scope.options = donutChartOptions;
+		// 	$scope.data = pieData;
+		// };
 
 		$scope.horizontalChartOptionsToggle = () => {
 			$scope.options = horizontalChartOptions

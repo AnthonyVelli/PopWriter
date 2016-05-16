@@ -1,4 +1,7 @@
 <div ng-app="myApp">
+	<select ng-model="selectedCharacter">
+		<option ng-repeat="character in data">{{character.character}}</option>
+	</select>
     <div ng-controller="analytics">
         <nvd3 options="options" data="data"></nvd3>
     </div>
