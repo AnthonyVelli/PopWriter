@@ -1,15 +1,19 @@
 
 <div class="editor-wrapper">
     <div class="outer-editor">
-        <div class="scenes flex-child">
+        <!-- scenes sidebar -->
+        <div id="scenes-bar" class="scenes flex-child hide">
         	<scenes screenplay="screenplay"></scenes>
         </div>
-        <div class="slide-bar">+</div>
-
+        <!-- sidebar toggle -->
+        <div class="slide-bar flex-child" ng-mouseenter="toggleScenesME($event)" ng-mouseleave="toggleScenesML($event)"><span id="triangle" class="glyphicon glyphicon-triangle-right"></span></div>
+        <!-- editor area -->
         <div class="editor-contain flex-child">
+
+            <div class="editor-header-bar">
             <h1>{{ selected.toUpperCase() }}</h1>
-            <button ui-sref="userHome">home</button>
             <button ng-click="save()">save</button>
+            </div>
 
             <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)" ng-click="click()"">
             <div id="slug"></div>
