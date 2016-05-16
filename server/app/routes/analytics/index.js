@@ -43,6 +43,7 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 			}
 		});
 		sceneMaster.push(charByScene);
+
 	});
 	var emotion = {};
 	sceneMaster.forEach((scene, idx) => {
@@ -59,6 +60,21 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 
 	res.json(emotion);
 });
+
+
+router.get('/:id/characters', (req, res , next)=>{
+	characterRepo.find({ screenplay: req.params.id })
+	.then(characters => {
+		characters = characters.filter(char => {
+			return (char.wordcount > 100 && !/(:|\d)/.test(char.name) && char.name.split(" ").length <= 3);
+		})
+		characters = characters.map(name => {
+			return {key: name.name, y: name.wordcount}
+		})
+		res.json(characters);
+	})
+	.catch(err => console.error(err));
+})
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
 	const TfIdf = new natural.TfIdf();
@@ -82,3 +98,4 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		res.json([formattedforWordCount, donutData]); })
 	.catch(next);	
 });
+

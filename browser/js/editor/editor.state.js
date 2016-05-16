@@ -10,60 +10,44 @@ app.config($stateProvider => {
         }
     });
 })
-.controller('EditorController', ($scope, screenplay, ScreenplaysFactory) => {
+.controller('EditorController', ($scope, screenplay, ScreenplaysFactory, EditorFactory) => {
     $scope.screenplay = screenplay;
-    $scope.options = mediumEditorOptions;
+    $scope.options = EditorFactory.editorOptions;
     $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        var toBeSaved = textToObj($scope.text);
+        var toBeSaved = textToObj();
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
-            console.log('udpate screenplay', screenplay);
+            console.log('udpated screenplay', screenplay);
         })
     }
 
+
+
+    $scope.check = () => {
+        console.log(screenplay);
+    }
+
     $scope.type = function(event) {
-        var compIdx = $scope.components.indexOf($scope.selected);
-        var currentClass = $scope.components[compIdx];
-        var currentElement;
-        if(event.code === 'Tab') {
-            currentElement = getSelectionStart();
-            event.preventDefault();
-            if(!$scope.components[compIdx + 1]) $scope.selected = $scope.components[0];
-            else $scope.selected = $scope.components[compIdx + 1];
-            currentElement.classList.remove(currentClass);
-            currentElement.classList.add($scope.selected);
-        } else if (event.code === 'Enter') {
-            currentElement = getSelectionStart();
-            setTimeout(()=> {
-                currentElement = getSelectionStart();
-                currentElement.removeAttribute('id');
-                if(currentClass === 'header' || currentClass === 'character'){
-                    $scope.selected = $scope.components[compIdx + 1];
-                    currentElement.classList.remove(currentClass);
-                    currentElement.classList.add($scope.selected);
+        if(event.code === 'Enter') {
+            var currentElement = getSelectionStart();
+            var toBeSaved = textToObj($scope.text);
+            console.log(toBeSaved);
+            ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+                .then( screenplay => {
+                   if(!currentElement.id) currentElement.id = getId(screenplay);
+            });
 
-                } else if(currentClass === 'dialogue') {
-                    $scope.selected = $scope.components[compIdx - 1];
-                    currentElement.classList.remove(currentClass);
-                    currentElement.classList.add($scope.selected);
-                }
-                $scope.$digest();
-            }, 5)
-        } else if(event.code === 'Backspace') {
-                currentElement = getSelectionStart();
-                if(!currentElement.previousSibling && !currentElement.textContent) event.preventDefault();
-            setTimeout(()=> {
-                currentElement = getSelectionStart();
-                $scope.selected = currentElement.classList[0];
-                $scope.$digest();
-            }, 5)
         }
+        EditorFactory.setScopeKeyDown(event, $scope);
+    };
 
+    $scope.click = () => {
+        EditorFactory.setScopeClick($scope);
     };
 
 });
