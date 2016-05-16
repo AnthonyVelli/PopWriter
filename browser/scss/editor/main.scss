@@ -66,14 +66,30 @@
     margin: 0;
     background-color: #271E23;
     cursor: pointer;
+    background-image:
+        linear-gradient(
+        rgba(75,109,108,0.5) 0,
+        rgba(75,109,108,0.5) 100%),
+
+        url(whitepaint.jpeg);
 }
 
 .editor-contain {
     flex-grow: 8;
     padding: 15px;
-    background-image: url(tex-paper-wrinkled.jpg);
+    background-image: 
+    linear-gradient(
+        /*rgba(0,0,0,0.35) 0,
+        rgba(0,0,0,0.35) 100%),*/
+        rgba(243,243,243,0.5) 0,
+        rgba(243,243,243,0.5) 100%),
+        url(editor-texture.jpg);
+    background-size: cover;
 }
 
+.editor-header-bar h1, .editor-header-bar  button {
+    display: inline-block;
+}
 .outer-editor {
     padding-right: 0px;
     display: flex;

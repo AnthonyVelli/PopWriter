@@ -5,7 +5,7 @@ navbar {
   left: 0;
   z-index: 99;
   width: 100%;
-  font-family: 'Cutive';
+  font-family: 'Cutive Mono';
   display: block;
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
@@ -41,7 +41,7 @@ navbar {
 
   a {
     color: rgb(220,220,220);
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .nav > li > a {
@@ -69,10 +69,10 @@ navbar {
 
   .welcome {
     float: right;
-    margin-top: 12px;
+    margin-top: 18px;
     span {
       color: rgb(220,220,220);
-      font-size: 16px;
+      font-size: 18px;
       margin-right: 5px;
     }
     a {

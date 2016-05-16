@@ -10,9 +10,10 @@
         <!-- editor area -->
         <div class="editor-contain flex-child">
 
+            <div class="editor-header-bar">
             <h1>{{ selected.toUpperCase() }}</h1>
-            <button ui-sref="userHome">home</button>
             <button ng-click="save()">save</button>
+            </div>
 
             <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)" ng-click="click()"">
             <div id="slug"></div>
