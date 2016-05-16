@@ -35,11 +35,8 @@ app.config($stateProvider => {
 
     $scope.type = function(event) {
         if(event.code === 'Enter') {
-            // debugger;
             var currentElement = getSelectionStart();
             var toBeSaved = textToObj($scope.text);
-            console.log('toBeSaved', toBeSaved);
-            console.log('screenplay', screenplay);
             ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
                 .then( screenplay => {
                    if(!currentElement.id) currentElement.id = getId(screenplay);
