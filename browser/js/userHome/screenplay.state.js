@@ -1,9 +1,9 @@
 
 
 app.config($stateProvider => {
-	$stateProvider.state('userHome', {
-		url: '/userHome',
-		templateUrl: 'js/userHome/userhome.html',
+	$stateProvider.state('screenplay', {
+		url: '/screenplays',
+		templateUrl: 'js/userHome/screenplay.html',
 		controller: 'UserhomeCtrl',
 		resolve: {
 			user: (AuthService) => {
