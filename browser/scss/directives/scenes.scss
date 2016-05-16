@@ -27,16 +27,24 @@
 
 .scene {
 	width: 90%;
-	padding: 5px 8px 2px;
+	font-size: 16px;
+	padding: 5px 10px 2px;
 	line-height: 1.2em;
 	margin: 2px 0;
 }
 
+.scene-title {
+	padding-top: 15px;
+	padding-left: 10px;
+}
 
 .edit-btn {
-	padding: 20%;
-	width: 50%;
-	height: 20px;
+	color: #271E23;
+	display: block;
+	line-height: 1.2em;
+	width: 40px;
+	height: 35px;
+	padding:  11px 5px;
 	text-align: center;
 	}
 .edit-btn.edit-btn-cursor {
