@@ -2,11 +2,11 @@
 <div class="editor-wrapper">
     <div class="outer-editor">
         <!-- scenes sidebar -->
-        <div class="scenes flex-child">
+        <div id="scenes-bar" class="scenes flex-child hide">
         	<scenes screenplay="screenplay"></scenes>
         </div>
         <!-- sidebar toggle -->
-        <div class="slide-bar flex-child" ng-mouseover="toggleScenes()" ng-mouseleave="toggleScenes()"><span class="glyphicon glyphicon-triangle-left"></span></div>
+        <div class="slide-bar flex-child" ng-mouseenter="toggleScenesME($event)" ng-mouseleave="toggleScenesML($event)"><span class="glyphicon glyphicon-triangle-left"></span></div>
         <!-- editor area -->
         <div class="editor-contain flex-child">
 

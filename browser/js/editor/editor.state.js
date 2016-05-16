@@ -28,13 +28,29 @@ app.config($stateProvider => {
 
     $scope.show = false;
 
-    $scope.toggleScenes = function() {
-        if ($scope.show === false) {
-            $scope.show = true;
-        } else {
-            $scope.show = false;
-        }
+    var myEl = angular.element( document.querySelector('#scenes-bar'));
+
+    $scope.toggleScenesML = function(event) {
+        
+        if (!myEl.hasClass('hide') && event.movementX > 0) {
+            // if no class 'hide' and mouse moving to right, hide scenes
+            event.stopPropagation();
+            myEl.addClass('hide');
+        } else if (!myEl.hasClass('hide') && 
+            event.movmentX <= 0) {
+            event.stopPropagation();
+            // if no class 'hide' and mouse moving to left, do nothing
+        } 
     }
+
+    $scope.toggleScenesME = function(event) {
+        if(myEl.hasClass('hide') && event.movementX <= 0) {
+            event.stopPropagation();
+            myEl.removeClass('hide');
+        } 
+    }
+
+
 
     $scope.type = function(event) {
         var compIdx = $scope.components.indexOf($scope.selected);
