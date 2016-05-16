@@ -24,15 +24,13 @@ app.config(function ($stateProvider) {
 		url: '/donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: ($scope, pieChartData) => {
+			$scope.data;
+			$scope.selectChar = char => {
+				console.log($scope.selected.words);
+				$scope.data = $scope.selected.words;
+			}
 			$scope.options = donutChartOptions
-			// console.log(pieChartData[1][0])
-			$scope.data = pieChartData[1];
-			pieChartData[1].forEach(objOfChar => {
-				console.log(objOfChar);
-				if(objOfChar.character === $scope.selectedCharacter){
-					$scope.data = objOfChar.words;
-				}
-			})
+			$scope.chars = pieChartData[1];
 		},
     	resolve: {
 			pieChartData: (AnalyticsFactory, $stateParams) => {

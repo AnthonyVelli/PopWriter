@@ -79,7 +79,6 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 				charObj.words.push({key: ele.term, y: ele.tfidf});
 			}
 		})
-		console.log(donutData);
 		res.json([formattedforWordCount, donutData]); })
 	.catch(next);	
 });

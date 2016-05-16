@@ -1,7 +1,5 @@
 <div ng-app="myApp">
-	<select ng-model="selectedCharacter">
-		<option ng-repeat="character in data">{{character.character}}</option>
-	</select>
+	<select ng-options="character as character.character for character in chars" ng-model='selected' ng-change='selectChar()'></select>
     <div ng-controller="analytics">
         <nvd3 options="options" data="data"></nvd3>
     </div>
