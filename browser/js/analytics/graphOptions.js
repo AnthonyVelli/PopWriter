@@ -83,10 +83,13 @@ const barChartOptions = {
             duration: 500,
             stacked: true,
             xAxis: {
-                axisLabel: 'Time (ms)',
+                axisLabel: 'Character',
                 showMaxMin: false,
                 tickFormat: function(d){
-                    return d3.format(',f')(d);
+                    console.log(d);
+                    debugger;
+                    var label = scope.data[0].values[d].label;
+                    return label;
                 }
             },
             yAxis: {

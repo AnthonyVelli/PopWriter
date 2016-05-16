@@ -46,9 +46,40 @@ app.config(function ($stateProvider) {
 		url: '/multiBarChart/:id',
 		templateUrl: 'js/analytics/barChart.html',
 		controller: ($scope, barChartData) => {
-			$scope.options = barChartOptions
+			$scope.data = barChartData;
+			$scope.options = {
+				chart: {
+            type: 'multiBarChart',
+            height: 450,
+            margin : {
+                top: 20,
+                right: 20,
+                bottom: 45,
+                left: 45
+            },
+            clipEdge: true,
+            staggerLabels: true,
+            duration: 500,
+            stacked: true,
+            xAxis: {
+                axisLabel: 'Character',
+                showMaxMin: false,
+                tickFormat: function(d){
+                    var label = $scope.data[0].values[d].label;
+                    return label;
+                }
+            },
+            yAxis: {
+                axisLabel: 'Y Axis',
+                axisLabelDistance: -20,
+                tickFormat: function(d){
+                    return d3.format(',.1f')(d);
+                }
+            }
+        }
+        }
 			console.log(barChartData)
-			$scope.data = barChartData
+			
 		},
 		resolve: {
 			barChartData: (AnalyticsFactory, $stateParams) => {
@@ -57,21 +88,19 @@ app.config(function ($stateProvider) {
 
 					var negative = {key: 'negative', values: []};
 					var positive = {key: 'positive', values: []};
-					var neutral = {key: 'neutral', values: []};
 					var beastLord = [negative, positive];
-					for (var char in info) {
-						if (char === 'scriptText') {
+					console.log("IM INFO")
+					var keys = Object.keys(info);
+					for (var x = 0; x < keys.length; x++) {
+						if (keys[x] === 'sceneText') {
 							continue;
 						}
-						beastLord[0].values.push({x: char, y: info[char].reduce((orig,scene) => {
+						beastLord[0].values.push({x: x, label: keys[x], y: info[keys[x]].reduce((orig,scene) => {
 							return orig += scene.sentiment.negative.length
 						}, 0)});
-						beastLord[1].values.push({x: char, y: info[char].reduce((orig,scene) => {
+						beastLord[1].values.push({x: x, label: keys[x], y: info[keys[x]].reduce((orig,scene) => {
 							return orig += scene.sentiment.positive.length
 						}, 0)});
-						// beastLord[2].values.push({x: char, y: info[char].reduce((orig,scene) => {
-						// 	return orig += scene.sentiment.tokens.length
-						// }, 0)})	
 					}
 					console.log(beastLord);
 					return beastLord;
