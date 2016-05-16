@@ -17,14 +17,17 @@ function scriptify(screenplay){
 
 
 function getId(updatedScreenplay) {
+    // console.log(updatedScreenplay);
+    // debugger;
+    console.log(updatedScreenplay);
     var scenes = updatedScreenplay.scenes;
     var lastScene = scenes[scenes.length -1];
     var currentId;
-    if(lastScene.components && lastScene.components.length) {
-        currentId = lastScene.components[lastScene.components.length -1]._id;
-    } else {
-        currentId = lastScene._id;
-    }
+        if(lastScene && lastScene.components && lastScene.components.length) {
+            currentId = lastScene.components[lastScene.components.length -1]._id;
+        } else {
+            currentId = lastScene._id;
+        }
     return currentId;
 }
 
