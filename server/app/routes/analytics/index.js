@@ -86,7 +86,16 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		var formattedforWordCount = filteredChars.map((name, idx) => {
 			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
-		res.json(formattedforWordCount); })
-	.catch(next);
+		var donutData = [];
+		formattedforWordCount.forEach(char => {
+			var charObj = {character: char.key, words: []};
+			donutData.push(charObj)
+			for(var i = 0; i < 10; i++){
+				var ele = char.tfidf[i];
+				charObj.words.push({key: ele.term, y: ele.tfidf});
+			}
+		})
+		res.json([formattedforWordCount, donutData]); })
+	.catch(next);	
 });
 
