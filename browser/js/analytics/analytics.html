@@ -15,7 +15,7 @@
 
 		<button ng-click="horizontalChartOptionsToggle()" ui-sref="analytics.horizontalChart" type="button" class="btn btn-success btn-lg">Comparative Bar Chart</button>
 
-		<button ng-click="barChartOptionsToggle()" ui-sref="analytics.donutChart" type="button" class="btn btn-info btn-lg">Another Chart</button>
+		<button ui-sref="analytics.multiBarChart({id: currentSP})" type="button" class="btn btn-info btn-lg">Multi Bar Chart</button>
 
 		<button ui-sref="analytics.lineChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Line Chart</button>
 	</div>
