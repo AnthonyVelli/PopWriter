@@ -118,8 +118,11 @@ const lineChartOptions = {
                     tooltipShow: function(e){ console.log("tooltipShow"); },
                     tooltipHide: function(e){ console.log("tooltipHide"); }
                 },
+                lines: {
+                    forceY: [-1,1]
+                },
                 xAxis: {
-                    axisLabel: 'Time (ms)'
+                    axisLabel: 'Time'
                 },
                 yAxis: {
                     axisLabel: 'Sentiment',
@@ -128,31 +131,13 @@ const lineChartOptions = {
                     },
                     axisLabelDistance: -10
                 },
-                // callback: function(chart){
-                //     console.log("!!! lineChart callback !!!");
-                // }
+
             },
             title: {
                 enable: true,
-                text: 'Sentiment'
-            },
-            subtitle: {
-                enable: true,
-                text: 'Subtitle for simple line chart. Lorem ipsum dolor',
-                css: {
-                    'text-align': 'center',
-                    'margin': '10px 13px 0px 7px'
-                }
-            },
-            caption: {
-                enable: true,
-                html: '<b>Figure 1.</b> Lorem ipsum',
-                css: {
-                    'text-align': 'justify',
-                    'margin': '10px 13px 0px 7px'
-                }
+                text: 'Sentiment over Time'
             }
-}
+};
 
 // This is for comparative Bar Chart
 const someData = [{

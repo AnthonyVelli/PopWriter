@@ -51,21 +51,20 @@ app.config(function ($stateProvider) {
 		url: '/lineChart/:id',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData) {
-				$scope.options = lineChartOptions
-				$scope.data = lineChartData
+				$scope.options = lineChartOptions;
+				$scope.data = lineChartData;
 		},
 		resolve: {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
-        			console.log(sentiment.sceneText);
 					var sentimentHolder = [{
 						color: "#337ab7",
 						key: "Sentiment",
 						values: sentiment.sceneText
 					}];
 					return sentimentHolder;
-				})
+				});
         	}
         }
 	})
