@@ -20,6 +20,7 @@ app.config($stateProvider => {
 
     $scope.save = () => {
         var toBeSaved = textToObj();
+        console.log(toBeSaved)
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( screenplay => {
             console.log('udpated screenplay', screenplay);
@@ -69,7 +70,6 @@ app.config($stateProvider => {
         if(event.code === 'Enter') {
             var currentElement = getSelectionStart();
             var toBeSaved = textToObj($scope.text);
-            console.log(toBeSaved);
             ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
                 .then( screenplay => {
                    if(!currentElement.id) currentElement.id = getId(screenplay);
