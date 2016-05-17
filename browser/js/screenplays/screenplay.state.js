@@ -3,8 +3,8 @@
 app.config($stateProvider => {
 	$stateProvider.state('screenplay', {
 		url: '/screenplays',
-		templateUrl: 'js/userHome/screenplay.html',
-		controller: 'UserhomeCtrl',
+		templateUrl: 'js/screenplays/screenplays.html',
+		controller: 'ScreenplayCtrl',
 		resolve: {
 			user: (AuthService) => {
 				return AuthService.getLoggedInUser();
@@ -15,22 +15,14 @@ app.config($stateProvider => {
 			}
 		}
 	})
-	.state('userHome.settings', {
-		url: '/settings',
-		templateUrl: 'js/userHome/usersetting.html'
-	})
-	.state('userHome.screenplays', {
-		url: '/screenplays',
-		templateUrl: 'js/userHome/userscreenplays.html'
-	})
-	.state('userHome.screenplays.add', {
+	.state('screenplay.screenplays.add', {
 		url: '/screenplays/add',
-		templateUrl: 'js/userHome/usersscreenplaysadd.html'
+		templateUrl: 'js/screenplays/usersscreenplaysadd.html'
 	});
 });
 
 
-app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
+app.controller('ScreenplayCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
 	$scope.user = user;
 	$scope.screenplays = theScreenplays;
 	$scope.save = () => {
@@ -40,13 +32,21 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays
 			console.log("updated User info");
 		});
 	};
-	$scope.cat = "Hello friend!";
 	$scope.addNewScreenplay = function (id, screenplay) {
+		console.log("made it");
 		ScreenplaysFactory.addOne(id, screenplay)
 		.then(function(screenplay){
 			console.log("screenplay was created:", screenplay);
-			return screenplay;
+			ScreenplaysFactory.getAllByUser(id)
+			.then(function(screenplays) {
+				console.log("screenplays:", screenplays)
+				$scope.screenplays = screenplays;
+				console.log("scope screenplays after addNewScreenplay:", $scope.screenplays);
+			})
+			// return screenplay;
 		});
 	}
+	$scope.cat = "Hello friend!";
+	console.log("addNewScreenplay", $scope.addNewScreenplay);
 });
 
