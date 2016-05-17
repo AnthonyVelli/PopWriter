@@ -1,7 +1,7 @@
 
 
 app.config($stateProvider => {
-	$stateProvider.state('userHome', {
+	$stateProvider.state('screenplay', {
 		url: '/screenplays',
 		templateUrl: 'js/userHome/screenplay.html',
 		controller: 'UserhomeCtrl',
@@ -15,15 +15,15 @@ app.config($stateProvider => {
 			}
 		}
 	})
-	.state('screenplay.settings', {
+	.state('userHome.settings', {
 		url: '/settings',
 		templateUrl: 'js/userHome/usersetting.html'
 	})
-	.state('screenplay.screenplays', {
+	.state('userHome.screenplays', {
 		url: '/screenplays',
 		templateUrl: 'js/userHome/userscreenplays.html'
 	})
-	.state('screenplay.screenplays.add', {
+	.state('userHome.screenplays.add', {
 		url: '/screenplays/add',
 		templateUrl: 'js/userHome/usersscreenplaysadd.html'
 	});
