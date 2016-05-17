@@ -67,14 +67,16 @@ router.get('/:id/screenplays', (req, res, next)=> {
 });
 
 router.post('/:id/screenplays', (req, res, next)=> {
+    var createdSP;
     if (req.user.isAdmin || req.user.equals(req.requestUser)){
     Screenplay.create(req.body)
     .then(screenplay => {
+        createdSP = screenplay;
         req.requestUser.screenplay ? req.requestUser.screenplay.push(screenplay._id) : req.requestUser.screenplay = [screenplay._id];
         return req.requestUser.save();
     })
     .then(user => {
-        res.json(user.screenplays);
+        res.json(createdSP);
     })
     .catch(next);
     } else {

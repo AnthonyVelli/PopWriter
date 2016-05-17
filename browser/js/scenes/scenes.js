@@ -7,7 +7,7 @@ app.directive('scenes', function ($state) {
     };
 });
 
-app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
+app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysFactory){
     var draggingElements = document.getElementsByClassName('scene');
     $scope.showform = false;
     $scope.showForm = function() {
@@ -27,6 +27,10 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state){
         screenplay.scenes.splice(newIdx, 0, valToMove);
         console.log("screenplay after splices: ", screenplay);
         $scope.text = scriptify(screenplay);
+        ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
+        .then(savedScreenplay => {
+            console.log('screenplay saved!');
+        })
         // SceneFactory.addOrUpdate(screenplay)
         // .then(function(updatedScreenplay) {
         //      console.log("Yeah!  The screenplay was updated.");

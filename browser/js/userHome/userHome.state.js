@@ -30,7 +30,7 @@ app.config($stateProvider => {
 });
 
 
-app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory) => {
+app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays, ScreenplaysFactory, SceneFactory) => {
 	$scope.user = user;
 	$scope.screenplays = theScreenplays;
 	$scope.save = () => {
@@ -42,11 +42,14 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory, theScreenplays
 	};
 	$scope.cat = "Hello friend!";
 	$scope.addNewScreenplay = function (id, screenplay) {
-		ScreenplaysFactory.addOne(id, screenplay)
-		.then(function(screenplay){
-			console.log("screenplay was created:", screenplay);
-			return screenplay;
-		});
+        var sceneId;
+        SceneFactory.createScene({header: 'Start writing your screenplay here'})
+        .then(createdScene => {
+            sceneId = createdScene._id;
+            screenplay.scenes = [createdScene._id];
+            return ScreenplaysFactory.addOne(id, screenplay)
+        })
+        .catch(console.error.bind(console));
 	}
 });
 
