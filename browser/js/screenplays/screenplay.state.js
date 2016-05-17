@@ -33,20 +33,24 @@ app.controller('ScreenplayCtrl', ($scope, $http, user, UserFactory, theScreenpla
 		});
 	};
 	$scope.addNewScreenplay = function (id, screenplay) {
-		console.log("made it");
 		ScreenplaysFactory.addOne(id, screenplay)
 		.then(function(screenplay){
-			console.log("screenplay was created:", screenplay);
 			ScreenplaysFactory.getAllByUser(id)
 			.then(function(screenplays) {
-				console.log("screenplays:", screenplays)
 				$scope.screenplays = screenplays;
-				console.log("scope screenplays after addNewScreenplay:", $scope.screenplays);
-			})
+			});
+			$scope.hideForm();
 			// return screenplay;
 		});
 	}
 	$scope.cat = "Hello friend!";
-	console.log("addNewScreenplay", $scope.addNewScreenplay);
+
+	$scope.showform = false;
+	$scope.showForm = function() {
+        $scope.showform = true;
+    };
+    $scope.hideForm = function() {
+        $scope.showform = false;
+    };
 });
 
