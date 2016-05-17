@@ -11,7 +11,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 { label: 'About', state: 'about' },
                 { label: 'Screenplays', state: 'screenplay', auth: true },
                 { label: 'Analytics', state: 'analytics', auth: true },
-                {label: 'Settings', state: 'userHome.settings'}
             ];
 
             scope.user = null;
