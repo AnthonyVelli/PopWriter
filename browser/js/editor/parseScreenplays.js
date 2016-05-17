@@ -20,11 +20,11 @@ function getId(updatedScreenplay) {
     var scenes = updatedScreenplay.scenes;
     var lastScene = scenes[scenes.length -1];
     var currentId;
-    if(lastScene.components.length) {
-        currentId = lastScene.components[lastScene.components.length -1]._id;
-    } else {
-        currentId = lastScene._id;
-    }
+        if(lastScene && lastScene.components && lastScene.components.length) {
+            currentId = lastScene.components[lastScene.components.length -1]._id;
+        } else {
+            currentId = lastScene._id;
+        }
     return currentId;
 }
 
