@@ -1,9 +1,11 @@
 'use strict';
-
-const router = require('express').Router();
 const sentiment = require('sentiment');
 const natural = require('natural');
 natural.PorterStemmer.attach();
+const tokenizer = new natural.WordTokenizer();
+const router = require('express').Router();
+
+var helper = require('./analyticsHelper');
 const mongoose = require('mongoose');
 const screenplayRepo = mongoose.model('screenplayRepo');
 const characterRepo = mongoose.model('characterRepo');
@@ -26,55 +28,18 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:screenplayId/emotion', (req, res, next) => {
-  	const tokenizer = new natural.WordTokenizer();
-	var scenes = req.screenplay.scenes();
-	var sceneMaster = [];
-	scenes.forEach(function(scene) {
-		var charByScene = {};
-		charByScene.sceneText = '';
-		scene.forEach(function(comp) {
-			if (comp[1]) {
-				charByScene.sceneText += (' ' + comp[1]);
-				if (charByScene[comp[0]]) {
-					charByScene[comp[0]] += (' '+comp[1]);
-				} else {
-					charByScene[comp[0]] = comp[1];
-				}
-			}
-		});
-		sceneMaster.push(charByScene);
-
-	});
-	var emotion = {};
-	sceneMaster.forEach((scene, idx) => {
-		for (var char in scene){
-			var sentimentRes = sentiment(scene[char].tokenizeAndStem().join(' '));
-			if (emotion[char]) {
-				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
-			} else if (scene[char]) {
-				emotion[char] = [];
-				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
-			}
-		}
-	});
-
-	res.json(emotion);
+	//breaks screenplay up into 100 equal parts, and returns only lines by the characters that meet requirements in character filter.
+	req.screenplay.CharsbyScenes()
+	.then(filteredScenes => {
+		var sceneMaster = helper.scenesToStrings(filteredScenes);
+		var emotion = helper.sceneStringsToEmotion(sceneMaster);
+		var allText = req.screenplay.TextbyScenes();
+		emotion.sceneText = helper.arrayOfStringsToEmotion(allText);
+		res.json(emotion);
+	})
+	.catch(next);
 });
 
-
-router.get('/:id/characters', (req, res , next)=>{
-	characterRepo.find({ screenplay: req.params.id })
-	.then(characters => {
-		characters = characters.filter(char => {
-			return (char.wordcount > 100 && !/(:|\d)/.test(char.name) && char.name.split(" ").length <= 3);
-		})
-		characters = characters.map(name => {
-			return {key: name.name, y: name.wordcount}
-		})
-		res.json(characters);
-	})
-	.catch(err => console.error(err));
-})
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
 	const TfIdf = new natural.TfIdf();
@@ -94,7 +59,7 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 				var ele = char.tfidf[i];
 				charObj.words.push({key: ele.term, y: ele.tfidf});
 			}
-		})
+		});
 		res.json([formattedforWordCount, donutData]); })
 	.catch(next);	
 });

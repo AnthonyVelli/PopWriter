@@ -62,7 +62,7 @@ app.config(function ($stateProvider) {
 						color: "#337ab7",
 						key: "Sentiment",
 						values: sentiment.sceneText
-					}]
+					}];
 					return sentimentHolder;
 				})
         	}
