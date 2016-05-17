@@ -33,17 +33,17 @@ app.config($stateProvider => {
 
     $scope.toggleScenesML = function(event) {
         
-        if (!myEl.hasClass('hide') && event.movementX > 0) {
+        if (!myEl.hasClass('flex-hide') && event.movementX > 0) {
             // if no class 'hide' and mouse moving to right, hide scenes
             console.log("triangleDirection", triangleDirection);
             if(triangleDirection.hasClass('glyphicon-triangle-left')) {
                 triangleDirection.removeClass('glyphicon-triangle-left');
                 triangleDirection.addClass('glyphicon-triangle-right');
             }
-            myEl.addClass('hide');
+            myEl.addClass('flex-hide');
             event.stopPropagation();
 
-        } else if (!myEl.hasClass('hide') && 
+        } else if (!myEl.hasClass('flex-hide') && 
             event.movmentX <= 0) {
             event.stopPropagation();
             // if no class 'hide' and mouse moving to left, do nothing
@@ -51,14 +51,14 @@ app.config($stateProvider => {
     }
 
     $scope.toggleScenesME = function(event) {
-        if(myEl.hasClass('hide') && event.movementX <= 0) {
+        if(myEl.hasClass('flex-hide') && event.movementX <= 0) {
               console.log("triangleDirection", triangleDirection);
             if(triangleDirection.hasClass('glyphicon-triangle-right')) {
                 triangleDirection.removeClass('glyphicon-triangle-right');
                 triangleDirection.addClass('glyphicon-triangle-left');
             }
             event.stopPropagation();
-            myEl.removeClass('hide');
+            myEl.removeClass('flex-hide');
         } 
     }
 
