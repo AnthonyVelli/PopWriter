@@ -55,25 +55,39 @@ spschema.methods.CharsbyScenes = function(){
 };
 
 spschema.methods.TextbyScenes = function(){
-	var sceneSize = Math.ceil(this.components.length / 100);
+	var sceneSize = Math.ceil(this.components.length / 10);
 	var sceneArray = [];
 	var components = this.components;
-	for (var x = 0; components.length > sceneSize; x+=sceneSize){
-		sceneArray.push(components.splice(0,sceneSize).reduce((orig, char) => {
+	while (components.length > 0){
+		var sceneSlice = components.splice(0,sceneSize);
+		console.log(components.length);
+		var sceneString = sceneSlice.reduce((orig, char) => {
 			if (char[1]) {
-				return orig += (' '+char[1]);
+				return orig + (' '+char[1]);
 			} else {
 				return orig;
 			}
-		}, ''));
+		}, '');
+		sceneArray.push(sceneString);
+
 	}
-	sceneArray.push(components.reduce((orig, char) => {
-			if (char[1]) {
-				return orig += (' '+char[1]);
-			} else {
-				return orig;
-			}
-		}, ''));
+	// sceneArray.push(components.reduce((orig, char) => {
+	// 		if (char[1]) {
+	// 			return orig += (' '+char[1]);
+	// 		} else {
+	// 			return orig;
+	// 		}
+	// 	}, ''));
+	console.log(sceneArray.reduce((orig,scene) => {
+		return scene.length + orig;
+	}, 0));
+	console.log(this.WordCount);
+		// console.log('????????????????????')
+		// console.log(sceneArray[87]);
+		// console.log('????????????????????')
+		// console.log(sceneArray[88]);
+		// console.log('????????????????????')
+		// console.log(sceneArray[89]);
 	return sceneArray;
 };
 
