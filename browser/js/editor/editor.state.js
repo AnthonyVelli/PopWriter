@@ -12,6 +12,7 @@ app.config($stateProvider => {
 })
 .controller('EditorController', ($scope, screenplay, ScreenplaysFactory, EditorFactory) => {
     $scope.screenplay = screenplay;
+    $scope.sideBarScreenplay = screenplay;
     $scope.options = EditorFactory.editorOptions;
     $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
@@ -20,10 +21,13 @@ app.config($stateProvider => {
 
     $scope.save = () => {
         var toBeSaved = textToObj();
+        var currentElement = getSelectionStart();
         console.log(toBeSaved)
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
-        .then( screenplay => {
-            console.log('udpated screenplay', screenplay);
+        .then( createdScreenplay => {
+            $scope.sideBarScreenplay = createdScreenplay;
+            console.log('udpated createdScreenplay', createdScreenplay);
+            if(!currentElement.id) currentElement.id = getId(screenplay);
         });
     };
 
@@ -32,7 +36,7 @@ app.config($stateProvider => {
     var triangleDirection = angular.element(document.querySelector('#triangle'));
 
     $scope.toggleScenesML = function(event) {
-        
+
         if (!myEl.hasClass('flex-hide') && event.movementX > 0) {
             // if no class 'hide' and mouse moving to right, hide scenes
             console.log("triangleDirection", triangleDirection);
@@ -43,11 +47,11 @@ app.config($stateProvider => {
             myEl.addClass('flex-hide');
             event.stopPropagation();
 
-        } else if (!myEl.hasClass('flex-hide') && 
+        } else if (!myEl.hasClass('flex-hide') &&
             event.movmentX <= 0) {
             event.stopPropagation();
             // if no class 'hide' and mouse moving to left, do nothing
-        } 
+        }
     }
 
     $scope.toggleScenesME = function(event) {
@@ -59,22 +63,12 @@ app.config($stateProvider => {
             }
             event.stopPropagation();
             myEl.removeClass('flex-hide');
-        } 
-    }
-
-    $scope.check = () => {
-        console.log(screenplay);
+        }
     }
 
     $scope.type = function(event) {
         if(event.code === 'Enter') {
-            var currentElement = getSelectionStart();
-            var toBeSaved = textToObj($scope.text);
-            ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
-                .then( screenplay => {
-                   if(!currentElement.id) currentElement.id = getId(screenplay);
-            });
-
+            $scope.save();
         }
         EditorFactory.setScopeKeyDown(event, $scope);
     };
