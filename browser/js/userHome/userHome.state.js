@@ -15,7 +15,9 @@ app.config($stateProvider => {
 });
 
 
+
 app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory) => {
+
 	$scope.user = user;
 	$scope.save = () => {
 		UserFactory.updateUser($scope.user._id, $scope.user)
@@ -25,5 +27,6 @@ app.controller('UserhomeCtrl', ($scope, $http, user, UserFactory) => {
 		});
 	};
 	$scope.cat = "Hello friend!";
+
 });
 

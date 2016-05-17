@@ -58,11 +58,12 @@ app.config(function ($stateProvider) {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => {
+        			console.log(sentiment.sceneText);
 					var sentimentHolder = [{
 						color: "#337ab7",
 						key: "Sentiment",
 						values: sentiment.sceneText
-					}]
+					}];
 					return sentimentHolder;
 				})
         	}
