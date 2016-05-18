@@ -17,7 +17,7 @@ app.config(function ($urlRouterProvider, $locationProvider) {
 app.run(function ($rootScope, AuthService, $state) {
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){ 
-
+        console.log(toState);
         $rootScope.currentState = toState;
 
      });
