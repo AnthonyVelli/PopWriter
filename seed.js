@@ -62,7 +62,7 @@ var seedUsers = function () {
             isAdmin: true
         },
         {
-            email: 'kim@gmail.com',
+            email: 'kim@kim.kim',
             password: 'kim'
         },
         {
