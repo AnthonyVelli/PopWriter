@@ -19,7 +19,7 @@ app.controller('SignupCtrl', ($scope, AuthService, $state, UserFactory) => {
 		UserFactory.createUser(signupInfo)
 		.then(() => {
 			AuthService.login(signupInfo)
-			.then(() => $state.go('userHome'))
+			.then(() => $state.go('screenplay'))
 			.catch(() => $scope.error = 'Invalid signup credentials.')
 		})
 	}

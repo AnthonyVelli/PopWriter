@@ -43,7 +43,9 @@ router.get('/:screenplayId?', (req, res, next) => {
 // create a screenplay
 router.post('/', (req, res, next) => {
 	Screenplay.create(req.body)
-	.then(newScreenPlay => res.status(201).json(newScreenPlay))
+	.then(newScreenPlay =>{
+        res.status(201).json(newScreenPlay)
+    })
 	.catch(next);
 });
 

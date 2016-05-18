@@ -1,4 +1,4 @@
-<h3 class="scene-title">{{screenplay.title}}</h3>
+ <h3 class="scene-title">{{screenplay.title}}</h3>
 <button type='btn btn-primary' ng-click="showForm()">New Scene</button>
 <div ng-show="showform">
 	<h3>{{screenplay.title}}</h3>
@@ -17,8 +17,8 @@
 		</form>
 </div>
 
-<div class="scene-box" ng-repeat="scene in screenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(screenplay, $index, $data)">
-	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{$index + 1}}.&nbsp;&nbsp;{{scene.header}}</h3>
+<div class="scene-box" ng-repeat="scene in sideBarScreenplay.scenes" ng-drop="true" ng-drop-success="onDropComplete(sideBarScreenplay, $index, $data)">
+	<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{$index + 1}}.&nbsp;&nbsp;{{ scene.header.toUpperCase() }}</h3>
 	<div class="edit-btn edit-btn-cursor"><span class="glyphicon glyphicon-plus"></span></div>
 
 </div>
