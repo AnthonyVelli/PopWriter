@@ -1,6 +1,9 @@
-<div ng-app="myApp">
-	<select ng-options="character as character.character for character in chars" ng-model='selected' ng-change='selectChar()'></select>
-    <div ng-controller="analytics">
-        <nvd3 options="options" data="data"></nvd3>
-    </div>
+<div>
+	<select ng-change='selectDChar()' ng-model="dselected" ng-options="char.words as char.character for char in chars">
+		<option value=''></option>
+	</select>
+	<nvd3 options="options" data="data"></nvd3>
 </div>
+
+
+
