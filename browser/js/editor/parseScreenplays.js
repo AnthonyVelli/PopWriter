@@ -19,8 +19,9 @@ function scriptify(screenplay){
 function getId(updatedScreenplay) {
     var scenes = updatedScreenplay.scenes;
     var lastScene = scenes[scenes.length -1];
+    var lastSceneComp = lastScene.components;
     var currentId;
-        if(lastScene && lastScene.components && lastScene.components.length) {
+        if(lastScene.components) {
             currentId = lastScene.components[lastScene.components.length -1]._id;
         } else {
             currentId = lastScene._id;

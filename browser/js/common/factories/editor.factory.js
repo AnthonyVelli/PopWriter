@@ -1,4 +1,4 @@
-app.factory('EditorFactory', function(){
+app.factory('EditorFactory', function($http){
     return {
         setScopeClick: function setScopeClick(scope){
             var currentElement;
@@ -49,6 +49,10 @@ app.factory('EditorFactory', function(){
         editorOptions: {
             toolbar: false,
             placeholder: false
+        },
+        saveCharacter: function(character) {
+            $http.post('/api/character/', character)
+            .then(res => res.data);
         }
     }
 })
