@@ -21,7 +21,7 @@
     }
     .header, .action {
         padding-left: 17%;
-        padding-right: 11%;
+        padding-right: 27%;
     }
     .character {
         padding-top:1%;
@@ -30,7 +30,7 @@
     }
     .dialogue {
         padding-left: 32%;
-        padding-right: 37%;
+        padding-right: 40%;
     }
     .action {
         padding-top: .5%;
@@ -48,7 +48,7 @@
 }
 
 .scenes {
-    background-image: 
+    background-image:
         linear-gradient(
             rgba(243,243,243,0.5) 0,
             rgba(243,243,243,0.5) 100%),
@@ -80,7 +80,7 @@
 .editor-contain {
     flex-grow: 8;
     padding: 15px;
-    background-image: 
+    background-image:
     linear-gradient(
         /*rgba(0,0,0,0.35) 0,
         rgba(0,0,0,0.35) 100%),*/
@@ -88,10 +88,14 @@
         rgba(243,243,243,0.5) 100%),
         url(tex-paper-wrinkled.jpg);
     background-size: cover;
+    height: 100vh;
 }
 
 .editor-header-bar h1, .editor-header-bar  button {
     display: inline-block;
+    position: fixed;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .outer-editor {
     padding-right: 0px;

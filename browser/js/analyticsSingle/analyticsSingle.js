@@ -52,7 +52,7 @@ app.config(function ($stateProvider) {
 	// })
 	.state('analyticsSingle.emotion', {
 		url: '/emotion',
-		templateUrl: 'js/analytics/lineChart.html',
+		templateUrl: 'js/analyticsSingle/lineChart.html',
 		controller: function($scope, screenplay, lineChartData, AnalyticsFactory) {
 			console.log(lineChartData);
 			console.log(screenplay);

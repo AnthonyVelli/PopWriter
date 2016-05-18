@@ -1,6 +1,6 @@
 app.factory('AnalyticsFactory', ($http) => {
 	const parseData = res => res.data;
-	
+
 
 	const pieChartOptions = {
 	    chart: {

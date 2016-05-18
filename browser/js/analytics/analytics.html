@@ -1,7 +1,7 @@
 <section class="state-container">
 	<div>
-		<select ng-model="selectedScreenplay" ng-change="changeSP(selectedScreenplay)"> 
-		<option>Select a Script</option>                                
+		<select ng-model="selectedScreenplay" ng-change="changeSP(selectedScreenplay)">
+		<option>Select a Script</option>
 		<option ng-repeat="script in scripts" value="{{script._id}}">{{script.name}}</option>
 		</select>
 	</div>

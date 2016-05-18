@@ -70,6 +70,8 @@ app.config(function ($stateProvider) {
 		},
 		resolve: {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
+                console.log('stateParams',$stateParams);
+
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => sentiment)
         		.catch(error => console.error(error));
@@ -79,6 +81,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
+    $scope.changeSP = (spId) => {$scope.currentSP = spId};
 	$scope.scripts = scrapedSPs;
 	$scope.changeSP = function(sp){
 		$scope.currentSP = sp;
