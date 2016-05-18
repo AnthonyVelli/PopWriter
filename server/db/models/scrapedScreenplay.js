@@ -20,7 +20,9 @@ var charschema = new mongoose.Schema({
 charschema.statics.filter = function(screenplay){
 	return this.find({screenplay: screenplay._id})
 	.then(foundChars => {
-		return foundChars.filter(char => char.wordcount / screenplay.WordCount > 0.007);
+		return foundChars.filter(char => {
+			return char.wordcount / screenplay.WordCount > 0.007 && !/(\:|^INT|^EXT|^\d)/.test(char.name);
+		});
 	});
 };
 
