@@ -20,22 +20,13 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
 
 // **** ngDraggable DRAG AND DROP **** //
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){
-        // newIdx - index of drop location element
-        // oldIdx - index of dragged object
-
         var valToMove = screenplay.scenes.splice(oldIdx, 1)[0];
         screenplay.scenes.splice(newIdx, 0, valToMove);
-        console.log("screenplay after splices: ", screenplay);
         $scope.text = scriptify(screenplay);
         ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
         .then(savedScreenplay => {
             console.log('screenplay saved!');
         })
-        // SceneFactory.addOrUpdate(screenplay)
-        // .then(function(updatedScreenplay) {
-        //      console.log("Yeah!  The screenplay was updated.");
-        // });
-
     };
 
 });
