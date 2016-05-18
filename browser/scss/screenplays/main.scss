@@ -1,6 +1,7 @@
 
 .sp-table {
 	padding-bottom: 20px;
+	font-size: 40px;
 }
 
 .sp-edit {
@@ -15,3 +16,19 @@
 .add-screenplay-wrapper {
 	padding: 20px;
 }
+
+#something {
+	background-image: url(beach.jpeg);
+	height: 100vh;
+	width: 100%;
+	background-size: cover;
+}
+
+#screenplays {
+	margin-left: 250px;
+	margin-top: 250px;
+}
+
+// .state-container {
+// 	padding-left: 650px;
+// }

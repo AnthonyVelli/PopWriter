@@ -88,10 +88,14 @@
         rgba(243,243,243,0.5) 100%),
         url(tex-paper-wrinkled.jpg);
     background-size: cover;
+    height: 100vh;
 }
 
 .editor-header-bar h1, .editor-header-bar  button {
     display: inline-block;
+    position: fixed;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .outer-editor {
     padding-right: 0px;
