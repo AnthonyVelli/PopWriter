@@ -23,14 +23,10 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Screenplay = mongoose.model('Screenplay');
-var Character = mongoose.model('Character');
+var Character = mongoose.model('Character')
 var Component = mongoose.model('Component');
 var Scene = mongoose.model('Scene');
-var screenplays = require('./seed/screenplays');
-var characters = require('./seed/characters');
-var components = require('./seed/components');
-var scenes = require('./seed/scenes');
-var allScreenplays = require('./seed/screenplay.one');
+var allScreenplays = require('./seed/screenplays');
 
 
 var wipeCollections = function () {
@@ -135,9 +131,6 @@ connectToDb
     .then(function () {
         return seedUsers();
     })
-    // .then(function(){
-    //     return seedScreenplays();
-    // })
     .then(function(){
         return Promise.all(allScreenplays.map(sp => {
             return seedScreenplaysTwo(sp);
