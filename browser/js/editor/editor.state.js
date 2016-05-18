@@ -22,14 +22,30 @@ app.config($stateProvider => {
     $scope.save = () => {
         var toBeSaved = textToObj();
         var currentElement = getSelectionStart();
-        console.log(toBeSaved)
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
-        .then( createdScreenplay => {
-            $scope.sideBarScreenplay = createdScreenplay;
-            console.log('udpated createdScreenplay', createdScreenplay);
-            if(!currentElement.id) currentElement.id = getId(screenplay);
-        });
+        .then( update => {
+            return ScreenplaysFactory.getOne(update._id);
+        })
+        .then(updatedScreenplay => {
+            $scope.sideBarScreenplay = updatedScreenplay;
+            if(!currentElement.id) currentElement.id = getId(updatedScreenplay);
+        })
+        .catch(console.error.bind(console));
     };
+
+
+    $scope.type = function(event) {
+        if(event.code === 'Enter') {
+            var currentElement = getSelectionStart();
+            $scope.save();
+        }
+        EditorFactory.setScopeKeyDown(event, $scope);
+    };
+
+    $scope.click = () => {
+        EditorFactory.setScopeClick($scope);
+    };
+
 
     var myEl = angular.element( document.querySelector('#scenes-bar'));
 
@@ -39,7 +55,6 @@ app.config($stateProvider => {
 
         if (!myEl.hasClass('flex-hide') && event.movementX > 0) {
             // if no class 'hide' and mouse moving to right, hide scenes
-            console.log("triangleDirection", triangleDirection);
             if(triangleDirection.hasClass('glyphicon-triangle-left')) {
                 triangleDirection.removeClass('glyphicon-triangle-left');
                 triangleDirection.addClass('glyphicon-triangle-right');
@@ -56,7 +71,6 @@ app.config($stateProvider => {
 
     $scope.toggleScenesME = function(event) {
         if(myEl.hasClass('flex-hide') && event.movementX <= 0) {
-              console.log("triangleDirection", triangleDirection);
             if(triangleDirection.hasClass('glyphicon-triangle-right')) {
                 triangleDirection.removeClass('glyphicon-triangle-right');
                 triangleDirection.addClass('glyphicon-triangle-left');
@@ -65,17 +79,6 @@ app.config($stateProvider => {
             myEl.removeClass('flex-hide');
         }
     }
-
-    $scope.type = function(event) {
-        if(event.code === 'Enter') {
-            $scope.save();
-        }
-        EditorFactory.setScopeKeyDown(event, $scope);
-    };
-
-    $scope.click = () => {
-        EditorFactory.setScopeClick($scope);
-    };
 
 });
 

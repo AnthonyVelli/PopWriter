@@ -1,4 +1,5 @@
 module.exports = {
+    user: 'useremail',
     screenplay: {
         title: 'TITLE'
     },
@@ -34,52 +35,52 @@ module.exports = {
         }
         ],
     components: [[{
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             }],
         [{
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             }],
             [{
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             },
             {
-            type: '',
-            text: ''
+            type: ``,
+            text: ``
             }]
         ],
 
