@@ -4,12 +4,20 @@ app.config(function ($stateProvider) {
     $stateProvider.state('analytics', {
         url: '/analytics',
         templateUrl: 'js/analytics/analytics.html',
-        controller: 'analytics'
+        controller: 'analytics',
+        resolve: {
+			scrapedSPs: (AnalyticsFactory) => {
+				return AnalyticsFactory.getScreenPlays()
+				.then(screenplays => screenplays)
+				.catch(error => console.error(error));
+    		}
+    	}
     })
     .state('analytics.pieChart', {
     	url: '/pieChart/:id',
     	templateUrl: 'js/analytics/pieChart.html',
-    	controller: ($scope, pieChartData) => {
+    	controller: function($scope, pieChartData) {
+    		$scope.piechartplace = 'hi';
     		$scope.options = pieChartOptions;
     		$scope.data = pieChartData[0];
     	},
@@ -17,78 +25,62 @@ app.config(function ($stateProvider) {
     		pieChartData: (AnalyticsFactory, $stateParams) => {
     			return AnalyticsFactory.getCharacters($stateParams.id)
     			.then(characters => characters)
+    			.catch(error => console.error(error));
     		}
     	}
     })
     .state('analytics.donutChart', {
-		url: '/donutChart/:id',
+		url: 'donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
-		controller: ($scope, pieChartData) => {
+		controller: function($scope, pieChartData) {
+			$scope.here = 'string';
+			$scope.selectDChar = function(char){
+				console.log('function ran');
+				console.log($scope.dselected);
+				$scope.data = $scope.dselected;
+			};
 			$scope.data;
-			$scope.selectChar = char => {
-				console.log($scope.selected.words);
-				$scope.data = $scope.selected.words;
-			}
-			$scope.options = donutChartOptions
+			$scope.options = AnalyticsFactory.donutChartOptions;
 			$scope.chars = pieChartData[1];
 		},
     	resolve: {
 			pieChartData: (AnalyticsFactory, $stateParams) => {
 				return AnalyticsFactory.getCharacters($stateParams.id)
 				.then(characters => characters)
+				.catch(error => console.error(error));
 			}
 	   	}
-	})
-    .state('analytics.horizontalChart', {
-		url: '/horizontalChart',
-		templateUrl: 'js/analytics/horizontalChart.html'
-    })
-	.state('analytics.barChart', {
-		url: '/barChart',
-		templateUrl: 'js/analytics/barChart.html'
 	})
 	.state('analytics.lineChart', {
 		url: '/lineChart/:id',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData) {
-				$scope.options = lineChartOptions
-				$scope.data = lineChartData
+			$scope.selectChar = function(){
+				$scope.data.push({
+					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+					key: $scope.selected,
+					values: $scope.chars[$scope.selected]
+				});
+			};
+			$scope.chars = lineChartData;
+			$scope.options = AnalyticsFactory.lineChartOptions;
+			$scope.data = [{
+					color: "#337ab7",
+					key: "All Text",
+					area: true,
+					values: lineChartData.sceneText
+				}];
 		},
 		resolve: {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
        			return AnalyticsFactory.getSentiment($stateParams.id)
-        		.then(sentiment => {
-					var sentimentHolder = [{
-						color: "#337ab7",
-						key: "Sentiment",
-						values: sentiment.sceneText
-					}]
-					return sentimentHolder;
-				})
+        		.then(sentiment => sentiment)
+        		.catch(error => console.error(error));
         	}
         }
-	})
+	});
 });
 
-app.controller('analytics', function($scope, ScreenplaysFactory, AnalyticsFactory){
-
-		AnalyticsFactory.getScreenPlays()
-		.then(screenplays => $scope.scripts = screenplays)
-		$scope.changeSP = (spId) => $scope.currentSP = spId;
-
-		// $scope.donutChartOptionsToggle = () => {
-		// 	$scope.options = donutChartOptions;
-		// 	$scope.data = pieData;
-		// };
-
-		$scope.horizontalChartOptionsToggle = () => {
-			$scope.options = horizontalChartOptions
-			$scope.data = someData;
-		}
-
-		$scope.barChartOptionsToggle = () => {
-			$scope.options = barChartOptions
-			$scope.data = generateData();
-		}
-    });
-
+app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
+	$scope.scripts = scrapedSPs;
+});
