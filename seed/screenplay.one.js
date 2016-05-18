@@ -591,6 +591,119 @@ module.exports = [
             }]
         ]
 
+},
+
+{
+    user: 'george.lucas@maytheforcebewith.you',
+    screenplay: {
+        title: 'Star Wars: The Empire Strikes Back'
+    },
+    scenes: [{
+            components: [],
+            synopsis: 'something',
+            header: 'EXT. GALAXY - PLANET HOTH'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'EXT. HOTH - METEORITE CRATER - SNOW PLAIN - DAY'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'EXT. PLAIN OF HOTH - DAY'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'EXT. HOTH - REBEL BASE ENTRANCE - DAY'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. HOTH - REBEL BASE - MAIN HANGAR DECK'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. HOTH - REBEL BASE - COMMAND CENTER'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. HOTH - REBEL BASE - ICE CORRIDOR'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. HOTH - REBEL BASE - ANOTHER ICE CORRIDOR'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. HOTH - REBEL BASE - MAIN HANGAR DECK'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'something'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'something'
+        }
+        ],
+    components: [[{
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            }],
+        [{
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            }],
+            [{
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            },
+            {
+            type: ``,
+            text: ``
+            }]
+        ],
+
 }
 
 ]
