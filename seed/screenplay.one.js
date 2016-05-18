@@ -631,80 +631,345 @@ module.exports = [
         {
             components: [],
             synopsis: 'something',
-            header: 'INT. HOTH - REBEL BASE - ICE CORRIDOR'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'INT. HOTH - REBEL BASE - ANOTHER ICE CORRIDOR'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'INT. HOTH - REBEL BASE - MAIN HANGAR DECK'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'something'
-        },
-        {
-            components: [],
-            synopsis: 'something',
-            header: 'something'
+            header: 'INT. GANTRY - OUTSIDE CONTROL ROOM - REACTOR SHAFT'
         }
         ],
     components: [[{
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `A Star Destroyer moves through space, releasing Imperial probe robots
+from its underside.`
             },
             {
-            type: ``,
-            text: ``
-            },
-            {
-            type: ``,
-            text: ``
-            },
-            {
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `One of these probes zooms toward the planet Hoth and lands on its ice-
+covered surface.  An explosion marks the point of
+impact. `
             }],
         [{
-            type: ``,
-            text: ``
-            },
-            {
-            type: ``,
-            text: ``
-            },
-            {
-            type: ``,
-            text: ``
-            },
-            {
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `A weird mechanical sound rises above the whining of the wind.  A
+strange probe robot, with several extended sensors, emerges from the
+smoke-shrouded crater.  The ominous mechanical probe floats across the
+snow plain and disappears into the distance.`
             }],
             [{
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `A small figure gallops across the windswept ice slope.  The bundled
+rider is mounted on a large gray snow lizard, a Tauntaun.  Curving
+plumes of snow rise from beneath the speeding paws of the two-legged
+beast.`
             },
             {
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `The rider gallops up a slope and reins his lizard to a stop.  Pulling
+off his protective goggles, Luke Skywalker notices something in the
+sky.  He takes a pair of electrobinoculars from his utility belt and
+through them sees smoke rising from where the probe robot has crashed.`
             },
             {
-            type: ``,
-            text: ``
+            type: `action`,
+            text: `The wind whips at Luke's fur-lined cap and he activates a comlink
+transmitter.  His Tauntaun shifts and moans nervously beneath him.`
             },
             {
-            type: ``,
-            text: ``
-            }]
-        ],
-
-}
+            type: `dialogue`,
+            charName: 'luke',
+            text: `Echo Three to Echo Seven.  Han,
+        old buddy, do you read me?`
+            },
+            {
+            type: `action`,
+            text: `After a little static a familiar voice is heard.`
+            },{
+            type: `dialogue`,
+            charName: 'han',
+            text: `Loud and clear, kid.  What's up?`
+            },{
+            type: `dialogue`,
+            charName: 'luke',
+            text: `Well, I finished my circle.  I
+        don't pick up any life readings.`
+            },{
+            type: `dialogue`,
+            charName: 'han',
+            text: `There isn't enough life on this
+        ice cube to fill a space cruiser.
+        The sensors are placed, I'm going
+        back.`
+            },{
+            type: `dialogue`,
+            charName: 'luke',
+            text: `There isn't enough life on this
+        ice cube to fill a space cruiser.
+        The sensors are placed, I'm going
+        back.`
+            },{
+            type: `action`,
+            text: `Luke clicks off his transmitter and reins back on his nervous lizard.
+He pats the beast on the head to calm it.`
+            },{
+            type: `dialogue`,
+            charName: 'luke',
+            text: `Hey, steady girl.  What's the
+        matter?  You smell something?`
+            },{
+            type: `action`,
+            text: `Luke takes a small device from his belt and starts to adjust it when
+suddenly a large shadow falls over him from behind.  He hears a
+monstrous howl and turns to see an eleven-foot-tall shape towering over
+him.  It is a Wampa Ice Creature, lunging at him ferociously.`
+            },{
+            type: `dialogue`,
+            charName: 'luke',
+            text: `Aaargh!`
+            },{
+            type: `action`,
+            text: `Luke grabs for his pistol, but is hit flat in the face by a huge white
+claw.  He falls unconscious into the snow and in a moment the terrified
+screams of the Tauntaun are cut short by the horrible snap of a neck
+being broken.`
+            },{
+            type: `action`,
+            text: `The Wampa Ice Creature grabs Luke by one ankle and drags him away
+across the frozen plain.`
+            }],
+            [{
+                type: `action`,
+                text: `A stalwart figure rides his Tauntaun up to the entrance of an enormous
+ice cave.`
+            }],
+            [{
+                type: `action`,
+                text: `Rebel troopers rush about unloading supplies and otherwise securing
+their new base.  The rider, Han Solo, swings off his lizard and pulls
+off his goggles.`
+            },{
+                type: `action`,
+                text: `He walks into the main hangar deck toward the Millennium Falcon, which
+is parked among several fighters.  Mechanics, R2 units, and various
+other droids hurry about.  Han stops at the Millennium Falcon where his
+Wookiee copilot, Chewbacca, is welding on a central lifter.  Chewie
+stops his work and lifts his face shield, growling an irritated
+greeting to his boss.`
+            },{
+                type: `dialogue`,
+                charName: `han`,
+                text: `Chewie!`
+            },{
+                type: `action`,
+                text: `The Wookiee grumbles a reply.
+`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `All right, don't lose your temper.
+        I'll come right back and give you
+        a hand.`
+            },{
+                type: `action`,
+                text: `Chewbacca puts his mask back on and returns to his welding as Han
+leaves.`
+            }],
+            [{
+                type: `action`,
+                text: `A makeshift command center has been set up in a blasted area of thick
+ice.  The low-ceilinged room is a beehive of activity. Controllers,
+troops, and droids move about setting up electronic equipment and
+monitoring radar signals.`
+            },{
+                type: `action`,
+                text: `General Rieekan straightens up from a console at Han's approach.`
+            },{
+                type: `dialogue`,
+                charName: `rieekan`,
+                text: `Solo?`
+            },{
+                type: `dialogue`,
+                charName: `HAN`,
+                text: `No sign of life out there, General.
+The sensors are in place.  You'll
+know if anything comes around.`
+            },{
+                type: `dialogue`,
+                charName: 'rieekan',
+                text: `Commander Skywalker reported in yet?`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `No.  He's checking out a meteorite
+        that hit near him.`
+            },{
+                type: `dialogue`,
+                charName: 'rieekan',
+                text: `With all the meteor activity in this
+        system, it's going to be difficult
+        to spot approaching ships.`
+            },{
+                type: `action`,
+                text: `Taking a deep breath, Han blurts out what is on his mind.`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `General, I've got to leave.  I
+        can't stay anymore.`
+            },{
+                type: `action`,
+                text: `Princess Leia, standing at a console nearby, is dressed in a short
+white combat jacket and pants.  Her hair is braided across her head in
+a Nordic fashion.  She overhears their  conversation and seems somewhat
+distressed.`
+            },{
+                type: `dialogue`,
+                charName: 'rieekan',
+                text: `I'm sorry to hear that.`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `Well, there's a price on my head.
+        If I don't pay off Jabba the Hut,
+        I'm a dead man.`
+            },{
+                type: `dialogue`,
+                charName: 'rieekan',
+                text: `A death mark's not an easy thing
+        to live with.  You're a good
+        fighter, Solo.  I hate to lose you.
+`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `Thank you, General.`
+            },{
+                type: `action`,
+                text: `He turns to Leia as Rieekan moves away.`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `Well, Your Highness, I guess this
+        is it.`
+            },{
+                type: `dialogue`,
+                charName: 'leia',
+                text: `That's right.`
+            },{
+                type: `action`,
+                text: `Leia is angry.  Han sees she has no warmth to offer him.  He shakes his
+head and adopts a sarcastic tone.`
+            },{
+                type: `dialogue`,
+                charName: 'han',
+                text: `Well, don't get all mushy on me.
+        So long, Princess.`
+            },{
+                type: `action`,
+                text: `Han walks away into the quiet corridor adjoining the command center.
+Leia stews a moment, then hurries after him.`
+            }],
+            [{
+                type: `action`,
+                text: `Luke moves along the railing and up to the control room.`
+            },{
+                type: `action`,
+                text: `Vader lunges at him and Luke immediately raises his lit sword to meet
+Vader's.  Sparks fly as they duel, Vader gradually forcing Luke
+backward toward the gantry.`
+            },{
+                type: `dialogue`,
+                charName: `vader`,
+                text: `You are beaten.  It is useless
+        to resist.  Don't let yourself
+        be destroyed as Obi-Wan did.`
+            },{
+                type: `action`,
+                text: `Luke answers by rolling sideways and thrusting his sword at Vader so
+viciously that he nicks Vader on the shoulder.  The black armor sparks
+and smokes and Vader seems to be hurt, but immediately recovers.`
+            },{
+                type: `action`,
+                text: `Luke backs off along the narrow end of the gantry as Vader comes at
+him, slashing at the young Jedi with his sword.  Luke makes a quick
+move around the instrument complex attached to the end of the gantry.
+Vader's sword comes slashing down, cutting the complex loose; it begins
+to fall, then is caught by the rising wind and blown upward.`
+            },{
+                type: `action`,
+                text: `Luke glances at the instrument complex floating away.  At that instant,
+Vader's sword comes down across Luke's right forearm, cutting off his
+hand and sending his sword flying.  In great pain, Luke squeezes his
+forearm under his left armpit and moves back along the gantry to its
+extreme end.  Vader
+follows.  The wind subsides.  Luke holds on.  There is nowhere else to
+go.  `
+            },{
+                type: `dialogue`,
+                charName: 'vader',
+                text: `There is no escape.  Don't make
+        me destroy you.  You do not yet
+        realize your importance.  You
+        have only begun to discover your
+        power.  Join me and I will complete
+        your training.  With our combined
+        strength, we can end this destructive
+        conflict and bring order to the
+        galaxy.`
+            },{
+                type: `dialogue`,
+                charName: 'luke',
+                text: `I'll never join you!`
+            },{
+                type: `dialogue`,
+                charName: 'vader',
+                text: `If you only knew the power of the
+        dark side.  Obi-Wan never told
+        you what happened to your father.`
+            },{
+                type: `dialogue`,
+                charName: 'luke',
+                text: `He told me enough!  It was you
+        who killed him.`
+            },{
+                type: `dialogue`,
+                charName: 'vader',
+                text: `No.  I am your father.`
+            },{
+                type: `action`,
+                text: `Shocked, Luke looks at Vader in utter disbelief.`
+            },{
+                type: `dialogue`,
+                charName: 'luke',
+                text: `No.  No.  That's not true!
+        That's impossible!`
+            },{
+                type: `dialogue`,
+                charName: 'vader',
+                text: `Search your feelings.  You know
+        it to be true.`
+            },{
+                type: `dialogue`,
+                charName: 'luke',
+                text: `No!  No!  No!`
+            },{
+                type: `dialogue`,
+                charName: 'vader',
+                text: `Luke.  You can destroy the Emperor.
+        He has foreseen this.  It is your
+        destiny.  Join me, and together
+        we can rule the galaxy as father
+        and son.  Come with me.  It is the
+        only way.`
+            },{
+                type: `action`,
+                text: `Vader puts away his sword and holds his hand out to Luke.`
+            },{
+                type: `action`,
+                text: `A calm comes over Luke, and he makes a decision.  In the next instant
+he steps off the gantry platform into space.  The Dark Lord looks over
+the platform and sees Luke falling far below.  The wind begins to blow
+at Vader's cape and the torrent finally forces him back, away from the
+edge.  The wind soon fades and the wounded Jedi begins to drop fast,
+unable to grab onto anything to break his fall.`
+            }]]
+    }
 
 ]
 
