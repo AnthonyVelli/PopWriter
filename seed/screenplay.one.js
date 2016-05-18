@@ -248,6 +248,16 @@ module.exports = [
             components: [],
             synopsis: 'something',
             header: 'INT. REBEL BLOCKADE RUNNER'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. MASSASSI OUTPOST - MAIN HANGAR'
+        },
+        {
+            components: [],
+            synopsis: 'something',
+            header: 'INT. MASSASSI OUTPOST - MAIN THRONE ROOM'
         }
         ],
     components: [[{
@@ -474,6 +484,110 @@ module.exports = [
             {
             type: `action`,
             text: `Artoo responds with electronic beeps.`
+            }],
+            [{
+                type: `action`,
+                text: `Luke climbs out of his starship fighter and is cheered by a
+               throng of ground crew and pilots. Luke climbs down the ladder
+               as they all welcome him with laughter, cheers, and shouting.
+               Princess Leia rushes toward him.`
+            },
+            {
+                type: `dialogue`,
+                charName: `leia`,
+                text: `Luke! Luke! Luke!`
+            },
+            {
+                type: `action`,
+                text: `She throws her arms around Luke and hugs him as they dance
+               around in a circle. Solo runs in toward Luke and they embrace
+               one another, slapping each other on the back.`
+            },
+            {
+                type: `dialogue`,
+                charName: `han`,
+                text: `Hey! Hey!`
+            },
+            {
+                type: `dialogue`,
+                charName: 'luke',
+                text: `I knew you'd come back! I just knew
+                         it!`
+            },
+            {
+                type: `dialogue`,
+                charName: 'han',
+                text: `Well, I wasn't gonna let you get all
+                         the credit and take all the reward.`
+            },
+            {
+                type: `action`,
+                text: `Luke and Han look at one another, as Solo playfully shoves
+               at Luke's face. Leia moves in between them.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'leia',
+                text: `Hey, I knew there was more to you
+                         than money.`
+            },
+            {
+                type: `action`,
+                text: `Luke looks toward the ship.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'luke',
+                text: `Oh, no!`
+            },
+            {
+                type: `action`,
+                text: `The fried little Artoo-Detoo is lifted off the back of the
+               fighter and carried off under the worried eyes of Threepio.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'threepio',
+                text: `Oh, my! Artoo! Can you hear me? Say
+                         something!
+                              (to mechanic)
+                         You can repair him, can't you?`
+            },
+            {
+                type: `dialogue`,
+                charName: 'technician',
+                text: `We'll get to work on him right away.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'threepio',
+                text: `You must repair him! Sir, if any of
+                         my circuits or gears will help, I'll
+                         gladly donate them.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'luke',
+                text: `He'll be all right.`
+            }],
+            [{
+                type: 'action',
+                text: `Luke, Han, and Chewbacca enter the huge ruins of the main
+               temple. Hundreds of troops are lined up in neat rows. Banners
+               are flying and at the far end stands a vision in white, the
+               beautiful young Senator Leia. Luke and the others solemnly
+               march up the long aisle and kneel before Senator Leia. From
+               one side of the temple marches a shined-up and fully repaired
+               Artoo-Detoo. He waddles up to the group and stands next to
+               an equally pristine Threepio, who is rather awestruck by the
+               whole event. Chewbacca is confused. Dodonna and several other
+               dignitaries sit on the left of the Princess Leia. Leia is
+               dressed in a long white dress and is staggeringly beautiful.
+               She rises and places a gold medallion around Han's neck. He
+               winks at her. She then repeats the ceremony with Luke, who
+               is moved by the event. They turn and face the assembled
+               troops, who all bow before them. Chewbacca growls and Artoo
+               beeps with happiness.`
             }]
         ]
 
