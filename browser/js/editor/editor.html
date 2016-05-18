@@ -12,9 +12,8 @@
 
             <div class="editor-header-bar">
             <h1>{{ selected.toUpperCase() }}</h1>
-            <button ng-click="save()">save</button>
             </div>
-
+            <button ng-click="save()">save</button>
             <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)" ng-click="click()"">
             <div id="slug"></div>
             </medium-editor>
