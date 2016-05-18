@@ -14,7 +14,7 @@ navbar {
     background: rgba(0,0,0, 0.35);
     background-image: linear-gradient(
     to left,
-    rgba(0,0,0, 0.4) 35%, rgba(0,0,0,0) 
+    rgba(0,0,0, 0.4) 35%, rgba(0,0,0,0)
     );
   }
 
@@ -46,7 +46,7 @@ navbar {
 
   .nav > li > a {
     cursor: pointer;
-    
+
     &.active {
       color: darken(#87b4a4, 10%);
     }
@@ -59,12 +59,22 @@ navbar {
     }
   }
 
-  .login-button {
+  .login-button, .signup-button {
     float: right;
-    border: 1px solid black;
-    margin-top: 10px;
+    border: 2px solid rgb(220,220,220);
+    color: rgb(220,220,220);
+    margin-top: 12px;
     background: none;
     outline: none !important;
+  }
+
+  .signup-button {
+    margin-right: 10px;
+  }
+
+  .login-button:hover , .signup-button:hover {
+    color: #87b4a4;
+    border: 2px solid #87b4a4;
   }
 
   .welcome {
