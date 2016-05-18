@@ -20,7 +20,9 @@ var charschema = new mongoose.Schema({
 charschema.statics.filter = function(screenplay){
 	return this.find({screenplay: screenplay._id})
 	.then(foundChars => {
-		return foundChars.filter(char => char.wordcount / screenplay.WordCount > 0.007);
+		return foundChars.filter(char => {
+			return char.wordcount / screenplay.WordCount > 0.007 && !/(\:|^INT|^EXT|^\d)/.test(char.name);
+		});
 	});
 };
 
@@ -55,12 +57,11 @@ spschema.methods.CharsbyScenes = function(){
 };
 
 spschema.methods.TextbyScenes = function(){
-	var sceneSize = Math.ceil(this.components.length / 10);
+	var sceneSize = Math.ceil(this.components.length / 100);
 	var sceneArray = [];
 	var components = this.components;
 	while (components.length > 0){
 		var sceneSlice = components.splice(0,sceneSize);
-		console.log(components.length);
 		var sceneString = sceneSlice.reduce((orig, char) => {
 			if (char[1]) {
 				return orig + (' '+char[1]);
@@ -71,23 +72,6 @@ spschema.methods.TextbyScenes = function(){
 		sceneArray.push(sceneString);
 
 	}
-	// sceneArray.push(components.reduce((orig, char) => {
-	// 		if (char[1]) {
-	// 			return orig += (' '+char[1]);
-	// 		} else {
-	// 			return orig;
-	// 		}
-	// 	}, ''));
-	console.log(sceneArray.reduce((orig,scene) => {
-		return scene.length + orig;
-	}, 0));
-	console.log(this.WordCount);
-		// console.log('????????????????????')
-		// console.log(sceneArray[87]);
-		// console.log('????????????????????')
-		// console.log(sceneArray[88]);
-		// console.log('????????????????????')
-		// console.log(sceneArray[89]);
 	return sceneArray;
 };
 
