@@ -8,7 +8,6 @@ app.config($stateProvider => {
 		resolve: {
 			user: (AuthService) => {
 				return AuthService.getLoggedInUser();
-
 			}
 		}
 	});
