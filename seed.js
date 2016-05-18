@@ -75,61 +75,61 @@ var seedUsers = function () {
 
 };
 
-var seedScreenplays = function(){
+// var seedScreenplays = function(){
 
-    var user, scene, currentChar, screenP, header, dialogue;
-    var compArr =[];
+//     var user, scene, currentChar, screenP, header, dialogue;
+//     var compArr =[];
 
-    return User.findOne({email: 'obama@gmail.com'})
-    .then(selectedUser => {
-        user = selectedUser;
-    })
-    .then(() => {
-        return Screenplay.create(screenplays);
-    })
-    .then(screenplay => {
-        screenP = screenplay;
-        user.screenplay = [screenplay[0]._id];
-        return user.save();
-    })
-    .then(() => {
-        return Character.create(characters);
-    })
-    .then((charsArr) => {
-        currentChar = charsArr[0];
-        return Component.create(components);
-    })
-    // consider changing the name here
-    .then((newlyCreatedComponent) => {
-        // why is there a header here
-        newlyCreatedComponent.forEach(comp => {
-            if(comp.type === 'dialogue') dialogue = comp;
-            // if(comp.type === 'location') header = comp;
-            // else compArr.push(comp._id);
-        });
-        compArr = newlyCreatedComponent;
-        dialogue.character = currentChar._id
-        return dialogue.save();
-        // return
-    })
-    .then(() => {
-        currentChar.dialogue = [dialogue._id];
-        return currentChar.save();
-    })
-    .then( () => {
-        return Scene.create({components: compArr, header: 'header to satisfy requirement'});
-    })
-    .then(scene1 => {
-        screenP[0].scenes = [scene1._id];
-        return screenP[0].save();
-    })
-    .catch(console.error.bind(console));
+//     return User.findOne({email: 'obama@gmail.com'})
+//     .then(selectedUser => {
+//         user = selectedUser;
+//     })
+//     .then(() => {
+//         return Screenplay.create(screenplays);
+//     })
+//     .then(screenplay => {
+//         screenP = screenplay;
+//         user.screenplay = [screenplay[0]._id];
+//         return user.save();
+//     })
+//     .then(() => {
+//         return Character.create(characters);
+//     })
+//     .then((charsArr) => {
+//         currentChar = charsArr[0];
+//         return Component.create(components);
+//     })
+//     // consider changing the name here
+//     .then((newlyCreatedComponent) => {
+//         // why is there a header here
+//         newlyCreatedComponent.forEach(comp => {
+//             if(comp.type === 'dialogue') dialogue = comp;
+//             // if(comp.type === 'location') header = comp;
+//             // else compArr.push(comp._id);
+//         });
+//         compArr = newlyCreatedComponent;
+//         dialogue.character = currentChar._id
+//         return dialogue.save();
+//         // return
+//     })
+//     .then(() => {
+//         currentChar.dialogue = [dialogue._id];
+//         return currentChar.save();
+//     })
+//     .then( () => {
+//         return Scene.create({components: compArr, header: 'header to satisfy requirement'});
+//     })
+//     .then(scene1 => {
+//         screenP[0].scenes = [scene1._id];
+//         return screenP[0].save();
+//     })
+//     .catch(console.error.bind(console));
 
-};
+// };
 
 function seedScreenplaysTwo(screenplay){
     var currentSP, currentScenes, user;
-    return User.findOne({email: 'kim@gmail.com'})
+    return User.findOne({email: screenplay.user})
     .then(selectedUser => {
         user = selectedUser;
     })
@@ -183,9 +183,9 @@ connectToDb
     .then(function () {
         return seedUsers();
     })
-    .then(function(){
-        return seedScreenplays();
-    })
+    // .then(function(){
+    //     return seedScreenplays();
+    // })
     .then(function(){
         return Promise.all(allScreenplays.map(sp => {
             return seedScreenplaysTwo(sp);

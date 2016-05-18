@@ -1,5 +1,6 @@
 module.exports = [
 {
+    user: 'kim@gmail.com',
     screenplay: {
         title: 'ARGO'
     },
@@ -83,6 +84,7 @@ module.exports = [
 
 },
 {
+    user: 'kim@gmail.com',
     screenplay: {
         title: 'Looper'
     },
