@@ -141,10 +141,12 @@ app.factory('AnalyticsFactory', ($http) => {
 	    }
 	};
 
+
 	return {
-		getScreenPlays: () => $http.get('/api/analytics').then(parseData),
-		getSentiment: (id) => $http.get('/api/analytics/' + id + '/emotion').then(parseData),
-		getCharacters: (id) => $http.get('/api/analytics/' + id + '/wordcount').then(parseData),
+		getScreenPlays: () => $http.get('/api/analytics/public/').then(parseData),
+		getSentiment: (id) => $http.get('/api/analytics/public/' + id + '/emotion').then(parseData),
+		getCharacters: (id) => $http.get('/api/analytics/public/' + id + '/wordcount').then(parseData),
+		getUserSentiment: (id) => $http.get('/api/analytics/user/' + id + '/emotion').then(parseData),
 		lineChartOptions: lineChartOptions,
 		barChartOptions: barChartOptions,
 		horizontalChartOptions: horizontalChartOptions,
