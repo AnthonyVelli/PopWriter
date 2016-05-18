@@ -1,19 +1,49 @@
 
 .sp-table {
+	
 	padding-bottom: 20px;
 	font-size: 40px;
+	width: 70%;
+	/*background-color: blue;*/
+}
+
+.sp {
+	font-size: 60px;
+	color: #9fdcc7;
+	padding-bottom: 40px;
+}
+
+.sp-analyze, .sp-edit {
+	/*float: right;*/
+	padding: 15px 10px 10px 10px;
 }
 
 .sp-edit {
-	padding: 20px 100px 0 10px;
+	flex: 4 0 200px;
 }
 
 .sp-analyze {
-	float: right;
-	padding: 20px 100px 0 10px;
+	flex: 4 0 100px;
 }
 
 .add-screenplay-wrapper {
 	padding: 20px;
 }
 
+.extra-padding {
+	padding-left: 60px;
+	background-size: cover;
+	background-image: 
+		linear-gradient(
+			rgba(130,100,100, 0.7),
+			rgba(130,100,100, 0.7) 100%
+			),
+		url(wood.jpeg);
+}
+
+.sp-tr {
+	padding-bottom: 15px;
+	margin: 0;
+	width: 90px;
+	display: flex;
+}
