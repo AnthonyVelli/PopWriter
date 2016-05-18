@@ -6,8 +6,7 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/analyticsSingle/analyticsSingle.html',
         controller: 'analyticsSingle',
         resolve: {
-    		screenplay: (ScreenplaysFactory, $stateParams) => {
-    			console.log($stateParams);
+    		screenplay: (ScreenplaysFactory, $stateParams, $state) => {
     			return ScreenplaysFactory.getOne($stateParams.id)
     			.then(screenplay => {
     				return screenplay;
@@ -82,11 +81,12 @@ app.config(function ($stateProvider) {
         		.catch(error => console.error(error));
         	}
         }
-        
+
 	});
 });
 
-app.controller('analyticsSingle', function($scope, screenplay){
-	$scope.currentSP = screenplay._id;
+app.controller('analyticsSingle', function($scope, screenplay, $state){
+    $scope.currentSP = screenplay._id;
+    $state.go('analyticsSingle.emotion')
 	console.log(screenplay);
 });
