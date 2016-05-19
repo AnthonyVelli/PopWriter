@@ -6,7 +6,10 @@ var schema = new mongoose.Schema({
 	name: {type: String},
 	sex: {type: String, enum: ["male", "female", "other"]},
 	custom: {},
-    screenplay: mongoose.Schema.Type.ObjectId
+    screenplay: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Screenplay'
+    }
 });
 
 
