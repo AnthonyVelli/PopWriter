@@ -1,6 +1,11 @@
-<section class="state-container">
+<div class="bg-wrapper">
+<section class="bg-img">
+	<div class="state-container left-padding">
+	<h2 class="sp">Screenplays</h2>
+	<button class='btn sp-btn' ng-click="showForm()">ADD NEW SCREENPLAY</button>
 	<div class="add-screenplay-wrapper">
-		<button class='btn btn-primary' ng-click="showForm()">Add a New Screenplay</button>
+		
+		
 		<form id="add-screenplay" class="add-screenplay" name="addScreenplay" ng-submit="addNewScreenplay(user._id, newscreenplay)" ng-show="showform">
 	  		<label for="title">Title</label>
 	  		<input type="text" ng-model="newscreenplay.title" ng-required="true" class="form-control" id="title" placeholder="Enter screenplay title here">
@@ -9,13 +14,16 @@
 		  	<button class="submit" class="btn btn-default">Add Screenplay</button>
 		</form>
 	</div>
-		<div> 
-		<table class="sp-table">
-			<th id="words">Screenplays</th>
-			<tr ng-repeat="screenplay in screenplays">
-				<td class="sp-edit"><button ui-sref="editor({id: screenplay._id})" type='btn btn-primary'>{{screenplay.title}}</button></td>
-				<td class="sp-analyze"><button ui-sref="analyticsSingle({id: screenplay._id})" type='btn btn-primary'>Analyze</button></td>
-			</tr>
-		</table>
+
+		<div>
+		<div class="sp-div">
+			<div class="sp-row" ng-repeat="screenplay in screenplays">
+				<div class="sp-edit"><button ui-sref="editor({id: screenplay._id})" class='btn sp-btn'>{{screenplay.title}}</button></div>
+				<div class="sp-analyze"><button class='btn sp-btn'>Analyze</button></div>
+			</div>
+		</div>
+
+	</div>
 	</div>
 </section>
+</div>
