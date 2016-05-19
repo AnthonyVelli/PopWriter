@@ -22,7 +22,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){
         var valToMove = screenplay.scenes.splice(oldIdx, 1)[0];
         screenplay.scenes.splice(newIdx, 0, valToMove);
-        $scope.text = EditorFactory.scriptify(screenplay);
+        $scope.text = EditorFactory.scriptify(screenplay).screenplay;
         ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
         .then(savedScreenplay => {
             console.log('screenplay saved!');

@@ -16,28 +16,32 @@ app.config($stateProvider => {
     $scope.sideBarScreenplay = screenplay;
     // console.log('screenplay', screenplay);
     $scope.options = EditorFactory.editorOptions;
-    $scope.text = EditorFactory.scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
+    $scope.text = EditorFactory.scriptify(screenplay).screenplay || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
+    let arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
+    console.log('arrayofsavedcharacters', arrayOfSavedCharacters);
 
 
     $scope.save = function() {
         var toBeSaved = EditorFactory.textToObj(screenplay._id);
         var currentElement = EditorFactory.getSelectionStart();
-        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved[0] })
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved.scenes })
         .then( update => {
             return ScreenplaysFactory.getOne(update._id);
         })
         .then(updatedScreenplay => {
-            console.log("this is the updated screenplay", updatedScreenplay)
             // reassign the sidebar screenplay so it automatically adds a new scene to the draggable ones.
             $scope.sideBarScreenplay = updatedScreenplay;
             if(!currentElement.id) currentElement.id = EditorFactory.getId(updatedScreenplay);
-            return CharacterFactory.saveAll(toBeSaved[1])
+            let filteredCharstoBeSaved = toBeSaved.characters.filter(charObj => {
+                return !arrayOfSavedCharacters.includes(charObj.name);
+            });
+            console.log('filtered', filteredCharstoBeSaved);
+            return CharacterFactory.saveAll(filteredCharstoBeSaved)
         })
         .then(characters => {
-
-            console.log('charactersssss', characters);
+            if(characters) arrayOfSavedCharacters = arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
         })
         .catch(console.error.bind(console));
     };
