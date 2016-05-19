@@ -35,11 +35,28 @@ schema.methods.TextbyScenes = function(divisions){
     });
     return Promise.all(popdScenesArray)
     .then(scenes => {
-        var compsArr = scenes.reduce((orig, scene) => {
-            return orig.concat(scene.components);
-        }, []);
-        return compsArr.map(comp => comp.text);
-
+        var sceneObj = {};
+        sceneObj.sceneText = {};
+        sceneObj.sceneText['1'] = '';
+        scenes.forEach((scene,idx) => {
+            sceneObj.sceneText[idx] = '';
+            scene.components.forEach(comp => {
+                if (!comp.text || !comp.text.trim().length) {return; }
+                sceneObj.sceneText[idx] += (' '+comp.text);
+                var key = comp.charName ? comp.charName : comp.type;
+                if (sceneObj[key]) {
+                    if (sceneObj[key][idx]) {
+                        sceneObj[key][idx] += (' '+comp.text);
+                    } else {
+                        sceneObj[key][idx] = comp.text;
+                    }
+                } else {
+                    sceneObj[key] = {};
+                    sceneObj[key][idx] = comp.text;
+                }
+            });
+        });
+        return sceneObj;
     });
 };
 
