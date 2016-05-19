@@ -14,8 +14,7 @@ var schema = new mongoose.Schema({
     },
     charName: {type: String},
     text: {
-        type: String,
-        required: true
+        type: String
     }
 });
 

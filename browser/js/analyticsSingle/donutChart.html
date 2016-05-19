@@ -1,0 +1,9 @@
+<div>
+	<select ng-change='selectDChar()' ng-model="dselected" ng-options="char.words as char.character for char in chars">
+		<option value=''></option>
+	</select>
+	<nvd3 options="options" data="data"></nvd3>
+</div>
+
+
+

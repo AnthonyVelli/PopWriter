@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var updateSubDocuments = require('./updateSubDocuments');
 var Scene = mongoose.model('Scene');
+var Promise = require('bluebird');
 var schema = new mongoose.Schema({
     title : {
         type: String,
@@ -26,5 +27,20 @@ schema.pre('update', function(next) {
   next();
 });
 
+schema.methods.TextbyScenes = function(divisions){
+    var popdScenesArray = this.scenes.map(scene => {
+        return Scene.findById(scene)
+        .populate('components')
+        .exec();
+    });
+    return Promise.all(popdScenesArray)
+    .then(scenes => {
+        var compsArr = scenes.reduce((orig, scene) => {
+            return orig.concat(scene.components);
+        }, []);
+        return compsArr.map(comp => comp.text);
+
+    });
+};
 
 mongoose.model('Screenplay', schema);
