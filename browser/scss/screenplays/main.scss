@@ -1,5 +1,5 @@
 
-.sp-table {
+.sp-div {
 	
 	padding-bottom: 20px;
 	font-size: 40px;
@@ -16,6 +16,17 @@
 .sp-analyze, .sp-edit {
 	/*float: right;*/
 	padding: 15px 10px 10px 10px;
+}
+
+.sp-btn {
+	color: white;
+	border: 2px solid white;
+	background-color: rgba(0,0,0,0);
+}
+
+.sp-btn:hover {
+	color: #87b4a4;
+    border: 2px solid #87b4a4;
 }
 
 .sp-edit {
@@ -35,13 +46,13 @@
 	background-size: cover;
 	background-image: 
 		linear-gradient(
-			rgba(130,100,100, 0.7),
-			rgba(130,100,100, 0.7) 100%
+			rgba(30,30,30, 0.7),
+			rgba(30,30,30, 0.7) 100%
 			),
 		url(wood.jpeg);
 }
 
-.sp-tr {
+.sp-row {
 	padding-bottom: 15px;
 	margin: 0;
 	width: 90px;
