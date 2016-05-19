@@ -27,11 +27,12 @@ app.factory('EditorFactory', function($http){
             }
         return currentId;
     }
-    function textToObj() {
+    function textToObj(spId) {
         var editor = document.getElementById('editor').childNodes;
         var arrayOfScenes = [];
         var toBeSaved = {};
         var currentCharacter;
+        var characters = [];
         // var currentCharacterId;
 
         for(var key = 0; key < editor.length; key++ ){
@@ -46,6 +47,7 @@ app.factory('EditorFactory', function($http){
                 arrayOfScenes.push(toBeSaved);
             } else if (currentClass === "character"){
                 currentCharacter = editor[key].textContent;
+                if(!characters.includes(currentCharacter)) characters.push(currentCharacter);
                 // currentCharacterId = editor[key].id;
             } else {
                 if(!toBeSaved.components) toBeSaved.components = [];
@@ -61,8 +63,12 @@ app.factory('EditorFactory', function($http){
                 toBeSaved.components.push(component);
             }
         }
+        characters = characters.map(charName => {
+            //ADDS SCREENPLAYIDS TO THE CHARACTER OBJECT TO BE SAVED>>>
 
-        return arrayOfScenes;
+            return {name: charName, screenplay: spId};
+        })
+        return [arrayOfScenes, characters];
     }
 
     function getSelectionStart() {

@@ -12,7 +12,9 @@ app.config($stateProvider => {
 })
 .controller('EditorController', ($scope, screenplay, ScreenplaysFactory, EditorFactory) => {
     $scope.screenplay = screenplay;
+    // assigning screenplay to another variable so that the digest happens only on the sidebar.
     $scope.sideBarScreenplay = screenplay;
+    // console.log('screenplay', screenplay);
     $scope.options = EditorFactory.editorOptions;
     $scope.text = EditorFactory.scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
@@ -22,13 +24,15 @@ app.config($stateProvider => {
     $scope.save = () => {
         var toBeSaved = EditorFactory.textToObj();
         var currentElement = EditorFactory.getSelectionStart();
-        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved[0] })
         .then( update => {
             return ScreenplaysFactory.getOne(update._id);
         })
         .then(updatedScreenplay => {
+            // reassign the sidebar screenplay so it automatically adds a new scene to the draggable ones.
             $scope.sideBarScreenplay = updatedScreenplay;
             if(!currentElement.id) currentElement.id = EditorFactory.getId(updatedScreenplay);
+            // return
         })
         .catch(console.error.bind(console));
     };
