@@ -4,18 +4,12 @@
 	padding-bottom: 20px;
 	font-size: 40px;
 	width: 70%;
-	/*background-color: blue;*/
 }
 
 .sp {
 	font-size: 60px;
-	color: #9fdcc7;
+	color: white;
 	padding-bottom: 40px;
-}
-
-.sp-analyze, .sp-edit {
-	/*float: right;*/
-	padding: 15px 10px 10px 10px;
 }
 
 .sp-btn {
@@ -31,25 +25,29 @@
 
 .sp-edit {
 	flex: 4 0 200px;
+	padding: 15px 10px 10px 0;
 }
 
 .sp-analyze {
 	flex: 4 0 100px;
+	padding: 15px 10px 10px 10px;
 }
 
 .add-screenplay-wrapper {
 	padding: 20px;
 }
 
-.extra-padding {
+.bg-img {
+	background-image: url(tweed.png);
+}
+
+.bg-wrapper {
+	background-color: #282824;
+	height: 100%;
+}
+
+.left-padding {
 	padding-left: 60px;
-	background-size: cover;
-	background-image: 
-		linear-gradient(
-			rgba(30,30,30, 0.7),
-			rgba(30,30,30, 0.7) 100%
-			),
-		url(wood.jpeg);
 }
 
 .sp-row {

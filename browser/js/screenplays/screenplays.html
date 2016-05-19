@@ -1,8 +1,11 @@
-<section class="extra-padding">
-	<div class="state-container">
+<div class="bg-wrapper">
+<section class="bg-img">
+	<div class="state-container left-padding">
+	<h2 class="sp">Screenplays</h2>
+	<button class='btn sp-btn' ng-click="showForm()">ADD NEW SCREENPLAY</button>
 	<div class="add-screenplay-wrapper">
-		<h2 class="sp">Screenplays</h2>
-		<button class='btn sp-btn' ng-click="showForm()">Add New Screenplay</button>
+		
+		
 		<form id="add-screenplay" class="add-screenplay" name="addScreenplay" ng-submit="addNewScreenplay(user._id, newscreenplay)" ng-show="showform">
 	  		<label for="title">Title</label>
 	  		<input type="text" ng-model="newscreenplay.title" ng-required="true" class="form-control" id="title" placeholder="Enter screenplay title here">
@@ -21,3 +24,4 @@
 	</div>
 	</div>
 </section>
+</div>
