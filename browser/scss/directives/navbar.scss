@@ -79,7 +79,7 @@ navbar {
 
   .welcome {
     float: right;
-    margin-top: 18px;
+    margin-top: 15px;
     span {
       color: rgb(220,220,220);
       font-size: 18px;
@@ -89,6 +89,10 @@ navbar {
     a {
       color: #87b4a4;
       cursor: pointer;
+    }
+    .glyphicon-cog {
+      padding-top: 0px; 
+      padding-bottom: 0px;
     }
   }
 
