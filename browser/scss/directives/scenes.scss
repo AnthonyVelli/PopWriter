@@ -1,5 +1,7 @@
 /* scenes directive styling */
 
+
+
 [ng-drag].drag-over {
             border: solid 1px red;
         }
@@ -47,6 +49,14 @@
 	padding:  11px 5px;
 	text-align: center;
 	}
+
 .edit-btn.edit-btn-cursor {
 	cursor: pointer;
 }
+
+/* ***** EDIT FORM STYLES ***** */
+
+#edit-header {
+	resize: none;
+}
+

@@ -113,12 +113,44 @@ app.factory('AnalyticsFactory', ($http) => {
 	        },
 	        x: function(d){ return d.x; },
 	        y: function(d){ return d.y; },
-	        useInteractiveGuideline: true,
+	        useInteractiveGuideline: false,
 	        dispatch: {
 	            stateChange: function(e){ console.log("stateChange"); },
 	            changeState: function(e){ console.log("changeState"); },
 	            tooltipShow: function(e){ console.log("tooltipShow"); },
 	            tooltipHide: function(e){ console.log("tooltipHide"); }
+	        },
+	        tooltip: {
+	        	contentGenerator: function (e) {
+	        		var series = e.series[0];
+                  	if (series.value === null) return;
+	        		var rows = 
+                    "<tr>" +
+                      "<td >" + 'Positive: ' + "</td>" +
+                      "<td >" + e.point.sentiment.positive + "</td>" + 
+                    "</tr><tr>" +
+                      "<td>" + 'Negative: ' + "</td>" +
+                      "<td>" + e.point.sentiment.negative + "</td>" +
+                    "</tr>";
+
+                  var header = 
+                    "<thead style='background-color: " + series.color + ";'>" + 
+	                    "<tr>" +
+	                    	"<td><strong>" + series.key + "</strong></td>" +
+	                    "</tr>" + 
+	                    "<tr>" +
+                        	"<td><strong>Scene: "+e.pointIndex+"</strong></td>" +
+                        	"<td><strong>Total Words: "+e.point.sentiment.tokens.length+"</strong></td>" +
+                      	"</tr>" + 
+                    "</thead>";
+                    
+                  return "<table>" +
+                      header +
+                      "<tbody>" + 
+                        rows + 
+                      "</tbody>" +
+                    "</table>";
+                } 
 	        },
 	        lines: {
 	            forceY: [-1,1]
@@ -141,10 +173,12 @@ app.factory('AnalyticsFactory', ($http) => {
 	    }
 	};
 
+
 	return {
-		getScreenPlays: () => $http.get('/api/analytics').then(parseData),
-		getSentiment: (id) => $http.get('/api/analytics/' + id + '/emotion').then(parseData),
-		getCharacters: (id) => $http.get('/api/analytics/' + id + '/wordcount').then(parseData),
+		getScreenPlays: () => $http.get('/api/analytics/public/').then(parseData),
+		getSentiment: (id) => $http.get('/api/analytics/public/' + id + '/emotion').then(parseData),
+		getCharacters: (id) => $http.get('/api/analytics/public/' + id + '/wordcount').then(parseData),
+		getUserSentiment: (id) => $http.get('/api/analytics/user/' + id + '/emotion').then(parseData),
 		lineChartOptions: lineChartOptions,
 		barChartOptions: barChartOptions,
 		horizontalChartOptions: horizontalChartOptions,

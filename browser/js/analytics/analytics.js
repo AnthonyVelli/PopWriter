@@ -8,7 +8,8 @@ app.config(function ($stateProvider) {
         resolve: {
 			scrapedSPs: (AnalyticsFactory) => {
 				return AnalyticsFactory.getScreenPlays()
-				.then(screenplays => screenplays)
+				.then(screenplays => {
+					return screenplays})
 				.catch(error => console.error(error));
     		}
     	}
@@ -16,8 +17,7 @@ app.config(function ($stateProvider) {
     .state('analytics.pieChart', {
     	url: '/pieChart/:id',
     	templateUrl: 'js/analytics/pieChart.html',
-    	controller: function($scope, pieChartData, AnalyticsFactory) {
-    		$scope.piechartplace = 'hi';
+    	controller: function($scope, AnalyticsFactory, pieChartData) {
     		$scope.options = AnalyticsFactory.pieChartOptions;
     		$scope.data = pieChartData[0];
     	},
@@ -32,11 +32,9 @@ app.config(function ($stateProvider) {
     .state('analytics.donutChart', {
 		url: 'donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
-		controller: function($scope, pieChartData) {
-			$scope.here = 'string';
+		controller: function($scope, AnalyticsFactory, pieChartData) {
+			console.log(pieChartData);
 			$scope.selectDChar = function(char){
-				console.log('function ran');
-				console.log($scope.dselected);
 				$scope.data = $scope.dselected;
 			};
 			$scope.data;
@@ -86,4 +84,7 @@ app.config(function ($stateProvider) {
 app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
     $scope.changeSP = (spId) => {$scope.currentSP = spId};
 	$scope.scripts = scrapedSPs;
+	$scope.changeSP = function(sp){
+		$scope.currentSP = sp;
+	};
 });

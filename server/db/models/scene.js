@@ -5,7 +5,7 @@ var updateSubDocuments = require('./updateSubDocuments');
 
 
 var schema = new mongoose.Schema({
-    header: {type: String, required: true},
+    header: {type: String},
     components: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Component'}
     ],

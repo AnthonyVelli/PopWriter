@@ -1,31 +1,60 @@
 
-.sp-table {
+.sp-div {
+	
 	padding-bottom: 20px;
 	font-size: 40px;
+	width: 70%;
+}
+
+.sp {
+	font-size: 60px;
+	color: white;
+	padding-bottom: 40px;
+}
+
+.sp-btn {
+	color: white;
+	border: 2px solid white;
+	background-color: rgba(0,0,0,0);
+}
+
+.sp-btn:hover {
+	color: #87b4a4;
+    border: 2px solid #87b4a4;
 }
 
 .sp-edit {
-	padding: 20px 100px 0 10px;
+	flex: 4 0 200px;
+	padding: 15px 10px 10px 0;
 }
 
 .sp-analyze {
-	float: right;
-	padding: 20px 100px 0 10px;
+	flex: 4 0 100px;
+	padding: 15px 10px 10px 10px;
 }
 
 .add-screenplay-wrapper {
 	padding: 20px;
 }
 
-#something {
-	background-image: url(grass.jpeg);
-	height: 100vh;
- 	width: 100%;
- 	background-size: cover;
+
+.bg-img {
+	background-image: url(tweed.png);
 }
 
-#words {
-	color: white;
-	font-size: 50px;
+.bg-wrapper {
+	background-color: #282824;
+	height: 100%;
+}
+
+.left-padding {
+	padding-left: 60px;
+}
+
+.sp-row {
+	padding-bottom: 15px;
+	margin: 0;
+	width: 90px;
+	display: flex;
 }
 

@@ -14,21 +14,21 @@ app.config($stateProvider => {
     $scope.screenplay = screenplay;
     $scope.sideBarScreenplay = screenplay;
     $scope.options = EditorFactory.editorOptions;
-    $scope.text = scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
+    $scope.text = EditorFactory.scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
 
 
     $scope.save = () => {
-        var toBeSaved = textToObj();
-        var currentElement = getSelectionStart();
+        var toBeSaved = EditorFactory.textToObj();
+        var currentElement = EditorFactory.getSelectionStart();
         ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
         .then( update => {
             return ScreenplaysFactory.getOne(update._id);
         })
         .then(updatedScreenplay => {
             $scope.sideBarScreenplay = updatedScreenplay;
-            if(!currentElement.id) currentElement.id = getId(updatedScreenplay);
+            if(!currentElement.id) currentElement.id = EditorFactory.getId(updatedScreenplay);
         })
         .catch(console.error.bind(console));
     };
@@ -36,7 +36,7 @@ app.config($stateProvider => {
 
     $scope.type = function(event) {
         if(event.code === 'Enter') {
-            var currentElement = getSelectionStart();
+            var currentElement = EditorFactory.getSelectionStart();
             $scope.save();
         }
         EditorFactory.setScopeKeyDown(event, $scope);

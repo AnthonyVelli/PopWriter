@@ -72,7 +72,7 @@
     color: rgb(220,220,220);
     text-align: center;
     margin: 0;
-    background-color: #271E23;
+    /*background-color: #271E23;*/
     cursor: pointer;
     background-color: rgb(51, 87, 85);
 }
@@ -82,8 +82,6 @@
     padding: 15px;
     background-image:
     linear-gradient(
-        /*rgba(0,0,0,0.35) 0,
-        rgba(0,0,0,0.35) 100%),*/
         rgba(243,243,243,0.5) 0,
         rgba(243,243,243,0.5) 100%),
         url(tex-paper-wrinkled.jpg);
@@ -100,6 +98,7 @@
 }
 .outer-editor {
     padding-right: 0px;
+    font-weight: 700;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -107,5 +106,10 @@
 
 .editor-wrapper {
     padding-top: 92px;
+}
+
+.btn-save {
+    background-color: rgba(0,0,0,0);
+    border: 2px solid #282824;
 }
 
