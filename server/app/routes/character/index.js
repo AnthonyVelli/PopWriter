@@ -28,7 +28,6 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
 	Character.create(req.body)
 	.then(character => {
-        console.log('these are the characters', character)
         res.status(201).json(character);
     })
 	.catch(next);

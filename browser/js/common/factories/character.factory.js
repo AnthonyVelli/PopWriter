@@ -5,6 +5,10 @@ app.factory('CharacterFactory', ($http) => {
         saveAll: (characters) => {
             return $http.post('/api/character/', characters)
             .then(res => res.data );
+        },
+        getAll:(spId) => {
+            return $http.get('/api/character/' + spId)
+            .then(res => res.data);
         }
     };
 });

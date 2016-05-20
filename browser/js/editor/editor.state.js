@@ -20,7 +20,6 @@ app.config($stateProvider => {
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
     let arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
-    console.log('arrayofsavedcharacters', arrayOfSavedCharacters);
 
 
     $scope.save = function() {
@@ -37,11 +36,12 @@ app.config($stateProvider => {
             let filteredCharstoBeSaved = toBeSaved.characters.filter(charObj => {
                 return !arrayOfSavedCharacters.includes(charObj.name);
             });
-            console.log('filtered', filteredCharstoBeSaved);
             return CharacterFactory.saveAll(filteredCharstoBeSaved)
         })
         .then(characters => {
-            if(characters) arrayOfSavedCharacters = arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
+            if(characters) {
+                arrayOfSavedCharacters = arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
+            }
         })
         .catch(console.error.bind(console));
     };
