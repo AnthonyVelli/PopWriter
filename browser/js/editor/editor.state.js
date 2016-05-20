@@ -19,8 +19,17 @@ app.config($stateProvider => {
     $scope.text = EditorFactory.scriptify(screenplay).screenplay || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
-    let arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
+    $scope.arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
 
+    function getAllCharactersForSideBar() {
+        CharacterFactory.getAll(screenplay._id)
+        .then(chars => {
+            $scope.sideBarCharacters = chars;
+        })
+        .catch(console.error.bind(console));
+    };
+
+    getAllCharactersForSideBar();
 
     $scope.save = function() {
         var toBeSaved = EditorFactory.textToObj(screenplay._id);
@@ -34,14 +43,15 @@ app.config($stateProvider => {
             $scope.sideBarScreenplay = updatedScreenplay;
             if(!currentElement.id) currentElement.id = EditorFactory.getId(updatedScreenplay);
             let filteredCharstoBeSaved = toBeSaved.characters.filter(charObj => {
-                return !arrayOfSavedCharacters.includes(charObj.name);
+                return !$scope.arrayOfSavedCharacters.includes(charObj.name);
             });
             return CharacterFactory.saveAll(filteredCharstoBeSaved)
         })
         .then(characters => {
             if(characters) {
-                arrayOfSavedCharacters = arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
+                $scope.arrayOfSavedCharacters = $scope.arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
             }
+            getAllCharactersForSideBar();
         })
         .catch(console.error.bind(console));
     };

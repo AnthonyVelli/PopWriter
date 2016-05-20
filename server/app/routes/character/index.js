@@ -24,6 +24,14 @@ router.get('/', (req, res, next) => {
 	};
 });
 
+//get all characters of a particular screenplay
+
+router.get('/:screenplayId', (req, res, next) => {
+    Character.find({screenplay: req.params.screenplayId})
+    .then(characters => res.json(characters))
+    .catch(next);
+})
+
 // create to a user
 router.post('/', (req, res, next) => {
 	Character.create(req.body)

@@ -1,5 +1,7 @@
  <h3 class="scene-title">{{screenplay.title}}</h3>
-
+ <p class="heading-bar">Characters:</p>
+<button class="char-buttons" ng-repeat="character in sideBarCharacters">{{ character.name }}</button>
+<p class="heading-bar">Scenes:</p>
 <div class="scenes-repeat" ng-repeat="scene in sideBarScreenplay.scenes">
 	<div class="scene-box" ng-drop="true" ng-drop-success="onDropComplete(sideBarScreenplay, $index, $data)">
 		<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{$index + 1}}.&nbsp;&nbsp;{{ scene.header.toUpperCase() }}</h3>
@@ -18,5 +20,6 @@
 		  	<button type="submit" class="btn btn-default">Save Edits</button>
 		  	<button ng-click="toggleShowForm()" class="btn btn-default">Cancel</button>
 		</form>
+
 	</div><!-- closes edit form -->
 </div><!-- closes ng-repeat div -->
