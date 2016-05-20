@@ -72,23 +72,26 @@ navbar {
     margin-right: 10px;
   }
 
-  .login-button:hover , .signup-button:hover {
+  .login-button:hover, .signup-button:hover {
     color: #87b4a4;
     border: 2px solid #87b4a4;
   }
 
   .welcome {
     float: right;
-    margin-top: 18px;
+    margin-top: 15px;
     span {
       color: rgb(220,220,220);
       font-size: 18px;
       margin-right: 5px;
-      padding-bottom: 20px;
+      padding-bottom: 30px;
     }
     a {
       color: #87b4a4;
       cursor: pointer;
+    }
+    .glyphicon-cog {
+      vertical-align: -2.5px;
     }
   }
 
