@@ -1,6 +1,6 @@
  <h3 class="scene-title">{{screenplay.title}}</h3>
 
-<div ng-repeat="scene in sideBarScreenplay.scenes">
+<div class="scenes-repeat" ng-repeat="scene in sideBarScreenplay.scenes">
 	<div class="scene-box" ng-drop="true" ng-drop-success="onDropComplete(sideBarScreenplay, $index, $data)">
 		<h3 class="scene" ng-drag="true" ng-drag-data="$index" ng-class="scene.name">{{$index + 1}}.&nbsp;&nbsp;{{ scene.header.toUpperCase() }}</h3>
 		<div class="edit-btn edit-btn-cursor" ng-click="toggleShowForm()"><span ng-class="{'glyphicon glyphicon-plus': !showform, 'glyphicon glyphicon-minus': showform}"></span></div>
