@@ -1,6 +1,10 @@
 <section class="state-container">
 	<div>
-		<select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"><option value=''></option></select>
+		<div class='charselector'>
+			<!-- <select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"><option value=''></option></select>
+			<select ng-change='selectOtherMovie()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts"><option value=''></option></select>
+			<select ng-show='selectedmovie' ng-change='selectOtherMovieChar()' ng-model="selectedMovieChar" ng-options="k as k for (k, v) in otherMovieChars"><option value=''></option></select> -->
+		</div>
 	    <nvd3 options="options" data="data"></nvd3>
 	</div>
 <section>

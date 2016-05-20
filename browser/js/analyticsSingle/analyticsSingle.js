@@ -12,6 +12,12 @@ app.config(function ($stateProvider) {
     				return screenplay;
     			})
     			.catch(error => console.error(error));
+    		},
+    		scrapedSPs: (AnalyticsFactory) => {
+				return AnalyticsFactory.getScreenPlays()
+				.then(screenplays => {
+					return screenplays})
+				.catch(error => console.error(error));
     		}
     	}
     })
@@ -52,8 +58,28 @@ app.config(function ($stateProvider) {
 	.state('analyticsSingle.emotion', {
 		url: '/emotion',
 		templateUrl: 'js/analyticsSingle/lineChart.html',
-		controller: function($scope, screenplay, lineChartData, AnalyticsFactory) {
-			console.log(lineChartData);
+		controller: function($scope, screenplay, lineChartData, AnalyticsFactory, scrapedSPs) {
+			$scope.scripts = scrapedSPs;
+			$scope.selectOtherMovie = () => {
+				console.log($scope.selectedmovie);
+				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
+				.then(sentiment => {
+					$scope.data.push({
+					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+					key: sentiment,
+					values: sentiment.sceneText});
+				});
+			};
+			$scope.selectOtherMovieChar = () => {
+				console.log($scope.selectedmovie);
+				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
+				.then(sentiment => {
+					$scope.data.push({
+					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+					key: sentiment,
+					values: sentiment.sceneText});
+				});
+			};
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -77,13 +103,13 @@ app.config(function ($stateProvider) {
         			return sentiment;
         		})
         		.catch(error => console.error(error));
-        	}
+        	},
         }
         
 	});
 });
 
-app.controller('analyticsSingle', function($scope, screenplay){
+app.controller('analyticsSingle', function($scope, scrapedSPs, screenplay){
 	$scope.currentSP = screenplay._id;
 	console.log(screenplay);
 });
