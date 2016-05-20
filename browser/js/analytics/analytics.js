@@ -33,6 +33,7 @@ app.config(function ($stateProvider) {
 		url: 'donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: function($scope, AnalyticsFactory, pieChartData) {
+			console.log(pieChartData);
 			$scope.selectDChar = function(char){
 				$scope.data = $scope.dselected;
 			};

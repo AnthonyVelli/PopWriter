@@ -45,9 +45,13 @@ module.exports.arrayOfStringsToEmotion = arrayOfStrings => {
 	});
 };
 
-
-
-// module.exports = {
-// 	scenesToStrings: scenesToStrings
-// 	scenesToStrings: scenesToStrings
-// };
+module.exports.objectOfStringsToEmotion = objOfStrings => {
+	var emotionArray = [];
+	for (var x in objOfStrings) {
+		if (objOfStrings[x]) {
+			var sentimentRes = sentiment(objOfStrings[x].tokenizeAndStem().join(' '));
+			emotionArray.push({x: x, y: sentimentRes.comparative, sentiment: sentimentRes});
+		}
+	}
+	return emotionArray;
+};

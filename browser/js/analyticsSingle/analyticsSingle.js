@@ -7,7 +7,6 @@ app.config(function ($stateProvider) {
         controller: 'analyticsSingle',
         resolve: {
     		screenplay: (ScreenplaysFactory, $stateParams) => {
-    			console.log($stateParams);
     			return ScreenplaysFactory.getOne($stateParams.id)
     			.then(screenplay => {
     				return screenplay;
@@ -55,7 +54,6 @@ app.config(function ($stateProvider) {
 		templateUrl: 'js/analyticsSingle/lineChart.html',
 		controller: function($scope, screenplay, lineChartData, AnalyticsFactory) {
 			console.log(lineChartData);
-			console.log(screenplay);
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -69,14 +67,13 @@ app.config(function ($stateProvider) {
 					color: "#337ab7",
 					key: "All Text",
 					area: true,
-					values: lineChartData
+					values: lineChartData.sceneText
 				}];
 		},
 		resolve: {
         	lineChartData: (AnalyticsFactory, screenplay, $stateParams) => {
        			return AnalyticsFactory.getUserSentiment(screenplay._id)
         		.then(sentiment => {
-
         			return sentiment;
         		})
         		.catch(error => console.error(error));
