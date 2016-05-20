@@ -31,19 +31,15 @@ router.get('/', (req, res, next) => {
 router.get('/:screenplayId/emotion', (req, res, next) => {
 	//breaks screenplay up into 100 equal parts, and returns only lines by the characters that meet requirements in character filter.
 	req.screenplay.TextbyScenes(100)
-	.then(sceneTextArr => {
-		res.json(helper.arrayOfStringsToEmotion(sceneTextArr));
+	.then(sceneTextObj => {
+		var charEmotion = {};
+		for (var x in sceneTextObj) {
+			charEmotion[x] = helper.objectOfStringsToEmotion(sceneTextObj[x]);
+		}
+		res.json(charEmotion);
 	})
 	.catch(error => console.error(error))
 		
-	
-	// console.log(allText);
-	
-	// var sceneMaster = helper.scenesToStrings(filteredScenes);
-	// var emotion = helper.sceneStringsToEmotion(sceneMaster);
-		// var  = req.screenplay.TextbyScenes();
-	// emotion.sceneText = helper.arrayOfStringsToEmotion(allText);
-		// res.json(emotion);
 });
 
 
