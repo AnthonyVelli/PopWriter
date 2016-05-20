@@ -27,7 +27,8 @@ h1.splash {
 	font-weight: normal;
 	font-size: 7vw;
 	line-height: 1;
-	margin-bottom: 20px;
+	margin-top: 0px;
+	margin-bottom: 15px;
 	
 }
 
@@ -37,10 +38,30 @@ h2.byline {
 	font-size: 2.25vw;
 	text-align: center;
 	line-height: 2;
+	margin-top: 10px;
 }
 
 main {
 	margin: 0;
+}
+
+.home-buttons {
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.signup-button, .login-button {
+	color: white;
+	font-size: 17px;
+	margin: 5px;
+	padding: 9px 13px;
+	border: 2.5px solid white;
+	background-color: rgba(0,0,0,0);
+}
+
+.signup-button:hover, .login-button:hover {
+	background-color: #87b4a4;
+	color: white;
 }
 
 .scroll-down {
