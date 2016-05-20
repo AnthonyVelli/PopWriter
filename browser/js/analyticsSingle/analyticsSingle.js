@@ -12,6 +12,12 @@ app.config(function ($stateProvider) {
     				return screenplay;
     			})
     			.catch(error => console.error(error));
+    		},
+    		scrapedSPs: (AnalyticsFactory) => {
+				return AnalyticsFactory.getScreenPlays()
+				.then(screenplays => {
+					return screenplays})
+				.catch(error => console.error(error));
     		}
     	}
     })
@@ -52,8 +58,27 @@ app.config(function ($stateProvider) {
 	.state('analyticsSingle.emotion', {
 		url: '/emotion',
 		templateUrl: 'js/analyticsSingle/lineChart.html',
-		controller: function($scope, screenplay, lineChartData, AnalyticsFactory) {
-			console.log(lineChartData);
+		controller: function($scope, screenplay, lineChartData, AnalyticsFactory, scrapedSPs) {
+			$scope.scripts = scrapedSPs;
+			$scope.selectOtherMovie = () => {
+				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
+				.then(sentiment => {
+					$scope.otherMovieChars = sentiment;
+					$scope.data.push({
+					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+					key: $scope.selectedmovie.name,
+					values: sentiment.sceneText});
+				});
+			};
+			$scope.selectOtherMovieChar = () => {
+				console.log($scope.otherMovieChars[$scope.selectedOtherMovieChar]);
+				console.log($scope.otherMovieChars);
+				console.log($scope.selectedOtherMovieChar);
+				$scope.data.push({
+				color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+				key: $scope.selectedOtherMovieChar,
+				values: $scope.otherMovieChars[$scope.selectedOtherMovieChar]});
+			};
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -65,7 +90,7 @@ app.config(function ($stateProvider) {
 			$scope.options = AnalyticsFactory.lineChartOptions;
 			$scope.data = [{
 					color: "#337ab7",
-					key: "All Text",
+					key: screenplay.title,
 					area: true,
 					values: lineChartData.sceneText
 				}];
@@ -77,13 +102,12 @@ app.config(function ($stateProvider) {
         			return sentiment;
         		})
         		.catch(error => console.error(error));
-        	}
+        	},
         }
         
 	});
 });
 
-app.controller('analyticsSingle', function($scope, screenplay){
+app.controller('analyticsSingle', function($scope, scrapedSPs, screenplay){
 	$scope.currentSP = screenplay._id;
-	console.log(screenplay);
 });

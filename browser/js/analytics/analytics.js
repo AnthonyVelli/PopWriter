@@ -53,6 +53,7 @@ app.config(function ($stateProvider) {
 		url: '/lineChart/:id',
 		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData, AnalyticsFactory) {
+			console.log(lineChartData);
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
