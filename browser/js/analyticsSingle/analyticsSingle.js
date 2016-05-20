@@ -61,24 +61,23 @@ app.config(function ($stateProvider) {
 		controller: function($scope, screenplay, lineChartData, AnalyticsFactory, scrapedSPs) {
 			$scope.scripts = scrapedSPs;
 			$scope.selectOtherMovie = () => {
-				console.log($scope.selectedmovie);
 				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
 				.then(sentiment => {
+					$scope.otherMovieChars = sentiment;
 					$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
-					key: sentiment,
+					key: $scope.selectedmovie.name,
 					values: sentiment.sceneText});
 				});
 			};
 			$scope.selectOtherMovieChar = () => {
-				console.log($scope.selectedmovie);
-				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
-				.then(sentiment => {
-					$scope.data.push({
-					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
-					key: sentiment,
-					values: sentiment.sceneText});
-				});
+				console.log($scope.otherMovieChars[$scope.selectedOtherMovieChar]);
+				console.log($scope.otherMovieChars);
+				console.log($scope.selectedOtherMovieChar);
+				$scope.data.push({
+				color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+				key: $scope.selectedOtherMovieChar,
+				values: $scope.otherMovieChars[$scope.selectedOtherMovieChar]});
 			};
 			$scope.selectChar = function(){
 				$scope.data.push({
@@ -91,7 +90,7 @@ app.config(function ($stateProvider) {
 			$scope.options = AnalyticsFactory.lineChartOptions;
 			$scope.data = [{
 					color: "#337ab7",
-					key: "All Text",
+					key: screenplay.title,
 					area: true,
 					values: lineChartData.sceneText
 				}];
@@ -111,5 +110,4 @@ app.config(function ($stateProvider) {
 
 app.controller('analyticsSingle', function($scope, scrapedSPs, screenplay){
 	$scope.currentSP = screenplay._id;
-	console.log(screenplay);
 });
