@@ -22,7 +22,7 @@
 	cursor: move;
 	display: flex;
 	justify-content: space-between;
-	background-color: rgba(200,200,200,0.8);
+	/*background-color: rgba(200,200,200,0.8);*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
@@ -38,6 +38,7 @@
 .scene-title {
 	padding-top: 15px;
 	padding-left: 10px;
+	padding-bottom: 15px;
 }
 
 .edit-btn {
@@ -55,8 +56,8 @@
 }
 
 /* ***** EDIT FORM STYLES ***** */
-
-#edit-header {
-	resize: none;
+#edit-scene {
+	padding: 8px 5px;
+	background-color: #87b4a4;
 }
 

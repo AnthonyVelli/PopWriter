@@ -55,7 +55,6 @@
         url(tex-paper-wrinkled.jpg);
     flex: 0 0 240px;
     overflow: hidden;
-    -webkit-transition: flex 0.6s ease;
     transition: flex 0.5s ease;
 }
 
@@ -72,7 +71,6 @@
     color: rgb(220,220,220);
     text-align: center;
     margin: 0;
-    /*background-color: #271E23;*/
     cursor: pointer;
     background-color: rgb(51, 87, 85);
 }
@@ -93,12 +91,17 @@
     display: inline-block;
     position: fixed;
     overflow: hidden;
+    padding-top: 50px;
+    padding-left: 10px;
     white-space: nowrap;
     color: lightgrey;
 }
+
+.editor-header-bar h1 {
+    color: grey;
+}
 .outer-editor {
     padding-right: 0px;
-    font-weight: 700;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -109,6 +112,8 @@
 }
 
 .btn-save {
+    margin-top: 15px;
+    margin-left: 10px;
     background-color: rgba(0,0,0,0);
     border: 2px solid #282824;
 }

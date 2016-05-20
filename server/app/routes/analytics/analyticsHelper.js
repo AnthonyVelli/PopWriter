@@ -50,7 +50,7 @@ module.exports.objectOfStringsToEmotion = objOfStrings => {
 	for (var x in objOfStrings) {
 		if (objOfStrings[x]) {
 			var sentimentRes = sentiment(objOfStrings[x].tokenizeAndStem().join(' '));
-			emotionArray.push({x: x, y: sentimentRes.comparative, sentiment: sentimentRes});
+			emotionArray.push({x: parseInt(x)+1, y: sentimentRes.comparative, sentiment: sentimentRes});
 		}
 	}
 	return emotionArray;
