@@ -12,13 +12,11 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
     var draggingElements = document.getElementsByClassName('scene');
     $scope.showform = false;
 
-
     $scope.toggleShowForm = function() {
         $scope.showform = !$scope.showform;
     };
 
     $scope.submitEditScene = function (screenplay, editscene, sceneId){
-
         screenplay.scenes.forEach(function(elem){
             console.log("elem._id", elem._id, "elem.header", elem.header, "elem.synopsis", elem.synopsis);
             if(elem._id === sceneId) {
@@ -31,7 +29,6 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
         .then(savedScreenplay => {
             $scope.toggleShowForm();
         });
-
     };
 
 // **** ngDraggable DRAG AND DROP **** //
