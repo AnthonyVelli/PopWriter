@@ -16,22 +16,19 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
     
     $scope.submitEditScene = function (screenplay, editscene, sceneId){
 
-        // modify screenplay with new editscene data, then send entire screenplay to server
-        console.log("screenplay in submit edits", screenplay);
-        console.log("editscene._id", sceneId);
-        console.log("editscene.header", editscene.header, "editscene.synopsis", editscene.synopsis);
         screenplay.scenes.forEach(function(elem){
             console.log("elem._id", elem._id, "elem.header", elem.header, "elem.synopsis", elem.synopsis);
-            // if(elem._id === sceneId) {
-            //     elem.header = editscene.header;
-            //     elem.synopsis = editscene.synopsis;
-            // }
+            if(elem._id === sceneId) {
+                elem.header = editscene.header;
+                elem.synopsis = editscene.synopsis;
+            }
         });
 
-        // ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
-        // .then(savedScreenplay => {
-        //     console.log('screenplay saved!', savedScreenplay);
-        // })
+        ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
+        .then(savedScreenplay => {
+            console.log('screenplay saved!', savedScreenplay);
+            $scope.toggleShowForm();
+        });
 
     };
 
@@ -43,7 +40,7 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
         ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
         .then(savedScreenplay => {
             console.log('screenplay saved!');
-        })
+        });
     };
 
 });
