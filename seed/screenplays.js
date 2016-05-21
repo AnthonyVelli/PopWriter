@@ -791,7 +791,7 @@ The sensors are in place.  You'll
 know if anything comes around.`
             },{
                 type: `dialogue`,
-                charName: 'RIEKAAN',
+                charName: 'RIEEKAN',
                 text: `Commander Skywalker reported in yet?`
             },{
                 type: `dialogue`,
@@ -800,7 +800,7 @@ know if anything comes around.`
         that hit near him.`
             },{
                 type: `dialogue`,
-                charName: 'RIEKAAN',
+                charName: 'RIEEKAN',
                 text: `With all the meteor activity in this
         system, it's going to be difficult
         to spot approaching ships.`
@@ -820,7 +820,7 @@ a Nordic fashion.  She overhears their  conversation and seems somewhat
 distressed.`
             },{
                 type: `dialogue`,
-                charName: 'RIEKAAN',
+                charName: 'RIEEKAN',
                 text: `I'm sorry to hear that.`
             },{
                 type: `dialogue`,
@@ -830,7 +830,7 @@ distressed.`
         I'm a dead man.`
             },{
                 type: `dialogue`,
-                charName: 'RIEKAAN',
+                charName: 'RIEEKAN',
                 text: `A death mark's not an easy thing
         to live with.  You're a good
         fighter, Solo.  I hate to lose you.
