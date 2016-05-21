@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 #editor {
     padding-top: 30px;
     font-family: courier;
@@ -122,6 +126,11 @@
 #an-btn {
     margin-right: 5px;
 }
+
+#an-btn:focus, .btn-save:focus {
+    outline: none;
+}
+
 
 #comp-displayer {
     margin-top: 15px;
