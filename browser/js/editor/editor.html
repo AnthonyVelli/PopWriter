@@ -9,11 +9,11 @@
         <div class="slide-bar flex-child" ng-mouseenter="toggleScenesME($event)" ng-mouseleave="toggleScenesML($event)"><span id="triangle" class="glyphicon glyphicon-triangle-right"></span></div>
         <!-- editor area -->
         <div class="editor-contain flex-child">
-
-            <div class="editor-header-bar">
-            <h1>{{ selected.toUpperCase() }}</h1>
+            <div id="topbar" scroll>
+                <button class="btn btn-save" ng-click="save()">save</button>
+                <button class="btn btn-save" id="an-btn" ui-sref="">analytics</button>
+                <div id="comp-displayer">{{ selected.toUpperCase() }}</div>
             </div>
-            <button class="btn btn-save" ng-click="save()">save</button>
             <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)" ng-click="click()"">
             <div id="slug"></div>
             </medium-editor>
