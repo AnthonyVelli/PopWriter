@@ -7,15 +7,16 @@ app.directive('scenes', function () {
     };
 });
 
-app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysFactory, EditorFactory){
+app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysFactory, EditorFactory, CharacterFactory){
+
     var draggingElements = document.getElementsByClassName('scene');
     $scope.showform = false;
+
     $scope.toggleShowForm = function() {
         $scope.showform = !$scope.showform;
     };
-    
-    $scope.submitEditScene = function (screenplay, editscene, sceneId){
 
+    $scope.submitEditScene = function (screenplay, editscene, sceneId){
         screenplay.scenes.forEach(function(elem){
             console.log("elem._id", elem._id, "elem.header", elem.header, "elem.synopsis", elem.synopsis);
             if(elem._id === sceneId) {
@@ -26,11 +27,17 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
 
         ScreenplaysFactory.updateScreenplay(screenplay._id, screenplay)
         .then(savedScreenplay => {
-            console.log('screenplay saved!', savedScreenplay);
             $scope.toggleShowForm();
         });
-
     };
+
+    //save characters backstory
+
+    $scope.submitCharacter = function(character) {
+        console.log(character);
+        CharacterFactory.updateOne(character._id, {backstory: character.backstory})
+        .then(()=> console.log('updated character'));
+    }
 
 // **** ngDraggable DRAG AND DROP **** //
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){

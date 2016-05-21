@@ -76,7 +76,7 @@ var seedUsers = function () {
 };
 
 function seedScreenplaysTwo(screenplay){
-    var currentSP, currentScenes, user;
+    var currentSP, currentScenes, user, savedComponents;
     return User.findOne({email: screenplay.user})
     .then(selectedUser => {
         user = selectedUser;
@@ -110,6 +110,7 @@ function seedScreenplaysTwo(screenplay){
         return Promise.all(compPromiseArray);
     })
     .then(createdComponents => {
+        savedComponents = createdComponents;
         createdComponents.forEach((arrayOfComp, index) => {
             currentScenes[index].components = arrayOfComp.map( comp =>{
                 return comp._id;
@@ -118,8 +119,26 @@ function seedScreenplaysTwo(screenplay){
         return Promise.all(currentScenes.map(scene => scene.save()));
     })
     .then(() => {
-        console.log('scenes saved');
+        var charsToBeSavedPromiseArray = [];
+        var copies = [];
+        savedComponents.forEach(componentsArray => {
+            componentsArray.forEach(comp => {
+                if(comp.charName) {
+                    var characterNameUpperCase = comp.charName.toUpperCase();
+                    console.log(copies);
+                    if(copies.indexOf(characterNameUpperCase) < 0){
+                        charsToBeSavedPromiseArray.push(Character.create({name: characterNameUpperCase, screenplay: currentSP._id}));
+                        copies.push(characterNameUpperCase);
+                    }
+                }
+            })
+        })
+        return Promise.all(charsToBeSavedPromiseArray);
     })
+    .then(savedChars => {
+        console.log('everything saved');
+    })
+    .catch(console.error.bind(console));
 }
 
 // Dialogue => Character => Scene =>
