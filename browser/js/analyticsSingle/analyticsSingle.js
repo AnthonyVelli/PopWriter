@@ -21,40 +21,42 @@ app.config(function ($stateProvider) {
     		}
     	}
     })
- //    .state('analyticsSingle.charWeight', {
- //    	url: '/charWeight',
- //    	templateUrl: 'js/analytics/pieChart.html',
- //    	controller: function($scope, AnalyticsFactory, pieChartData) {
- //    		$scope.options = AnalyticsFactory.pieChartOptions;
- //    		$scope.data = pieChartData[0];
- //    	},
- //    	resolve: {
- //    		pieChartData: (AnalyticsFactory, $stateParams) => {
- //    			return AnalyticsFactory.getCharacters($stateParams.id)
- //    			.then(characters => characters)
- //    			.catch(error => console.error(error));
- //    		}
- //    	}
- //    })
- //    .state('analyticsSingle.charWord', {
-	// 	url: '/charWord',
-	// 	templateUrl: 'js/analytics/donutChart.html',
-	// 	controller: function($scope, AnalyticsFactory, pieChartData) {
-	// 		$scope.selectDChar = function(char){
-	// 			$scope.data = $scope.dselected;
-	// 		};
-	// 		$scope.data;
-	// 		$scope.options = AnalyticsFactory.donutChartOptions;
-	// 		$scope.chars = pieChartData[1];
-	// 	},
- //    	resolve: {
-	// 		pieChartData: (AnalyticsFactory, $stateParams) => {
-	// 			return AnalyticsFactory.getCharacters($stateParams.id)
-	// 			.then(characters => characters)
-	// 			.catch(error => console.error(error));
-	// 		}
-	//    	}
-	// })
+    .state('analyticsSingle.charWeight', {
+    	url: '/charWeight',
+    	templateUrl: 'js/analytics/pieChart.html',
+    	controller: function($scope, AnalyticsFactory, pieChartData) {
+    		console.log(pieChartData);
+    		$scope.options = AnalyticsFactory.pieChartOptions;
+    		$scope.data = pieChartData;
+    	},
+    	resolve: {
+    		pieChartData: (AnalyticsFactory, $stateParams) => {
+    			return AnalyticsFactory.getUserCharacters($stateParams.id)
+    			.then(characters => characters)
+    			.catch(error => console.error(error));
+    		}
+    	}
+    })
+    .state('analyticsSingle.charWord', {
+		url: '/charWord',
+		templateUrl: 'js/analyticsSingle/donutChart.html',
+		controller: function($scope, AnalyticsFactory, pieChartData) {
+			$scope.selectDChar = function(){
+				console.log($scope.dselected);
+				$scope.data = $scope.dselected;
+			};
+			$scope.data;
+			$scope.options = AnalyticsFactory.donutChartOptions;
+			$scope.chars = pieChartData;
+		},
+    	resolve: {
+			pieChartData: (AnalyticsFactory, $stateParams) => {
+				return AnalyticsFactory.getUserCharacters($stateParams.id)
+				.then(characters => characters)
+				.catch(error => console.error(error));
+			}
+	   	}
+	})
 	.state('analyticsSingle.emotion', {
 		url: '/emotion',
 		templateUrl: 'js/analyticsSingle/lineChart.html',
@@ -71,9 +73,6 @@ app.config(function ($stateProvider) {
 				});
 			};
 			$scope.selectOtherMovieChar = () => {
-				console.log($scope.otherMovieChars[$scope.selectedOtherMovieChar]);
-				console.log($scope.otherMovieChars);
-				console.log($scope.selectedOtherMovieChar);
 				$scope.data.push({
 				color: "hsl(" + Math.random() * 360 + ",100%,50%)",
 				key: $scope.selectedOtherMovieChar,

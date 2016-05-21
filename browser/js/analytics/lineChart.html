@@ -2,6 +2,6 @@
 <section class="state-container">
 	<div>
 		<select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"><option value=''></option></select>
-	    <nvd3 options="options" data="data"></nvd3>
+	    <nvd3 class="nvd3holder" options="options" data="data"></nvd3>
 	</div>
 <section>
