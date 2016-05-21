@@ -1,6 +1,18 @@
  <h3 class="scene-title">{{screenplay.title}}</h3>
  <p class="heading-bar">Characters:</p>
-<button class="char-buttons" ng-repeat="character in sideBarCharacters">{{ character.name }}</button>
+<!-- <button class="char-buttons" ng-repeat="character in sideBarCharacters">{{ character.name }}</button> -->
+<div class="scenes-repeat" ng-repeat="character in sideBarCharacters">
+    <button class="scene char-buttons btn signup-button" ng-class="scene.name" ng-click="showform.name = showform.name === character.name ? null : character.name">{{ character.name }}</button>
+    <div ng-show="showform.name === character.name">
+        <div id="edit-scene">
+            <label for="header">Backstory</label>
+            <textarea class="form-control" id="edit-header" ng-model="character.backstory"></textarea>
+
+            <button ng-click="submitCharacter(character)" type="submit" class="btn btn-default">Save Edits</button>
+            <button ng-click="showform.name = null" class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+    </div><!-- closes edit form -->
 <p class="heading-bar">Scenes:</p>
 <div class="scenes-repeat" ng-repeat="scene in sideBarScreenplay.scenes">
 	<div class="scene-box" ng-drop="true" ng-drop-success="onDropComplete(sideBarScreenplay, $index, $data)">

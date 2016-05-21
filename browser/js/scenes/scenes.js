@@ -31,6 +31,14 @@ app.controller('ScenesCtrl', function($scope, SceneFactory, $state, ScreenplaysF
         });
     };
 
+    //save characters backstory
+
+    $scope.submitCharacter = function(character) {
+        console.log(character);
+        CharacterFactory.updateOne(character._id, {backstory: character.backstory})
+        .then(()=> console.log('updated character'));
+    }
+
 // **** ngDraggable DRAG AND DROP **** //
     $scope.onDropComplete = function (screenplay, newIdx, oldIdx){
         var valToMove = screenplay.scenes.splice(oldIdx, 1)[0];

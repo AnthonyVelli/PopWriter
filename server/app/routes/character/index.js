@@ -6,7 +6,7 @@ const Character = require('mongoose').model('Character');
 module.exports = router;
 
 router.param('id', (req, res, next, id) => {
-	Character.findbyId(id)
+	Character.findById(id)
 	.then(character => {
 		req.requestedCharacter = character;
 		next();
@@ -44,7 +44,7 @@ router.post('/', (req, res, next) => {
 // update a character
 router.put('/:id', (req, res, next) => {
 	if(!req.user) res.sendStatus(401)
-	else if (req.user.isAdmin || req.user.equals(req.requestedCharacter)) {
+	else if (req.user.isAdmin || req.user) {
 		req.requestedCharacter.update(req.body)
 		.then(updatedCharacter => res.json(updatedCharacter))
 		.catch(next);

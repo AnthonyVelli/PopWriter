@@ -9,6 +9,10 @@ app.factory('CharacterFactory', ($http) => {
         getAll:(spId) => {
             return $http.get('/api/character/' + spId)
             .then(res => res.data);
+        },
+        updateOne:(charId, char) => {
+            return $http.put('/api/character/' + charId, char)
+            .then(res => res.data);
         }
     };
 });
