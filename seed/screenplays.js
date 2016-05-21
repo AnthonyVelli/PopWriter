@@ -302,7 +302,7 @@ module.exports = [
             },
             {
             type: 'dialogue',
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `Did you hear that? They've shut down
                          the main reactor. We'll be destroyed
                          for sure. This is madness!`
@@ -314,7 +314,7 @@ module.exports = [
             },
             {
             type: 'dialogue',
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `We're doomed!`
             },
             {
@@ -324,7 +324,7 @@ module.exports = [
             },
             {
             type: 'dialogue',
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `There'll be no escape for the Princess
                          this time.`
             },
@@ -336,7 +336,7 @@ module.exports = [
             },
             {
             type: 'dialogue',
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `What's that?`
             }],
             [{
@@ -367,7 +367,7 @@ module.exports = [
             },
             {
             type: `dialogue`,
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `I should have known better than to
                          trust the logic of a half-sized
                          thermocapsulary dehousing assister...`
@@ -408,7 +408,7 @@ module.exports = [
             },
             {
             type: `action`,
-            charName: `luke`,
+            charName: `LUKE`,
             text: `The robot scoots around in a tight circle, stops short, and
                smoke begins to pour out of every joint. Luke throws his
                arms up in disgust. Exasperated, the young farm boy jumps
@@ -441,7 +441,7 @@ module.exports = [
             },
             {
             type: `dialogue`,
-            charName: 'threepio',
+            charName: 'THREEPIO',
             text: `Artoo! Artoo-Detoo, where are you?`
             },
             {
@@ -456,7 +456,7 @@ module.exports = [
             },
             {
             type: `dialogue`,
-            charName: `threepio`,
+            charName: `THREEPIO`,
             text: `At last! Where have you been?`
             },
             {
@@ -465,7 +465,7 @@ module.exports = [
             },
             {
             type: `dialogue`,
-            charName: 'threepio',
+            charName: 'THREEPIO',
             text: `They're heading in this direction.
                          What are we going to do? We'll be
                          sent to the spice mine of Kessel or
@@ -494,7 +494,7 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: `leia`,
+                charName: `LEIA`,
                 text: `Luke! Luke! Luke!`
             },
             {
@@ -505,18 +505,18 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: `han`,
+                charName: `HAN`,
                 text: `Hey! Hey!`
             },
             {
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `I knew you'd come back! I just knew
                          it!`
             },
             {
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `Well, I wasn't gonna let you get all
                          the credit and take all the reward.`
             },
@@ -527,7 +527,7 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: 'leia',
+                charName: 'LEIA',
                 text: `Hey, I knew there was more to you
                          than money.`
             },
@@ -537,7 +537,7 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `Oh, no!`
             },
             {
@@ -547,7 +547,7 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: 'threepio',
+                charName: 'THREEPIO',
                 text: `Oh, my! Artoo! Can you hear me? Say
                          something!
                               (to mechanic)
@@ -555,19 +555,19 @@ module.exports = [
             },
             {
                 type: `dialogue`,
-                charName: 'technician',
+                charName: 'TECHNICIAN',
                 text: `We'll get to work on him right away.`
             },
             {
                 type: `dialogue`,
-                charName: 'threepio',
+                charName: 'THREEPIO',
                 text: `You must repair him! Sir, if any of
                          my circuits or gears will help, I'll
                          gladly donate them.`
             },
             {
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `He'll be all right.`
             }],
             [{
@@ -673,7 +673,7 @@ transmitter.  His Tauntaun shifts and moans nervously beneath him.`
             },
             {
             type: `dialogue`,
-            charName: 'luke',
+            charName: 'LUKE',
             text: `Echo Three to Echo Seven.  Han,
         old buddy, do you read me?`
             },
@@ -682,23 +682,23 @@ transmitter.  His Tauntaun shifts and moans nervously beneath him.`
             text: `After a little static a familiar voice is heard.`
             },{
             type: `dialogue`,
-            charName: 'han',
+            charName: 'HAN',
             text: `Loud and clear, kid.  What's up?`
             },{
             type: `dialogue`,
-            charName: 'luke',
+            charName: 'LUKE',
             text: `Well, I finished my circle.  I
         don't pick up any life readings.`
             },{
             type: `dialogue`,
-            charName: 'han',
+            charName: 'HAN',
             text: `There isn't enough life on this
         ice cube to fill a space cruiser.
         The sensors are placed, I'm going
         back.`
             },{
             type: `dialogue`,
-            charName: 'luke',
+            charName: 'LUKE',
             text: `There isn't enough life on this
         ice cube to fill a space cruiser.
         The sensors are placed, I'm going
@@ -709,7 +709,7 @@ transmitter.  His Tauntaun shifts and moans nervously beneath him.`
 He pats the beast on the head to calm it.`
             },{
             type: `dialogue`,
-            charName: 'luke',
+            charName: 'LUKE',
             text: `Hey, steady girl.  What's the
         matter?  You smell something?`
             },{
@@ -720,7 +720,7 @@ monstrous howl and turns to see an eleven-foot-tall shape towering over
 him.  It is a Wampa Ice Creature, lunging at him ferociously.`
             },{
             type: `dialogue`,
-            charName: 'luke',
+            charName: 'LUKE',
             text: `Aaargh!`
             },{
             type: `action`,
@@ -753,7 +753,7 @@ stops his work and lifts his face shield, growling an irritated
 greeting to his boss.`
             },{
                 type: `dialogue`,
-                charName: `han`,
+                charName: `HAN`,
                 text: `Chewie!`
             },{
                 type: `action`,
@@ -761,7 +761,7 @@ greeting to his boss.`
 `
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `All right, don't lose your temper.
         I'll come right back and give you
         a hand.`
@@ -781,7 +781,7 @@ monitoring radar signals.`
                 text: `General Rieekan straightens up from a console at Han's approach.`
             },{
                 type: `dialogue`,
-                charName: `rieekan`,
+                charName: `RIEEKAN`,
                 text: `Solo?`
             },{
                 type: `dialogue`,
@@ -791,16 +791,16 @@ The sensors are in place.  You'll
 know if anything comes around.`
             },{
                 type: `dialogue`,
-                charName: 'rieekan',
+                charName: 'RIEKAAN',
                 text: `Commander Skywalker reported in yet?`
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `No.  He's checking out a meteorite
         that hit near him.`
             },{
                 type: `dialogue`,
-                charName: 'rieekan',
+                charName: 'RIEKAAN',
                 text: `With all the meteor activity in this
         system, it's going to be difficult
         to spot approaching ships.`
@@ -809,7 +809,7 @@ know if anything comes around.`
                 text: `Taking a deep breath, Han blurts out what is on his mind.`
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `General, I've got to leave.  I
         can't stay anymore.`
             },{
@@ -820,36 +820,36 @@ a Nordic fashion.  She overhears their  conversation and seems somewhat
 distressed.`
             },{
                 type: `dialogue`,
-                charName: 'rieekan',
+                charName: 'RIEKAAN',
                 text: `I'm sorry to hear that.`
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `Well, there's a price on my head.
         If I don't pay off Jabba the Hut,
         I'm a dead man.`
             },{
                 type: `dialogue`,
-                charName: 'rieekan',
+                charName: 'RIEKAAN',
                 text: `A death mark's not an easy thing
         to live with.  You're a good
         fighter, Solo.  I hate to lose you.
 `
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `Thank you, General.`
             },{
                 type: `action`,
                 text: `He turns to Leia as Rieekan moves away.`
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `Well, Your Highness, I guess this
         is it.`
             },{
                 type: `dialogue`,
-                charName: 'leia',
+                charName: 'LEIA',
                 text: `That's right.`
             },{
                 type: `action`,
@@ -857,7 +857,7 @@ distressed.`
 head and adopts a sarcastic tone.`
             },{
                 type: `dialogue`,
-                charName: 'han',
+                charName: 'HAN',
                 text: `Well, don't get all mushy on me.
         So long, Princess.`
             },{
@@ -875,7 +875,7 @@ Vader's.  Sparks fly as they duel, Vader gradually forcing Luke
 backward toward the gantry.`
             },{
                 type: `dialogue`,
-                charName: `vader`,
+                charName: `VADER`,
                 text: `You are beaten.  It is useless
         to resist.  Don't let yourself
         be destroyed as Obi-Wan did.`
@@ -902,7 +902,7 @@ follows.  The wind subsides.  Luke holds on.  There is nowhere else to
 go.  `
             },{
                 type: `dialogue`,
-                charName: 'vader',
+                charName: 'VADER',
                 text: `There is no escape.  Don't make
         me destroy you.  You do not yet
         realize your importance.  You
@@ -914,43 +914,43 @@ go.  `
         galaxy.`
             },{
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `I'll never join you!`
             },{
                 type: `dialogue`,
-                charName: 'vader',
+                charName: 'VADER',
                 text: `If you only knew the power of the
         dark side.  Obi-Wan never told
         you what happened to your father.`
             },{
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `He told me enough!  It was you
         who killed him.`
             },{
                 type: `dialogue`,
-                charName: 'vader',
+                charName: 'VADER',
                 text: `No.  I am your father.`
             },{
                 type: `action`,
                 text: `Shocked, Luke looks at Vader in utter disbelief.`
             },{
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `No.  No.  That's not true!
         That's impossible!`
             },{
                 type: `dialogue`,
-                charName: 'vader',
+                charName: 'VADER',
                 text: `Search your feelings.  You know
         it to be true.`
             },{
                 type: `dialogue`,
-                charName: 'luke',
+                charName: 'LUKE',
                 text: `No!  No!  No!`
             },{
                 type: `dialogue`,
-                charName: 'vader',
+                charName: 'VADER',
                 text: `Luke.  You can destroy the Emperor.
         He has foreseen this.  It is your
         destiny.  Join me, and together

@@ -7,8 +7,8 @@ app.factory('EditorFactory', function($http){
             script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '</p>';
             scene.components.forEach( component => {
                 if(component.charName) {
-                        if (component.character) script += '<p id="' + component.character + '" class="character">' + component.charName + '</p>';
-                        else script += '<p class="character">' + component.charName + '</p>';
+                        if (component.character) script += '<p id="' + component.character + '" class="character">' + component.charName.toUpperCase() + '</p>';
+                        else script += '<p class="character">' + component.charName.toUpperCase() + '</p>';
                         charArray.push(component.charName.toUpperCase());
                     }
                 script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
