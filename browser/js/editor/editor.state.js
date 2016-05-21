@@ -10,25 +10,38 @@ app.config($stateProvider => {
         }
     });
 })
-.controller('EditorController', ($scope, screenplay, ScreenplaysFactory, EditorFactory) => {
+.controller('EditorController', ($scope, screenplay, ScreenplaysFactory, EditorFactory, CharacterFactory) => {
     $scope.screenplay = screenplay;
+    // assigning screenplay to another variable so that the digest happens only on the sidebar.
     $scope.sideBarScreenplay = screenplay;
+    // console.log('screenplay', screenplay);
     $scope.options = EditorFactory.editorOptions;
-    $scope.text = EditorFactory.scriptify(screenplay) || '<p class="header">START YOUR SCRIPT HERE</p>';
+    $scope.text = EditorFactory.scriptify(screenplay).screenplay || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
+    let arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
 
 
-    $scope.save = () => {
-        var toBeSaved = EditorFactory.textToObj();
+    $scope.save = function() {
+        var toBeSaved = EditorFactory.textToObj(screenplay._id);
         var currentElement = EditorFactory.getSelectionStart();
-        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved })
+        ScreenplaysFactory.updateScreenplay(screenplay._id, { scenes: toBeSaved.scenes })
         .then( update => {
             return ScreenplaysFactory.getOne(update._id);
         })
         .then(updatedScreenplay => {
+            // reassign the sidebar screenplay so it automatically adds a new scene to the draggable ones.
             $scope.sideBarScreenplay = updatedScreenplay;
             if(!currentElement.id) currentElement.id = EditorFactory.getId(updatedScreenplay);
+            let filteredCharstoBeSaved = toBeSaved.characters.filter(charObj => {
+                return !arrayOfSavedCharacters.includes(charObj.name);
+            });
+            return CharacterFactory.saveAll(filteredCharstoBeSaved)
+        })
+        .then(characters => {
+            if(characters) {
+                arrayOfSavedCharacters = arrayOfSavedCharacters.concat(characters.map(charObj => charObj.name));
+            }
         })
         .catch(console.error.bind(console));
     };

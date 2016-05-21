@@ -48,7 +48,7 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		filteredChars.forEach(name => {
 			TfIdf.addDocument(name.text, name.name);
 		});
-		res.send(TfIdf);
+		
 		var formattedforWordCount = filteredChars.map((name, idx) => {
 			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
 		});
@@ -60,8 +60,8 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 				var ele = char.tfidf[i];
 				charObj.words.push({key: ele.term, y: ele.tfidf});
 			}
-		}); ; })
-		// res.json([formattedforWordCount, donutData]); })
-	.catch(next);	
+		}); 
+		res.json([formattedforWordCount, donutData]); })
+	.catch(next);
 });
 

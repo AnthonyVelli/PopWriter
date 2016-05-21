@@ -2,17 +2,19 @@ app.factory('EditorFactory', function($http){
 
     function scriptify(screenplay){
         var script = '';
+        var charArray = [];
         screenplay.scenes.forEach( scene => {
             script += '<p id="' + scene._id.toString() + '" class="header">' + scene.header + '</p>';
             scene.components.forEach( component => {
                 if(component.charName) {
                         if (component.character) script += '<p id="' + component.character + '" class="character">' + component.charName + '</p>';
                         else script += '<p class="character">' + component.charName + '</p>';
+                        charArray.push(component.charName.toUpperCase());
                     }
                 script += '<p id="' + component._id + '" class="'+ component.type +'">' + component.text + '</p>';
             })
         })
-        return script;
+        return { screenplay: script, characters: charArray };
     }
 
     function getId(updatedScreenplay) {
@@ -27,11 +29,13 @@ app.factory('EditorFactory', function($http){
             }
         return currentId;
     }
-    function textToObj() {
+
+    function textToObj(spId) {
         var editor = document.getElementById('editor').childNodes;
         var arrayOfScenes = [];
         var toBeSaved = {};
         var currentCharacter;
+        var characters = [];
         // var currentCharacterId;
 
         for(var key = 0; key < editor.length; key++ ){
@@ -45,7 +49,8 @@ app.factory('EditorFactory', function($http){
                 if(editor[key].id) toBeSaved._id = editor[key].id;
                 arrayOfScenes.push(toBeSaved);
             } else if (currentClass === "character"){
-                currentCharacter = editor[key].textContent;
+                currentCharacter = editor[key].textContent.toUpperCase();
+                if(!characters.includes(currentCharacter)) characters.push(currentCharacter);
                 // currentCharacterId = editor[key].id;
             } else {
                 if(!toBeSaved.components) toBeSaved.components = [];
@@ -61,8 +66,13 @@ app.factory('EditorFactory', function($http){
                 toBeSaved.components.push(component);
             }
         }
+        console.log('characters Array', characters);
+        characters = characters.map(charName => {
+            //ADDS SCREENPLAYIDS TO THE CHARACTER OBJECT TO BE SAVED>>>
 
-        return arrayOfScenes;
+            return {name: charName, screenplay: spId};
+        })
+        return { scenes: arrayOfScenes, characters: characters };
     }
 
     function getSelectionStart() {

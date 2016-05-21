@@ -18,6 +18,7 @@ app.config(function ($stateProvider) {
     	url: '/pieChart/:id',
     	templateUrl: 'js/analytics/pieChart.html',
     	controller: function($scope, AnalyticsFactory, pieChartData) {
+    		console.log(pieChartData);
     		$scope.options = AnalyticsFactory.pieChartOptions;
     		$scope.data = pieChartData[0];
     	},
@@ -51,8 +52,9 @@ app.config(function ($stateProvider) {
 	})
 	.state('analytics.lineChart', {
 		url: '/lineChart/:id',
-		templateUrl: 'js/analytics/lineChart.html',
+		templateUrl: 'js/analyticsSingle/lineChart.html',
 		controller: function($scope, lineChartData, AnalyticsFactory) {
+			
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -64,15 +66,13 @@ app.config(function ($stateProvider) {
 			$scope.options = AnalyticsFactory.lineChartOptions;
 			$scope.data = [{
 					color: "#337ab7",
-					key: "All Text",
+					key: $scope.selectedScreenplay.name,
 					area: true,
 					values: lineChartData.sceneText
 				}];
 		},
 		resolve: {
         	lineChartData: (AnalyticsFactory, $stateParams) => {
-                console.log('stateParams',$stateParams);
-
        			return AnalyticsFactory.getSentiment($stateParams.id)
         		.then(sentiment => sentiment)
         		.catch(error => console.error(error));
@@ -84,7 +84,4 @@ app.config(function ($stateProvider) {
 app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
     $scope.changeSP = (spId) => {$scope.currentSP = spId};
 	$scope.scripts = scrapedSPs;
-	$scope.changeSP = function(sp){
-		$scope.currentSP = sp;
-	};
 });
