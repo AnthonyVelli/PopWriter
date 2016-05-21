@@ -66,7 +66,6 @@ app.factory('EditorFactory', function($http){
                 toBeSaved.components.push(component);
             }
         }
-        console.log('characters Array', characters);
         characters = characters.map(charName => {
             //ADDS SCREENPLAYIDS TO THE CHARACTER OBJECT TO BE SAVED>>>
 
