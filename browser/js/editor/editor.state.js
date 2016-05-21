@@ -19,6 +19,7 @@ app.config($stateProvider => {
     $scope.text = EditorFactory.scriptify(screenplay).screenplay || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
     $scope.selected = $scope.components[0];
+
     $scope.arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
 
     function getAllCharactersForSideBar() {
@@ -30,6 +31,11 @@ app.config($stateProvider => {
     };
 
     getAllCharactersForSideBar();
+
+    let arrayOfSavedCharacters = EditorFactory.scriptify(screenplay).characters;
+    var myEl = angular.element( document.querySelector('#scenes-bar'));
+    var triangleDirection = angular.element(document.querySelector('#triangle'));
+
 
     $scope.save = function() {
         var toBeSaved = EditorFactory.textToObj(screenplay._id);
@@ -70,9 +76,7 @@ app.config($stateProvider => {
     };
 
 
-    var myEl = angular.element( document.querySelector('#scenes-bar'));
 
-    var triangleDirection = angular.element(document.querySelector('#triangle'));
 
     $scope.toggleScenesML = function(event) {
 

@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 #editor {
     padding-top: 30px;
     font-family: courier;
@@ -113,9 +117,48 @@
 .btn-save {
     margin-top: 15px;
     margin-left: 10px;
+    margin-right:8%;
+    margin-bottom: 10px;
     background-color: rgba(0,0,0,0);
-    border: 2px solid #282824;
+    float: right;
 }
+
+#an-btn {
+    margin-right: 5px;
+}
+
+#an-btn:focus, .btn-save:focus {
+    outline: none;
+}
+
+
+#comp-displayer {
+    margin-top: 15px;
+    margin-left: 3%;
+    margin-right:10px;
+    width: 30%;
+    font-size: 1.5em;
+    float: left;
+}
+
+#topbar {
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 0%;
+    &:hover {
+        background-color: rgba(240,240,240,.5);
+        color: green;
+    }
+}
+
+.fixed {
+    position: fixed;
+    top:0;
+    color: lightgrey;
+}
+// .btn-save, #comp-displayer {
+//     position: fixed;
+// }
 
 .heading-bar {
     margin-top: 5%;
