@@ -6,7 +6,7 @@ const Character = require('mongoose').model('Character');
 module.exports = router;
 
 router.param('id', (req, res, next, id) => {
-	Character.findbyId(id)
+	Character.findById(id)
 	.then(character => {
 		req.requestedCharacter = character;
 		next();
@@ -24,6 +24,14 @@ router.get('/', (req, res, next) => {
 	};
 });
 
+//get all characters of a particular screenplay
+
+router.get('/:screenplayId', (req, res, next) => {
+    Character.find({screenplay: req.params.screenplayId})
+    .then(characters => res.json(characters))
+    .catch(next);
+})
+
 // create to a user
 router.post('/', (req, res, next) => {
 	Character.create(req.body)
@@ -36,7 +44,7 @@ router.post('/', (req, res, next) => {
 // update a character
 router.put('/:id', (req, res, next) => {
 	if(!req.user) res.sendStatus(401)
-	else if (req.user.isAdmin || req.user.equals(req.requestedCharacter)) {
+	else if (req.user.isAdmin || req.user) {
 		req.requestedCharacter.update(req.body)
 		.then(updatedCharacter => res.json(updatedCharacter))
 		.catch(next);
