@@ -179,6 +179,7 @@ app.factory('AnalyticsFactory', ($http) => {
 		getSentiment: (id) => $http.get('/api/analytics/public/' + id + '/emotion').then(parseData),
 		getCharacters: (id) => $http.get('/api/analytics/public/' + id + '/wordcount').then(parseData),
 		getUserSentiment: (id) => $http.get('/api/analytics/user/' + id + '/emotion').then(parseData),
+		getUserCharacters: (id) => $http.get('/api/analytics/user/' + id + '/wordcount').then(parseData),
 		lineChartOptions: lineChartOptions,
 		barChartOptions: barChartOptions,
 		horizontalChartOptions: horizontalChartOptions,
