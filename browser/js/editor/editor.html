@@ -11,7 +11,7 @@
         <div class="editor-contain flex-child">
             <div id="topbar" scroll>
                 <button class="btn btn-save" ng-click="save()">save</button>
-                <button class="btn btn-save" id="an-btn" ui-sref="">analytics</button>
+                <button class="btn btn-save" id="an-btn" ui-sref="analyticsSingle({id: screenplay._id})">analytics</button>
                 <div id="comp-displayer">{{ selected.toUpperCase() }}</div>
             </div>
             <medium-editor id="editor" bind-options="options" ng-model="text" ng-keydown="type($event)" ng-click="click()"">
