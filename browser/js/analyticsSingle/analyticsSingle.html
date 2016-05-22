@@ -1,13 +1,15 @@
 <section class="bg-wrapper">
 	<section class="bg-img">
-		<h2 class="sp">Analytics</h2>
-		<div>
-			<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.charWeight({id: currentSP})" type="button" class="btn btn-primary btn-lg">Character Weight</button>
+		<div class="state-container">
+			<h2 class="sp">Analytics</h2>
+			<div class="chart-types">
+				<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.charWeight({id: currentSP})" type="button" class="btn btn-primary btn-lg">Character Weight</button>
 
-			<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.charWord({id: currentSP})" type="button" class="btn btn-danger btn-lg">Character Word Distribution</button>
+				<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.charWord({id: currentSP})" type="button" class="btn btn-danger btn-lg">Character Word Distribution</button>
 
-			<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.emotion({id: currentSP})" type="button" class="btn btn-primary btn-lg">Emotional Development</button>
+				<button class="btn sp-btn add-screenplay" ui-sref="analyticsSingle.emotion({id: currentSP})" type="button" class="btn btn-primary btn-lg">Emotional Development</button>
+			</div>
+			<div id="analytics-div" ui-view></div>
 		</div>
-		<div id="analytics-div" ui-view></div>
 	</section>
 </section>
