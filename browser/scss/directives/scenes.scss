@@ -41,6 +41,7 @@
 	padding-bottom: 15px;
 }
 
+/* plus sign next to each scene */
 .edit-btn {
 	color: #271E23;
 	display: block;
@@ -49,7 +50,7 @@
 	height: 35px;
 	padding:  11px 5px;
 	text-align: center;
-	}
+}
 
 .edit-btn.edit-btn-cursor {
 	cursor: pointer;
@@ -59,5 +60,9 @@
 #edit-scene {
 	padding: 8px 5px;
 	background-color: #87b4a4;
+}
+
+.btn-scenes, label {
+	margin-top: 6px;
 }
 

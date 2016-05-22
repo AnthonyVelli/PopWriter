@@ -3,19 +3,20 @@
 	<section class="bg-img">
 		<div class="state-container left-padding">
 		<h2 class="sp">Analytics</h2>
-		<div>
-			<select ng-model="selectedScreenplay" ng-change="changeSP(selectedScreenplay)">
+		<div class="select-sp">
+			<select ng-model="selectedScreenplay" ng-init="selectedScreenplay='Select a Script'" ng-change="changeSP(selectedScreenplay)">
 				<option>Select a Script</option>
 				<option ng-repeat="script in scripts | orderBy: 'name'" value="{{script._id}}">{{script.name}}</option>
 			</select>
 		</div>
-		<div>
-			<button class="btn sp-btn add-screenplay" ui-sref="analytics.pieChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Character Weight</button>
+		<div class="chart-types">
+			<button class="btn sp-btn add-screenplay btn-space" ui-sref="analytics.pieChart({id: currentSP})" type="button">Character Weight</button>
 
-			<button class="btn sp-btn add-screenplay" ui-sref="analytics.donutChart({id: currentSP})" type="button" class="btn btn-danger btn-lg">Character Word Distribution</button>
+			<button class="btn sp-btn add-screenplay  btn-space" ui-sref="analytics.donutChart({id: currentSP})" type="button">Character Word Distribution</button>
 
-			<button class="btn sp-btn add-screenplay" ui-sref="analytics.lineChart({id: currentSP})" type="button" class="btn btn-primary btn-lg">Emotional Development</button>
+			<button class="btn sp-btn add-screenplay btn-space" ui-sref="analytics.lineChart({id: currentSP})" type="button">Emotional Development</button>
 		</div>
-		<div class="sp-div" ui-view></div>
+		<div class="analytics-div" ui-view></div>
+		</div>
 	</section>
 </section>
