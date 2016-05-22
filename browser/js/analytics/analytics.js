@@ -18,6 +18,7 @@ app.config(function ($stateProvider) {
     	url: '/pieChart/:id',
     	templateUrl: 'js/analytics/pieChart.html',
     	controller: function($scope, AnalyticsFactory, pieChartData) {
+            $scope.hidden = true;
     		console.log(pieChartData);
     		$scope.options = AnalyticsFactory.pieChartOptions;
     		console.log("PC options", $scope.options);
@@ -35,6 +36,7 @@ app.config(function ($stateProvider) {
 		url: 'donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: function($scope, AnalyticsFactory, pieChartData) {
+            $scope.hidden = true;
 			console.log("piechartdata in donut:", pieChartData);
 			$scope.selectDChar = function(char){
 				$scope.data = $scope.dselected;
@@ -56,7 +58,7 @@ app.config(function ($stateProvider) {
 		url: '/lineChart/:id',
 		templateUrl: 'js/analyticsSingle/lineChart.html',
 		controller: function($scope, lineChartData, AnalyticsFactory) {
-			
+            $scope.hidden = true;
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -86,4 +88,5 @@ app.config(function ($stateProvider) {
 app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
     $scope.changeSP = (spId) => {$scope.currentSP = spId};
 	$scope.scripts = scrapedSPs;
+    $scope.hidden = false;
 });
