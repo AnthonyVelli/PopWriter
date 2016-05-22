@@ -3,7 +3,7 @@
 	<section class="bg-img">
 		<div class="state-container left-padding">
 		<h2 class="sp">Analytics</h2>
-		<div>
+		<div class="select-sp">
 			<select ng-model="selectedScreenplay" ng-init="selectedScreenplay='Select a Script'" ng-change="changeSP(selectedScreenplay)">
 				<option>Select a Script</option>
 				<option ng-repeat="script in scripts | orderBy: 'name'" value="{{script._id}}">{{script.name}}</option>
