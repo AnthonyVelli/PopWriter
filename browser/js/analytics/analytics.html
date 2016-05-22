@@ -4,19 +4,16 @@
 		<div class="state-container left-padding">
 		<h2 class="sp">Analytics</h2>
 		<div class="select-sp">
-			<select ng-model="selectedScreenplay" ng-init="selectedScreenplay='Select a Script'" ng-change="changeSP(selectedScreenplay)">
-				<option>Select a Script</option>
-				<option ng-repeat="script in scripts | orderBy: 'name'" value="{{script._id}}">{{script.name}}</option>
-			</select>
+			<select ng-change='changeSP()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts | orderBy: 'name'"><option value=''></option></select>
 		</div>
 		<div class="chart-types">
-			<button class="btn sp-btn add-screenplay btn-space" ui-sref="analytics.pieChart({id: currentSP})" type="button">Character Weight</button>
+			<button class="btn sp-btn add-screenplay btn-space" ng-click="charWeightChart()" type="button">Character Weight</button>
 
-			<button class="btn sp-btn add-screenplay  btn-space" ui-sref="analytics.donutChart({id: currentSP})" type="button">Character Word Distribution</button>
+			<button class="btn sp-btn add-screenplay  btn-space" ng-click="wordDistroChart()" type="button">Character Word Distribution</button>
 
-			<button class="btn sp-btn add-screenplay btn-space" ui-sref="analytics.lineChart({id: currentSP})" type="button">Emotional Development</button>
+			<button class="btn sp-btn add-screenplay btn-space" ng-click="sentimentChart()" type="button">Emotional Development</button>
 		</div>
-		<div class="analytics-div" ui-view></div>
+		<chart ng-show="currentSP" options="options" data="data"></chart>
 		</div>
 	</section>
 </section>

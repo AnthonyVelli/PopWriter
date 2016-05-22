@@ -79,6 +79,7 @@ app.config(function ($stateProvider) {
 				values: $scope.otherMovieChars[$scope.selectedOtherMovieChar]});
 			};
 			$scope.selectChar = function(){
+				console.log($scope.chars[$scope.selected]);
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
 					key: $scope.selected,
