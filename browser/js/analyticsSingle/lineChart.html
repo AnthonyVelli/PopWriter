@@ -1,8 +1,8 @@
-<section class="state-container">
+<section class="chart-container">
 	<div>
 		<div class='charselector'>
 			<select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"><option value="Analyze a Character"></option></select>
-			<select ng-change='selectOtherMovie()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts"><option value=''></option></select>
+			<select ng-change='selectOtherMovie()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts | orderBy: 'name'"><option value=''></option></select>
 			<select ng-show='otherMovieChars' ng-change='selectOtherMovieChar()' ng-model="selectedOtherMovieChar" ng-options="k as k for (k, v) in otherMovieChars"><option value=""></option></select>
 		</div>
 	    <nvd3 options="options" data="data"></nvd3>

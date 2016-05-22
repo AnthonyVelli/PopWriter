@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 #editor {
     padding-top: 30px;
     font-family: courier;
@@ -84,7 +88,7 @@
         rgba(243,243,243,0.5) 100%),
         url(tex-paper-wrinkled.jpg);
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .editor-header-bar h1, .editor-header-bar  button {
@@ -105,6 +109,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    height: 100%;
 }
 
 .editor-wrapper {
@@ -112,9 +117,63 @@
 }
 
 .btn-save {
-    margin-top: 15px;
-    margin-left: 10px;
+    margin: 15px 8% 10px 10px;
     background-color: rgba(0,0,0,0);
-    border: 2px solid #282824;
+    float: right;
+}
+
+#an-btn {
+    margin-right: 5px;
+}
+
+#an-btn:focus, .btn-save:focus {
+    outline: none;
+}
+
+
+#comp-displayer {
+    margin-top: 15px;
+    margin-left: 3%;
+    margin-right:10px;
+    width: 30%;
+    font-size: 1.5em;
+    float: left;
+}
+
+#topbar {
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 0%;
+    &:hover {
+        background-color: rgba(240,240,240,.5);
+        color: green;
+    }
+}
+
+.fixed {
+    position: fixed;
+    top:0;
+    color: lightgrey;
+}
+// .btn-save, #comp-displayer {
+//     position: fixed;
+// }
+
+.heading-bar {
+    margin-top: 5%;
+    background-color: rgb(51, 87, 85);
+    color: white;
+}
+
+.char-buttons {
+    width: 95%;
+    background-color: white;
+    font-size: 1.2em;
+    color: black;
+    border: 1px solid #282824;
+    padding:1px;
+    &:focus {
+        outline: none;
+    }
 }
 

@@ -27,13 +27,31 @@ schema.pre('update', function(next) {
   next();
 });
 
-schema.methods.TextbyScenes = function(divisions){
+schema.methods.PopulateComponents = function(){
     var popdScenesArray = this.scenes.map(scene => {
         return Scene.findById(scene)
         .populate('components')
         .exec();
     });
-    return Promise.all(popdScenesArray)
+    return Promise.all(popdScenesArray);
+};
+
+
+schema.methods.GetDialogue = function(){
+    return this.PopulateComponents()
+    .then(scenes => {
+        var dialogueArr = [];
+        return scenes.reduce((orig,scene) => {
+            return orig.concat(scene.components.filter(comp => comp.charName && comp.text.split(' ').length > 1));
+        }, []); 
+    });
+};
+
+
+
+
+schema.methods.TextbyScenes = function(){
+    return this.PopulateComponents()
     .then(scenes => {
         var sceneObj = {};
         sceneObj.sceneText = {};
