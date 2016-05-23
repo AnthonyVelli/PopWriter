@@ -20,7 +20,8 @@ app.config(function ($stateProvider) {
     	controller: function($scope, AnalyticsFactory, pieChartData) {
     		console.log(pieChartData);
     		$scope.options = AnalyticsFactory.pieChartOptions;
-    		$scope.data = pieChartData[0];
+    		console.log("PC options", $scope.options);
+    		$scope.data = pieChartData;
     	},
     	resolve: {
     		pieChartData: (AnalyticsFactory, $stateParams) => {
@@ -34,13 +35,13 @@ app.config(function ($stateProvider) {
 		url: 'donutChart/:id',
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: function($scope, AnalyticsFactory, pieChartData) {
-			console.log(pieChartData);
+			console.log("piechartdata in donut:", pieChartData);
 			$scope.selectDChar = function(char){
 				$scope.data = $scope.dselected;
 			};
-			$scope.data;
+			// $scope.data;
 			$scope.options = AnalyticsFactory.donutChartOptions;
-			$scope.chars = pieChartData[1];
+			$scope.chars = pieChartData;
 		},
     	resolve: {
 			pieChartData: (AnalyticsFactory, $stateParams) => {

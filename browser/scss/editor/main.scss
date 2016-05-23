@@ -70,7 +70,7 @@
 }
 
 .slide-bar {
-    flex-basis: 30px;
+    flex: 0 0 28px;
     padding-top: 20px;
     color: rgb(220,220,220);
     text-align: center;
@@ -155,9 +155,10 @@
     top:0;
     color: lightgrey;
 }
-// .btn-save, #comp-displayer {
-//     position: fixed;
-// }
+
+/* .btn-save, #comp-displayer {
+     position: fixed;
+} */
 
 .heading-bar {
     margin-top: 5%;

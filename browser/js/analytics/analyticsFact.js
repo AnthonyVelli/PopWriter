@@ -9,6 +9,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	        x: function(d){return d.key},
 	        y: function(d){return d.y},
 	        showLabels: true,
+	        labelsOutside: true,
 	        duration: 500,
 	        labelThreshold: 0.01,
 	        labelSunbeamLayout: true,
@@ -16,7 +17,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	            margin: {
 	                top: 5,
 	                right: 35,
-	                bottom: 5,
+	                bottom: 50,
 	                left: 0
 	            }
 	        }
@@ -41,7 +42,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	            margin: {
 	                top: 5,
 	                right: 140,
-	                bottom: 5,
+	                bottom: 50,
 	                left: 0
 	            }
 	        }
