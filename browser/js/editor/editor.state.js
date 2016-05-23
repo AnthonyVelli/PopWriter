@@ -14,7 +14,6 @@ app.config($stateProvider => {
     $scope.screenplay = screenplay;
     // assigning screenplay to another variable so that the digest happens only on the sidebar.
     $scope.sideBarScreenplay = screenplay;
-    // console.log('screenplay', screenplay);
     $scope.options = EditorFactory.editorOptions;
     $scope.text = EditorFactory.scriptify(screenplay).screenplay || '<p class="header">START YOUR SCRIPT HERE</p>';
     $scope.components = ["header","action", "character", "dialogue"];
@@ -61,7 +60,6 @@ app.config($stateProvider => {
         })
         .catch(console.error.bind(console));
     };
-
 
     $scope.type = function(event) {
         if(event.code === 'Enter') {

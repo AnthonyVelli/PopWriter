@@ -30,6 +30,15 @@ main {
   margin: 0 auto;
 }
 
+.chart-types .btn:focus, .sp-btn:focus {
+  outline: none;
+  color: #fff;
+}
+
+.chart-types .btn:active {
+  color: #87b4a4;
+}
+
 @import 'analytics/main';
 @import 'directives/main';
 @import 'home/main';
