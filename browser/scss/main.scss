@@ -41,6 +41,10 @@ main {
   color: #fff;
 }
 
+.btn:active, .sp-btn:active {
+  outline: none;
+}
+
 .chart-types .btn:active {
   color: #87b4a4;
 }
