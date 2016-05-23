@@ -30,7 +30,7 @@ main {
   margin: 0 auto;
 }
 
-.chart-types .btn:focus {
+.chart-types .btn:focus, .sp-btn:focus {
   outline: none;
   color: #fff;
 }
