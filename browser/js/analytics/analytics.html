@@ -3,17 +3,22 @@
 	<section class="bg-img">
 		<div class="state-container left-padding">
 		<h2 class="sp">Analytics</h2>
+		<h3 class="scene-title">{{selectedmovie.name}}<h3>
 		<div class="select-sp">
-			<select ng-change='changeSP()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts | orderBy: 'name'"><option value=''></option></select>
+			<select ng-show="selectedmovie == null" ng-change='changeSP()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts | orderBy: 'name'"><option value=''></option></select>
 		</div>
-		<div class="chart-types">
+		<div class="chart-types" ng-show="selectedmovie">
 			<button class="btn sp-btn add-screenplay btn-space" ng-click="charWeightChart()" type="button">Character Weight</button>
 
 			<button class="btn sp-btn add-screenplay  btn-space" ng-click="wordDistroChart()" type="button">Character Word Distribution</button>
 
 			<button class="btn sp-btn add-screenplay btn-space" ng-click="sentimentChart()" type="button">Emotional Development</button>
+
+			<button class="btn sp-btn add-screenplay btn-space" ng-click="clearData()" type="button">Clear Screenplay</button>
+
 		</div>
-		<chart ng-show="currentSP" options="options" data="data"></chart>
+
+		<chart ng-show="dataReady" callback="callback" config='config' options="options" data="data"></chart>
 		</div>
 	</section>
 </section>

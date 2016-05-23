@@ -11,7 +11,27 @@ const screenplayRepo = mongoose.model('screenplayRepo');
 const characterRepo = mongoose.model('characterRepo');
 module.exports = router;
 
+// router.get('/seed', (req, res, next) => {
+	// const TfIdf = natural.TfIdf;
+	// var tfidf = new TfIdf();
+	// screenplayRepo.find({WordCount: {$gt: 1000}})
+	// .then(allSPs => {
+	// 	console.log(allSPs[20].name);
 
+	
+		// screenplayRepo.allCharSeed()
+		// .then(res => {
+		// 	console.log('back in route');
+		// 	console.log(res[2].allchars);
+		// 	res.sendStatus(200);
+		// })
+
+		
+	
+	// })
+	// .catch(next);
+
+// });
 
 router.param('screenplayId', (req, res, next, screenplayId) => {
 	screenplayRepo.findById(screenplayId)
@@ -40,6 +60,25 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 	.catch(next);
 });
 
+router.get('/:screenplayId/wordweight', (req, res, next) => {
+	var topTerms = [];
+	var chars = [];
+	var tfidf = req.screenplay.tfidf;
+	for (var char in req.screenplay.allchars) {
+		chars.push(req.screenplay.allchars[char].toUpperCase());
+	}
+	var x = 0;
+	while (topTerms.length < 10 && x < tfidf.length) {
+		if (chars.indexOf(tfidf[x].term.toUpperCase()) === -1 && tfidf[x].term !== 'null' && tfidf[x].term.length > 3) {
+			var addingTerm = {key: tfidf[x].term, y: tfidf[x].tfidf};
+			
+
+			topTerms.push(addingTerm); 
+		}
+		x++;
+	}
+	res.json(topTerms);
+});
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
 	const TfIdf = new natural.TfIdf();

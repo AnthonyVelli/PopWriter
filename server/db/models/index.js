@@ -7,5 +7,6 @@ require('./scene');
 require('./screenplay');
 require('./user');
 require('./scrapedScreenplay');
+require('./scrapedCharacters');
 
 

@@ -31,7 +31,6 @@ app.factory('AnalyticsFactory', ($http) => {
 	        x: function(d){return d.key},
 	        y: function(d){return d.y},
 	        showLabels: true,
-
 	        pie: {
 	            startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
 	            endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
@@ -48,59 +47,6 @@ app.factory('AnalyticsFactory', ($http) => {
 	    }
 	};
 
-	const horizontalChartOptions = {
-		chart: {
-		    type: 'multiBarHorizontalChart',
-		    height: 450,
-		    x: function(d){return d.label},
-		    y: function(d){return d.value},
-		    //yErr: function(d){ return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] },
-		    showControls: true,
-		    showValues: true,
-		    duration: 500,
-		    xAxis: {
-		        showMaxMin: false
-		    },
-		    yAxis: {
-		        axisLabel: 'Values',
-		        tickFormat: function(d){
-		            return d3.format(',.2f')(d);
-		        }
-		    }
-		}
-	};
-
-	const barChartOptions = {
-		chart: {
-		    type: 'multiBarChart',
-		    height: 450,
-		    margin : {
-		        top: 20,
-		        right: 20,
-		        bottom: 45,
-		        left: 45
-		    },
-		    clipEdge: true,
-		    staggerLabels: true,
-		    duration: 500,
-		    stacked: true,
-		    xAxis: {
-		        axisLabel: 'Time (ms)',
-		        showMaxMin: false,
-		        tickFormat: function(d){
-		            return d3.format(',f')(d);
-		        }
-		    },
-		    yAxis: {
-		        axisLabel: 'Y Axis',
-		        axisLabelDistance: -20,
-		        tickFormat: function(d){
-		            return d3.format(',.1f')(d);
-		        }
-		    }
-		}
-	};
-
 	const lineChartOptions = {
 		chart: {
 	        type: 'lineChart',
@@ -114,12 +60,6 @@ app.factory('AnalyticsFactory', ($http) => {
 	        x: function(d){ return d.x; },
 	        y: function(d){ return d.y; },
 	        useInteractiveGuideline: false,
-	        dispatch: {
-	            stateChange: function(e){ console.log("stateChange"); },
-	            changeState: function(e){ console.log("changeState"); },
-	            tooltipShow: function(e){ console.log("tooltipShow"); },
-	            tooltipHide: function(e){ console.log("tooltipHide"); }
-	        },
 	        tooltip: {
 	        	contentGenerator: function (e) {
 	        		var series = e.series[0];
@@ -150,13 +90,13 @@ app.factory('AnalyticsFactory', ($http) => {
                         rows + 
                       "</tbody>" +
                     "</table>";
-                } 
-	        },
+                }
+            },
 	        lines: {
-	            forceY: [-1,1]
+	            forceY: [-0.5,0.5],
 	        },
 	        xAxis: {
-	            axisLabel: 'Time'
+	            axisLabel: 'Scene'
 	        },
 	        yAxis: {
 	            axisLabel: 'Sentiment',
@@ -165,24 +105,23 @@ app.factory('AnalyticsFactory', ($http) => {
 	            },
 	            axisLabelDistance: -10
 	        },
-
-	    },
-	    title: {
-	        enable: true,
-	        text: 'Sentiment over Time'
-	    }
+		    title: {
+		        enable: true,
+		        text: 'Sentiment over Time'
+		    }
+		}
 	};
+	
 
 
 	return {
 		getScreenPlays: () => $http.get('/api/analytics/public/').then(parseData),
 		getSentiment: (id) => $http.get('/api/analytics/public/' + id + '/emotion').then(parseData),
 		getCharacters: (id) => $http.get('/api/analytics/public/' + id + '/wordcount').then(parseData),
+		getWords: (id) => $http.get('/api/analytics/public/' + id + '/wordweight').then(parseData),
 		getUserSentiment: (id) => $http.get('/api/analytics/user/' + id + '/emotion').then(parseData),
 		getUserCharacters: (id) => $http.get('/api/analytics/user/' + id + '/wordcount').then(parseData),
 		lineChartOptions: lineChartOptions,
-		barChartOptions: barChartOptions,
-		horizontalChartOptions: horizontalChartOptions,
 		donutChartOptions: donutChartOptions,
 		pieChartOptions: pieChartOptions
 	};
