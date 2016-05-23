@@ -55,11 +55,18 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		var donutData = [];
 		formattedforWordCount.forEach(char => {
 			var charObj = {character: char.key, words: []};
-			donutData.push(charObj)
-			for(var i = 0; i < 10; i++){
+			donutData.push(charObj);
+			var i = 0;
+			while (charObj.words.length < 10) {
 				var ele = char.tfidf[i];
-				charObj.words.push({key: ele.term, y: ele.tfidf});
+				if (ele.term.length > 3 && !(filteredChars.find(char){
+					char.name.toUppercase() === ele.term.toUppercase
+				})) {
+					charObj.words.push({key: ele.term, y: ele.tfidf});
+				}
+				i++;
 			}
+			
 		}); 
 		res.json([formattedforWordCount, donutData]); })
 	.catch(next);

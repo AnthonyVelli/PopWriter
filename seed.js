@@ -23,11 +23,15 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Screenplay = mongoose.model('Screenplay');
-var Character = mongoose.model('Character')
+var Character = mongoose.model('Character');
 var Component = mongoose.model('Component');
 var Scene = mongoose.model('Scene');
 var allScreenplays = require('./seed/screenplays');
+var fs = require('fs');
 
+var swOBJ = JSON.parse(fs.readFileSync('./Star Wars1.txt'));
+var scenes = swOBJ.components.filter(comp => comp[0] === 'scene');
+var characters = swOBJ.components.filter(comp => comp[0] === 'character');
 
 var wipeCollections = function () {
     var removeUsers = User.remove({});
@@ -72,6 +76,55 @@ var seedUsers = function () {
     ];
 
     return User.create(users);
+
+};
+var seedChars = function () {
+    Screenplay.create({title: 'Star Wars - A New Hope'})
+    .save()
+    .then(createdSP => {
+        var promiseArr = [];
+        for (var x = 0; x < swOBJ.components.length; x++) {
+            if (swOBJ.components[x][0] === 'scene') {
+                x++;
+                var sceneHolder = {};
+                sceneHolder.scene = swOBJ.components[x][1];
+                while(swOBJ.components[x] !== 'scene' && x < swOBJ.components.length) {
+                    promiseArr.push({})
+                }
+            }
+        }
+        var promise = swOBJ.components.forEach((comp, idx) => {
+            if (comp[0] === 'scene') {
+                return Scene.create({header: comp[1]})
+                
+            }
+        })
+    });
+    var users = [
+        {
+            email: 'testing@fsa.com',
+            password: 'password'
+        },
+        {
+            email: 'obama@gmail.com',
+            password: 'potus'
+        },
+        {
+            email: 'zeke@zeke.zeke',
+            password: 'zeke',
+            isAdmin: true
+        },
+        {
+            email: 'kim@kim.kim',
+            password: 'kim'
+        },
+        {
+            email: 'george.lucas@maytheforcebewith.you',
+            password: 'wookies'
+        }
+    ];
+
+    return Character.create(users);
 
 };
 
@@ -149,6 +202,25 @@ connectToDb
     })
     .then(function () {
         return seedUsers();
+    })
+    .then(function(){
+        return Promise.all(allScreenplays.map(sp => {
+            return seedScreenplaysTwo(sp);
+        }));
+    })
+    .then(function () {
+        console.log(chalk.green('Seed successful!'));
+        process.kill(0);
+    })
+    .catch(function (err) {
+        console.error(err);
+        process.kill(1);
+    });
+
+
+connectToDb
+    .then(function () {
+        return seedChars();
     })
     .then(function(){
         return Promise.all(allScreenplays.map(sp => {
