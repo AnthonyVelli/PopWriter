@@ -10,9 +10,9 @@ body {
   background: #fdfdfd;
 }
 
-.paper {
-  background-image: url(tex-paper-wrinkled.jpg);
-  background-size: cover;
+.tweed {
+  background-image: url(tweed.png);
+  background-repeat: xy;
 }
 
 @mixin clearfix {
