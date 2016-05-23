@@ -10,6 +10,11 @@ body {
   background: #fdfdfd;
 }
 
+.paper {
+  background-image: url(tex-paper-wrinkled.jpg);
+  background-size: cover;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -27,6 +32,7 @@ main {
   padding-top: 120px;
   padding-bottom: 40px;
   width: 91%;
+  min-height: 100vh;
   margin: 0 auto;
 }
 

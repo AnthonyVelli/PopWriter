@@ -29,6 +29,7 @@
 <body ng-app="FullstackGeneratedApp">
     <navbar ng-show="user || currentState.name === 'signup' || currentState.name === 'login' " ng-class="{ homebar: currentState.name === 'home', nonhomebar: currentState.name
     !== 'home'}"></navbar>
-    <div id="main" ui-view></div>
+    <div id="main" ng-class="{ paper: currentState.name === 'login' || currentState.name
+    === 'signup'}" ui-view></div>
 </body>
 </html>
