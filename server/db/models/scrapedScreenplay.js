@@ -21,7 +21,7 @@ charschema.statics.filter = function(screenplay){
 	return this.find({screenplay: screenplay._id})
 	.then(foundChars => {
 		return foundChars.filter(char => {
-			return char.wordcount / screenplay.WordCount > 0.007 && !/(\:|^INT|^EXT|^\d)/.test(char.name);
+			return char.wordcount / screenplay.WordCount > 0.007 && !/(\:|^INT|^EXT|^\d)/.test(char.name) && char.name.split(" ").length < 3;
 		});
 	});
 };

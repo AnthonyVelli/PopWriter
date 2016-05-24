@@ -22,125 +22,55 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var Character = mongoose.model('Character');
+var Screenplay = mongoose.model('Screenplay');
+var Scene = mongoose.model('Scene');
+var User = mongoose.model('User');
+var Component = mongoose.model('Component');
+var screenplayRepo = mongoose.model('screenplayRepo');
 var fs = require('fs');
 
-var swOBJ = JSON.parse(fs.readFileSync('./Star Wars1.txt'));
-console.log(Object.keys(swOBJ.components));
-// var seedChars = function () {
+// var swOBJ = JSON.parse(fs.readFileSync('./Star Wars1.txt'));
+// var scenes = swOBJ.components.filter(comp => comp[0] === 'scene').map(scene => {
+// 	return {header: scene[1]};
+// });
 
-//     var users = [
-//         {
-//             email: 'testing@fsa.com',
-//             password: 'password'
-//         },
-//         {
-//             email: 'obama@gmail.com',
-//             password: 'potus'
-//         },
-//         {
-//             email: 'zeke@zeke.zeke',
-//             password: 'zeke',
-//             isAdmin: true
-//         },
-//         {
-//             email: 'kim@kim.kim',
-//             password: 'kim'
-//         },
-//         {
-//             email: 'george.lucas@maytheforcebewith.you',
-//             password: 'wookies'
-//         }
-//     ];
+// var components = swOBJ.components.filter(comp => comp[0] === 'scene').map(scene => {
+// 	return [{type: 'action', text: scene[2]}];
+// });
+// var idx = -1;
+// swOBJ.components.forEach(comp => { 
+// 	if (comp[0] === 'scene') {
+// 		idx++;
+// 	} else {
+// 		components[idx].push({type: 'dialogue', text: comp[2], charName: comp[1]});
+// 	}
+// });
+// var spHolder;
+// var swHolder;
+// Screenplay.create({title: 'StarWars Full'})
+// .then(sw => {
+// 	swHolder = sw;
+// 	return Scene.create(scenes); })
+// .then(allScenes => {
+// 	swHolder.scenes = allScenes;
+// 	return swHolder.save(); })
+// .then(updatedSP => {
+// 	var promiseArr = updatedSP.scenes.map((scene,idx) => {
+// 		return Component.create(components[idx])
+// 		.then(createdComps => {
+// 			scene.components = createdComps;
+// 			return scene.save();
+// 		});
+// 	});
+// 	return Promise.all(promiseArr); })
+// .then(updatedScenes => {
+// 	spHolder = updatedScenes;
+// 	return User.findOne({email: 'george.lucas@maytheforcebewith.you'}); })
+// .then(user => {
+// 	user.screenplay.push(swHolder);
+// 	user.save();
+// });
 
-//     return Character.create(users);
 
-// };
-
-// function seedscrapedSP(screenplay){
-//     var currentSP, currentScenes, user, savedComponents;
-//     return User.findOne({email: screenplay.user})
-//     .then(selectedUser => {
-//         user = selectedUser;
-//     })
-//     .then(() => {
-//         return Screenplay.create(screenplay.screenplay)
-//     })
-//     .then(createdScreenplay => {
-//         currentSP = createdScreenplay;
-//         if(!user.screenplay) user.screenplay = [];
-//         user.screenplay.push(currentSP._id);
-//         return user.save();
-//     })
-//     .then(() => {
-//         return Scene.create(screenplay.scenes);
-//     })
-//     .then(scenes => {
-//         // console.log(scenes);
-//         currentScenes = scenes;
-//         ScenesIds = currentScenes.map(ele => {
-//             return ele._id;
-//         });
-//         currentSP.scenes = ScenesIds;
-//         return currentSP.save();
-//     })
-//     .then(() => {
-//         // console.log(currentScenes);
-//         compPromiseArray = screenplay.components.map( ele => {
-//             return Component.create(ele);
-//         });
-//         return Promise.all(compPromiseArray);
-//     })
-//     .then(createdComponents => {
-//         savedComponents = createdComponents;
-//         createdComponents.forEach((arrayOfComp, index) => {
-//             currentScenes[index].components = arrayOfComp.map( comp =>{
-//                 return comp._id;
-//             });
-//         });
-//         return Promise.all(currentScenes.map(scene => scene.save()));
-//     })
-//     .then(() => {
-//         var charsToBeSavedPromiseArray = [];
-//         var copies = [];
-//         savedComponents.forEach(componentsArray => {
-//             componentsArray.forEach(comp => {
-//                 if(comp.charName) {
-//                     var characterNameUpperCase = comp.charName.toUpperCase();
-//                     console.log(copies);
-//                     if(copies.indexOf(characterNameUpperCase) < 0){
-//                         charsToBeSavedPromiseArray.push(Character.create({name: characterNameUpperCase, screenplay: currentSP._id}));
-//                         copies.push(characterNameUpperCase);
-//                     }
-//                 }
-//             })
-//         })
-//         return Promise.all(charsToBeSavedPromiseArray);
-//     })
-//     .then(savedChars => {
-//         console.log('everything saved');
-//     })
-//     .catch(console.error.bind(console));
-// }
-
-// // Dialogue => Character => Scene =>
-
-// connectToDb
-//     .then(function () {
-//         return wipeCollections();
-//     })
-//     .then(function () {
-//         return seedUsers();
-//     })
-//     .then(function(){
-//         return Promise.all(allScreenplays.map(sp => {
-//             return seedScreenplaysTwo(sp);
-//         }));
-//     })
-//     .then(function () {
-//         console.log(chalk.green('Seed successful!'));
-//         process.kill(0);
-//     })
-//     .catch(function (err) {
-//         console.error(err);
-//         process.kill(1);
-//     });
+var fortOBJ = fs.readFileSync('./fortress.txt').split(/\n/);
+console.log(fortOBJ.length);
