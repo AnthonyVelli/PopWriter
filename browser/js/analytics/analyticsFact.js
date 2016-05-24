@@ -125,36 +125,36 @@ app.factory('AnalyticsFactory', ($http) => {
 	        	contentGenerator: function (e) {
 	        		var series = e.series[0];
                   	if (series.value === null) return;
-	        		var rows = 
+	        		var rows =
                     "<tr>" +
                       "<td >" + 'Positive: ' + "</td>" +
-                      "<td >" + e.point.sentiment.positive + "</td>" + 
+                      "<td >" + e.point.sentiment.positive + "</td>" +
                     "</tr><tr>" +
                       "<td>" + 'Negative: ' + "</td>" +
                       "<td>" + e.point.sentiment.negative + "</td>" +
                     "</tr>";
 
-                  var header = 
-                    "<thead style='background-color: " + series.color + ";'>" + 
+                  var header =
+                    "<thead style='background-color: " + series.color + ";'>" +
 	                    "<tr>" +
 	                    	"<td><strong>" + series.key + "</strong></td>" +
-	                    "</tr>" + 
+	                    "</tr>" +
 	                    "<tr>" +
                         	"<td><strong>Scene: "+e.pointIndex+"</strong></td>" +
                         	"<td><strong>Total Words: "+e.point.sentiment.tokens.length+"</strong></td>" +
-                      	"</tr>" + 
+                      	"</tr>" +
                     "</thead>";
-                    
+
                   return "<table>" +
                       header +
-                      "<tbody>" + 
-                        rows + 
+                      "<tbody>" +
+                        rows +
                       "</tbody>" +
                     "</table>";
-                } 
+                }
 	        },
 	        lines: {
-	            forceY: [-1,1]
+	            forceY: [-0.4,0.4]
 	        },
 	        xAxis: {
 	            axisLabel: 'Time'
