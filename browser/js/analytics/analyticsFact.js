@@ -161,6 +161,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	        },
 	        yAxis: {
 	            axisLabel: 'Sentiment',
+	            axisLabelDistance: -60,
 	            tickFormat: function(d){
 	                return d3.format('.04f')(d);
 	            },
