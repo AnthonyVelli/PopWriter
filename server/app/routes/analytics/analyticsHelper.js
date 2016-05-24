@@ -60,7 +60,7 @@ module.exports.objectOfStringsToEmotion = objOfStrings => {
 
 module.exports.processText = (textArr, stopwordsSupp) => {
 	const TfIdf = new natural.TfIdf();
-	textArr = textArr.map(text => nlp.tokenizer(text).filter(word => word.length > 2));
+	textArr = textArr.map(text => nlp.tokenizer(text).filter(word => word.length > 3));
 	var tokenstopMap = textArr.map(text => {
 		return nlp.stopwords(text, {additionalWords: {all: stopwordsSupp}})
 		.then(processedTxt => {
