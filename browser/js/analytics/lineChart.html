@@ -1,7 +1,10 @@
-
 <section class="state-container">
-	<div>
-		<select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"><option value=''></option></select>
-	    <nvd3 class="nvd3holder" options="options" data="data"></nvd3>
+	<div class="chart-container">
+		<div class='charselector'>
+			<select ng-change='selectChar()' ng-model="selected" ng-options="k as k for (k, v) in chars"></select>
+			<select ng-change='selectOtherMovie()' ng-model="selectedmovie" ng-options="script as script.name for script in scripts | orderBy: 'name'"><option value=''></option></select>
+			<select ng-show='otherMovieChars' ng-change='selectOtherMovieChar()' ng-model="selectedOtherMovieChar" ng-options="k as k for (k, v) in otherMovieChars"><option value=""></option></select>
+		</div>
+	    <nvd3 options="options" data="data"></nvd3>
 	</div>
 <section>

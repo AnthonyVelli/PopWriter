@@ -14,8 +14,8 @@ app.config(function ($stateProvider) {
     		}
     	}
     })
-    .state('analytics.pieChart', {
-    	url: '/pieChart/:id',
+    .state('analytics.charWeight', {
+    	url: '/charWeight/:id',
     	templateUrl: 'js/analytics/pieChart.html',
     	controller: function($scope, AnalyticsFactory, pieChartData) {
             $scope.hidden = true;
@@ -32,8 +32,8 @@ app.config(function ($stateProvider) {
     		}
     	}
     })
-    .state('analytics.donutChart', {
-		url: 'donutChart/:id',
+    .state('analytics.charWord', {
+		url: '/charWord/:id',
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: function($scope, AnalyticsFactory, pieChartData) {
             $scope.hidden = true;
@@ -52,11 +52,30 @@ app.config(function ($stateProvider) {
 			}
 	   	}
 	})
-	.state('analytics.lineChart', {
-		url: '/lineChart/:id',
-		templateUrl: 'js/analyticsSingle/lineChart.html',
+	.state('analytics.emotion', {
+		url: '/emotion/:id',
+		templateUrl: 'js/analytics/lineChart.html',
 		controller: function($scope, lineChartData, AnalyticsFactory) {
-            $scope.hidden = true;
+			$scope.hidden = true;
+			console.log('in emotion controller');
+			console.log($scope);
+            $scope.selectOtherMovie = () => {
+            	console.log($scope);
+				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
+				.then(sentiment => {
+					$scope.otherMovieChars = sentiment;
+					$scope.data.push({
+					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+					key: $scope.selectedmovie.name,
+					values: sentiment.sceneText});
+				});
+			};
+			$scope.selectOtherMovieChar = () => {
+				$scope.data.push({
+				color: "hsl(" + Math.random() * 360 + ",100%,50%)",
+				key: $scope.selectedOtherMovieChar,
+				values: $scope.otherMovieChars[$scope.selectedOtherMovieChar]});
+			};
 			$scope.selectChar = function(){
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
@@ -84,7 +103,8 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('analytics', function($scope, ScreenplaysFactory, scrapedSPs, AnalyticsFactory){
-    $scope.changeSP = (spId) => {$scope.currentSP = spId};
+    $scope.changeSP = (spId) => {
+    	console.log($scope.selectedScreenplay);
+    	$scope.currentSP = $scope.selectedScreenplay._id};
 	$scope.scripts = scrapedSPs;
-    $scope.hidden = false;
 });
