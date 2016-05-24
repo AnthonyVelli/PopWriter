@@ -37,7 +37,6 @@ app.config(function ($stateProvider) {
 		templateUrl: 'js/analytics/donutChart.html',
 		controller: function($scope, AnalyticsFactory, pieChartData) {
             $scope.hidden = true;
-			console.log("piechartdata in donut:", pieChartData);
 			$scope.selectDChar = function(char){
 				$scope.data = $scope.dselected;
 			};

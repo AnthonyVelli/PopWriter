@@ -63,6 +63,7 @@ app.config(function ($stateProvider) {
 		controller: function($scope, screenplay, lineChartData, AnalyticsFactory, scrapedSPs) {
 			$scope.scripts = scrapedSPs;
 			$scope.selectOtherMovie = () => {
+				console.log($scope);
 				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
 				.then(sentiment => {
 					$scope.otherMovieChars = sentiment;
@@ -79,6 +80,7 @@ app.config(function ($stateProvider) {
 				values: $scope.otherMovieChars[$scope.selectedOtherMovieChar]});
 			};
 			$scope.selectChar = function(){
+
 				$scope.data.push({
 					color: "hsl(" + Math.random() * 360 + ",100%,50%)",
 					key: $scope.selected,
