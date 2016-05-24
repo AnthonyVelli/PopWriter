@@ -37,6 +37,24 @@
 	padding: 20px;
 }
 
+.add-screenplay-wrapper label {
+	color: #fff;
+	margin-top: 10px;
+}
+
+.add-screenplay-wrapper .submit {
+	margin-top: 12px;
+	padding: 6px 12px;
+	border: 2px solid white;
+	border-radius: 4px;
+	background-color: #87b4a4;
+	color: #fff;
+}
+
+.add-screenplay-wrapper .submit:hover {
+	color: #282824;
+}
+
 .bg-img {
 	min-height: 100vh;
 	background-image: url(tweed.png);
