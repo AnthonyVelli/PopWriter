@@ -114,6 +114,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	        },
 	        x: function(d){ return d.x; },
 	        y: function(d){ return d.y; },
+            duration: 750,
 	        useInteractiveGuideline: false,
 	        dispatch: {
 	            stateChange: function(e){ console.log("stateChange"); },
