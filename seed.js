@@ -23,11 +23,10 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Screenplay = mongoose.model('Screenplay');
-var Character = mongoose.model('Character')
+var Character = mongoose.model('Character');
 var Component = mongoose.model('Component');
 var Scene = mongoose.model('Scene');
 var allScreenplays = require('./seed/screenplays');
-
 
 var wipeCollections = function () {
     var removeUsers = User.remove({});
@@ -47,6 +46,35 @@ var wipeCollections = function () {
 
 var seedUsers = function () {
 
+    var users = [
+        {
+            email: 'testing@fsa.com',
+            password: 'password'
+        },
+        {
+            email: 'obama@gmail.com',
+            password: 'potus'
+        },
+        {
+            email: 'zeke@zeke.zeke',
+            password: 'zeke',
+            isAdmin: true
+        },
+        {
+            email: 'kim@kim.kim',
+            password: 'kim'
+        },
+        {
+            email: 'george.lucas@maytheforcebewith.you',
+            password: 'wookies'
+        }
+    ];
+
+    return User.create(users);
+
+};
+var seedUsers = function () {
+    
     var users = [
         {
             email: 'testing@fsa.com',

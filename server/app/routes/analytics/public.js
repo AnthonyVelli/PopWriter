@@ -42,26 +42,24 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
-	const TfIdf = new natural.TfIdf();
+	var tfidfPerm;
+	var filteredCharsPerm;
 	characterRepo.filter(req.screenplay)
 	.then(filteredChars => {
-		filteredChars.forEach(name => {
-			TfIdf.addDocument(name.text, name.name);
+		filteredCharsPerm = filteredChars;
+		return characterRepo.find({screenplay: req.screenplay._id}); })
+	.then(allChars => {
+		var charText = filteredCharsPerm.map(char => char.text);
+		var charNames = allChars.map(char => char.name.toLowerCase());
+		return helper.processText(charText, charNames); })
+	.then(tfidf => {
+		var formattedforWordCount = filteredCharsPerm.map((name, idx) => {
+			var tenTfIdf = tfidf.listTerms(idx).slice(0,10).map(tfidf => {
+				return {key: tfidf.term, y: tfidf.tfidf};
+			});
+			
+			return {key: name.name, y: name.wordcount, tfidf: tenTfIdf};
 		});
-		
-		var formattedforWordCount = filteredChars.map((name, idx) => {
-			return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
-		});
-		var donutData = [];
-		formattedforWordCount.forEach(char => {
-			var charObj = {character: char.key, words: []};
-			donutData.push(charObj)
-			for(var i = 0; i < 10; i++){
-				var ele = char.tfidf[i];
-				charObj.words.push({key: ele.term, y: ele.tfidf});
-			}
-		}); 
-		res.json([formattedforWordCount, donutData]); })
+		res.json(formattedforWordCount); })
 	.catch(next);
 });
-

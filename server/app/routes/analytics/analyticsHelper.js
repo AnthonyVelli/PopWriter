@@ -2,6 +2,8 @@ const sentiment = require('sentiment');
 const natural = require('natural');
 natural.PorterStemmer.attach();
 const tokenizer = new natural.WordTokenizer();
+const nlp = require('nlp-toolkit');
+const Promise = require('bluebird');
 
 module.exports.scenesToStrings = arrayOfScenes => {
 	sceneMaster = [];
@@ -54,4 +56,19 @@ module.exports.objectOfStringsToEmotion = objOfStrings => {
 		}
 	}
 	return emotionArray;
+};
+
+module.exports.processText = (textArr, stopwordsSupp) => {
+	const TfIdf = new natural.TfIdf();
+	textArr = textArr.map(text => nlp.tokenizer(text).filter(word => word.length > 2));
+	var tokenstopMap = textArr.map(text => {
+		return nlp.stopwords(text, {additionalWords: {all: stopwordsSupp}})
+		.then(processedTxt => {
+			TfIdf.addDocument(processedTxt);
+		});
+	});
+	return Promise.all(tokenstopMap)
+	.then(all => {
+		return TfIdf;
+	});
 };

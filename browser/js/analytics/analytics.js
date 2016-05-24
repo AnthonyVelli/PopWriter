@@ -22,7 +22,7 @@ app.config(function ($stateProvider) {
     		console.log(pieChartData);
     		$scope.options = AnalyticsFactory.pieChartOptions;
     		console.log("PC options", $scope.options);
-    		$scope.data = pieChartData[0];
+    		$scope.data = pieChartData;
     	},
     	resolve: {
     		pieChartData: (AnalyticsFactory, $stateParams) => {
@@ -41,10 +41,9 @@ app.config(function ($stateProvider) {
 			$scope.selectDChar = function(char){
 				$scope.data = $scope.dselected;
 			};
-			$scope.data;
+			// $scope.data;
 			$scope.options = AnalyticsFactory.donutChartOptions;
-			console.log()
-			$scope.chars = pieChartData[1];
+			$scope.chars = pieChartData;
 		},
     	resolve: {
 			pieChartData: (AnalyticsFactory, $stateParams) => {
