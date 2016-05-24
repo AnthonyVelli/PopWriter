@@ -1,13 +1,10 @@
-svg, .chart-container {
+.chart-container {
 	background-color: #fff;
 	padding: 20px;
 	margin-bottom: 20px;
-}
-
-.analytics-div {
-	background-color: #fff;
-	padding-bottom: 20px;
-	min-height: 200px;
+	border-radius: 4px;
+	background-image: url(p2.png);
+	background-repeat: xy;
 }
 
 .select-sp, .chart-types {
