@@ -10,6 +10,11 @@ body {
   background: #fdfdfd;
 }
 
+.tweed {
+  background-image: url(tweed.png);
+  background-repeat: xy;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -27,12 +32,17 @@ main {
   padding-top: 120px;
   padding-bottom: 40px;
   width: 91%;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
 .chart-types .btn:focus, .sp-btn:focus {
   outline: none;
   color: #fff;
+}
+
+.btn:active, .sp-btn:active {
+  outline: none;
 }
 
 .chart-types .btn:active {

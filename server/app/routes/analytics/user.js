@@ -1,7 +1,6 @@
 'use strict';
 const sentiment = require('sentiment');
 const natural = require('natural');
-natural.PorterStemmer.attach();
 const tokenizer = new natural.WordTokenizer();
 const router = require('express').Router();
 
@@ -61,7 +60,6 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		}
 		solution = solution.map((ele,idx) => {
 			 var termHolder = TfIdf.listTerms(idx).slice(0,10);
-			 console.log(termHolder);
 			 ele.words = termHolder.map(term => ({y: term.tfidf, key: term.term}));
 			return ele;
 		});
@@ -69,22 +67,3 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 	})
 	.catch(error => console.error(error));
 });
-	
-	// characterRepo.filter(req.screenplay)
-	// .then(filteredChars => {
-	// 	filteredChars.forEach(name => {
-			
-	// 	});
-	// 	var formattedforWordCount = filteredChars.map((name, idx) => {
-	// 		return {key: name.name, y: name.wordcount, tfidf: TfIdf.listTerms(idx)};
-	// 	});
-	// 	var donutData = [];
-	// 	formattedforWordCount.forEach(char => {
-	// 		var charObj = {character: char.key, words: []};
-	// 		donutData.push(charObj)
-	// 		for(var i = 0; i < 10; i++){
-	// 			var ele = char.tfidf[i];
-	// 			charObj.words.push({key: ele.term, y: ele.tfidf});
-	// 		}
-	// 	});
-	// 	res.json([formattedforWordCount, donutData]); })

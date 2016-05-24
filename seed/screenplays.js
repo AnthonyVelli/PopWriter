@@ -227,6 +227,11 @@ module.exports = [
         {
             components: [],
             synopsis: 'something',
+            header: 'INT. MOS EISLEY - CANTINA'
+        },
+        {
+            components: [],
+            synopsis: 'something',
             header: 'INT. REBEL BLOCKADE RUNNER'
         },
         {
@@ -376,6 +381,110 @@ module.exports = [
             type: `action`,
             text: `Artoo counters with an angry rebuttal as the battle rages
                around the two hapless robots.`
+            }],
+            [{
+                type: 'action',
+                text: `As Han is about to leave, Greedo, a slimy green-faced alien
+               with a short trunk-nose, pokes a gun in his side. The creature
+               speaks in a foreign tongue translated into English subtitles.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `Going somewhere, Solo?`
+            },
+            {
+                type:'dialogue',
+                charName: 'HAN',
+                text:`Yes, Greedo. As a matter of fact, I
+                         was just going to see your boss.
+                         Tell Jabba that I've got his money.
+`
+            },
+            {
+                type: 'action',
+                text: `Han sits down and the alien sits across from him holding the
+               gun on him.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `It's too late. You should have paid
+                         him when you had the chance. Jabba's
+                         put a price on your head, so large
+                         that every bounty hunter in the galaxy
+                         will be looking for you. I'm lucky I
+                         found you first.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'HAN',
+                text: `Yeah, but this time I got the money.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `If you give it to me, I might forget
+                         I found you.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'HAN',
+                text: `I don't have it with me. Tell Jabba...`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `Jabba's through with you. He has no
+                         time for smugglers who drop their
+                         shipments at the first sign of an
+                         Imperial cruiser.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'HAN',
+                text: `Even I get boarded sometimes. Do you
+                         think I had a choice?`
+            },
+            {
+                type: `action`,
+                text: `Han Solo slowly reaches for his gun under the table.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `You can tell that to Jabba. He may
+                         only take your ship.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'HAN',
+                text: `Over my dead body.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'GREEDO',
+                text: `That's the idea. I've been looking
+                         forward to killing you for a long
+                         time.`
+            },
+            {
+                type: `dialogue`,
+                charName: 'HAN',
+                text: `Yes, I'll bet you have.`
+            },
+            {
+                type: `action`,
+                text: `Suddenly the slimy alien disappears in a blinding flash of
+               light. Han pulls his smoking gun from beneath the table as
+               the other patron look on in bemused amazement. Han gets up
+               and starts out of the cantina, flipping the bartender some
+               coins as he leaves.`
+            },
+            {
+                type: 'dialogue',
+                charName: 'HAN',
+                text: `Sorry about the mess.`
             }],
             [{
             type: `action`,
