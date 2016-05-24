@@ -71,6 +71,7 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 				return {key: tfidf.term, y: tfidf.tfidf};
 			});
 			solution.push({y: compObjPerm[char].split(' ').length, key: char, tfidf: tenTfIdf});
+            idx++;
 		}
 		res.json(solution);
 	})
