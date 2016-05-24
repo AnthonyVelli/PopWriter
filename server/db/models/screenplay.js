@@ -48,17 +48,20 @@ schema.methods.GetDialogue = function(){
 };
 
 
-
-
-schema.methods.TextbyScenes = function(){
+schema.methods.TextbyScenes = function(sections){
     return this.PopulateComponents()
     .then(scenes => {
+        var sceneSize = Math.ceil(scenes.length / 100);
+        var hundoScenes = [];
+        while (scenes.length > 0) {
+            hundoScenes.push(scenes.splice(0, sceneSize).reduce((orig, scene) => orig.concat(scene.components), []));
+        }
         var sceneObj = {};
         sceneObj.sceneText = {};
-        sceneObj.sceneText['1'] = '';
-        scenes.forEach((scene,idx) => {
+        sceneObj.sceneText[1] = '';
+        hundoScenes.forEach((scene,idx) => {
             sceneObj.sceneText[idx] = '';
-            scene.components.forEach(comp => {
+            scene.forEach(comp => {
                 if (!comp.text || !comp.text.trim().length) {return; }
                 sceneObj.sceneText[idx] += (' '+comp.text);
                 var key = comp.charName ? comp.charName : comp.type;

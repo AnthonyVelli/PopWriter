@@ -30,10 +30,10 @@ module.exports.sceneStringsToEmotion = arrayOfSceneStrings => {
 		for (var char in scene){
 			var sentimentRes = sentiment(scene[char].tokenizeAndStem().join(' '));
 			if (emotion[char]) {
-				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
+				emotion[char].push({x: idx+1, y: sentimentRes.comparative, sentiment: sentimentRes});
 			} else if (scene[char]) {
 				emotion[char] = [];
-				emotion[char].push({x: idx, y: sentimentRes.comparative, sentiment: sentimentRes});
+				emotion[char].push({x: idx+1, y: sentimentRes.comparative, sentiment: sentimentRes});
 			}
 		}
 	});
@@ -43,7 +43,7 @@ module.exports.sceneStringsToEmotion = arrayOfSceneStrings => {
 module.exports.arrayOfStringsToEmotion = arrayOfStrings => {
 	return arrayOfStrings.map((ele, idx) => {
 		var sentimentRes = sentiment(ele.tokenizeAndStem().join(' '));
-		return {x: idx, y: sentimentRes.comparative, sentiment: sentimentRes};
+		return {x: idx+1, y: sentimentRes.comparative, sentiment: sentimentRes};
 	});
 };
 
@@ -60,7 +60,7 @@ module.exports.objectOfStringsToEmotion = objOfStrings => {
 
 module.exports.processText = (textArr, stopwordsSupp) => {
 	const TfIdf = new natural.TfIdf();
-	textArr = textArr.map(text => nlp.tokenizer(text).filter(word => word.length > 2));
+	textArr = textArr.map(text => nlp.tokenizer(text).filter(word => word.length > 3));
 	var tokenstopMap = textArr.map(text => {
 		return nlp.stopwords(text, {additionalWords: {all: stopwordsSupp}})
 		.then(processedTxt => {

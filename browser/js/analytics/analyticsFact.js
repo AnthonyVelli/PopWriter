@@ -141,7 +141,7 @@ app.factory('AnalyticsFactory', ($http) => {
 	                    	"<td><strong>" + series.key + "</strong></td>" +
 	                    "</tr>" +
 	                    "<tr>" +
-                        	"<td><strong>Scene: "+e.pointIndex+"</strong></td>" +
+                        	"<td><strong>Scene: "+e.value+"</strong></td>" +
                         	"<td><strong>Total Words: "+e.point.sentiment.tokens.length+"</strong></td>" +
                       	"</tr>" +
                     "</thead>";
