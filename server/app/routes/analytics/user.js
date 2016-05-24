@@ -42,27 +42,36 @@ router.get('/:screenplayId/emotion', (req, res, next) => {
 
 
 router.get('/:screenplayId/wordcount', (req, res , next)=>{
-	const TfIdf = new natural.TfIdf();
+	var compObjPerm;
+	var charNames = [];
 	req.screenplay.GetDialogue()
 	.then(dialogue => {
 		var compObj = {};
 		dialogue.forEach(comp => {
+			if (charNames.indexOf(comp.charName.toLowerCase()) === -1){
+				charNames.push(comp.charName.toLowerCase());
+			}
 			if (compObj[comp.charName]) {
 				compObj[comp.charName] += ' '+comp.text;
 			} else {
 				compObj[comp.charName] = comp.text;
 			}
 		});
-		var solution = [];
+		var textArr = [];
 		for (var char in compObj) {
-			TfIdf.addDocument(compObj[char], char);
-			solution.push({y: compObj[char].split(' ').length, key: char});
+			textArr.push(compObj[char]);
 		}
-		solution = solution.map((ele,idx) => {
-			 var termHolder = TfIdf.listTerms(idx).slice(0,10);
-			 ele.words = termHolder.map(term => ({y: term.tfidf, key: term.term}));
-			return ele;
-		});
+		compObjPerm = compObj;
+		return helper.processText(textArr, charNames); })
+	.then(tfidf => {
+		var solution = [];
+		var idx = 0;
+		for (var char in compObjPerm) {
+			var tenTfIdf = tfidf.listTerms(idx).slice(0,10).map(tfidf => {
+				return {key: tfidf.term, y: tfidf.tfidf};
+			});
+			solution.push({y: compObjPerm[char].split(' ').length, key: char, tfidf: tenTfIdf});
+		}
 		res.json(solution);
 	})
 	.catch(error => console.error(error));
