@@ -67,10 +67,11 @@ router.get('/:screenplayId/wordcount', (req, res , next)=>{
 		var solution = [];
 		var idx = 0;
 		for (var char in compObjPerm) {
-			var tenTfIdf = tfidf.listTerms(idx).slice(0,10).map(tfidf => {
-				return {key: tfidf.term, y: tfidf.tfidf};
+			var tenTfIdf = tfidf.listTerms(idx).slice(0,10).map(tfidfChar => {
+				return {key: tfidfChar.term, y: tfidfChar.tfidf};
 			});
 			solution.push({y: compObjPerm[char].split(' ').length, key: char, tfidf: tenTfIdf});
+			idx++;
 		}
 		res.json(solution);
 	})

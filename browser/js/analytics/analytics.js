@@ -19,9 +19,7 @@ app.config(function ($stateProvider) {
     	templateUrl: 'js/analytics/pieChart.html',
     	controller: function($scope, AnalyticsFactory, pieChartData) {
             $scope.hidden = true;
-    		console.log(pieChartData);
     		$scope.options = AnalyticsFactory.pieChartOptions;
-    		console.log("PC options", $scope.options);
     		$scope.data = pieChartData;
     	},
     	resolve: {
