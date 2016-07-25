@@ -70,7 +70,6 @@ spschema.methods.TextbyScenes = function(){
 			}
 		}, '');
 		sceneArray.push(sceneString);
-
 	}
 	return sceneArray;
 };

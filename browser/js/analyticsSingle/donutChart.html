@@ -1,5 +1,5 @@
 <div class="chart-container">
-	<select ng-change='selectDChar()' ng-model="dselected" ng-options="char.words as char.key for char in chars">
+	<select ng-change='selectDChar()' ng-model="dselected" ng-options="char.tfidf as char.key for char in chars">
 		<option value=''></option>
 	</select>
 	<nvd3 options="options" data="data"></nvd3>

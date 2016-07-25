@@ -63,6 +63,7 @@ app.config(function ($stateProvider) {
 		controller: function($scope, screenplay, lineChartData, AnalyticsFactory, scrapedSPs) {
 			$scope.scripts = scrapedSPs;
 			$scope.selectOtherMovie = () => {
+				console.log($scope);
 				AnalyticsFactory.getSentiment($scope.selectedmovie._id)
 				.then(sentiment => {
 					$scope.otherMovieChars = sentiment;
